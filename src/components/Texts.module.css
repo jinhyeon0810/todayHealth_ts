@@ -1,0 +1,16 @@
+.textList {
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.fix,
+.delete {
+  cursor: pointer;
+}
+
+.textArea {
+  background-color: white;
+  border: 1px solid white;
+  color: black;
+  padding: 30px;
+}
