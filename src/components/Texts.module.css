@@ -1,16 +1,50 @@
 .textList {
   display: flex;
+  flex-direction: row;
   margin-bottom: 30px;
+  width: 100%;
+  justify-content: center;
 }
 
 .fix,
 .delete {
   cursor: pointer;
+  border-radius: 0 6px 6px 0;
+  border: none;
+  width: 5%;
 }
 
-.textArea {
+.fix {
+  border-radius: 0;
+  border-right: 1px solid black;
+}
+
+.cancel,
+.ok {
+  cursor: pointer;
+  border-radius: 0 6px 6px 0;
+  border: none;
+  width: 5%;
+}
+
+.ok {
+  border-radius: 0;
+  border-right: 1px solid black;
+}
+
+.textArea,
+.textContents {
   background-color: white;
   border: 1px solid white;
+  border: none;
   color: black;
   padding: 30px;
+  border-radius: 6px 0 0 6px;
+  min-width: 600px;
+}
+
+.form {
+  display: flex;
+  width: 100%;
+  justify-content: center;
 }

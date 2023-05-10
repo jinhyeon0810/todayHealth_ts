@@ -39,22 +39,25 @@ export default function Texts({ textObj, isOwner, user }) {
         <div className={styles.textList}>
           {editing ? (
             <>
-              <form onSubmit={onSubmit}>
+              <form onSubmit={onSubmit} className={styles.form}>
                 <input
                   type="text"
                   placeholder="수정하세요"
                   value={newText}
                   required
                   onChange={onChange}
+                  className={styles.textContents}
                 />
 
-                <input type="submit" value="확인" />
-                <button onClick={toggleEditing}>취소</button>
+                <input type="submit" value="확인" className={styles.ok} />
+                <button onClick={toggleEditing} className={styles.cancel}>
+                  취소
+                </button>
               </form>
             </>
           ) : (
             <>
-              <div className={styles.textArea}>{textObj.text}</div>
+              <button className={styles.textArea}>{textObj.text}</button>
               {!isOwner && (
                 <>
                   <button onClick={toggleEditing} className={styles.fix}>

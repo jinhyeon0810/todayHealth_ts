@@ -14,7 +14,6 @@ export default function LoginPage({
   user,
   setUser,
 }: Props): React.ReactElement {
-  //궁금한점 : 여기서 console.log(user) 하면은 console값이 onChange할때마다 계속찍힘
   const [email, setEmail] = useState("");
   const [pw, setPw] = useState("");
 
