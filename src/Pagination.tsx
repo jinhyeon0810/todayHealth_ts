@@ -11,9 +11,9 @@ export default function Pagination({
   maxPage,
   currentPage,
   onClickPageButton,
-}): React.ReactElement {
+}: Props): React.ReactElement {
   return (
-    <div>
+    <div className={styles.wrapper}>
       <button>{"< Previous"}</button>
       {new Array(maxPage).fill(null).map((_, i) => (
         <PageButton number={i + 1} />

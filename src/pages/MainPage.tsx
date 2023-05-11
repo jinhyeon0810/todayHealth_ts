@@ -13,10 +13,11 @@ import {
 } from "firebase/firestore";
 import db from "../api/firebase";
 import Texts from "../components/Texts";
+import Footer from "../components/Footer";
 
 interface Props {
-  setUser: React.Dispatch<React.SetStateAction<boolean>>;
-  user: boolean;
+  setUser?: React.Dispatch<React.SetStateAction<{ uid: string }>>;
+  user?: { uid: string };
 }
 
 export default function MainPage({ user, setUser }: Props): React.ReactElement {
@@ -50,9 +51,6 @@ export default function MainPage({ user, setUser }: Props): React.ReactElement {
   const onChange = (e) => {
     setText(e.target.value);
   };
-
-  console.log(user);
-  console.log(texts);
 
   return (
     <>
@@ -95,11 +93,12 @@ export default function MainPage({ user, setUser }: Props): React.ReactElement {
                 textObj={text}
                 key={text.id}
                 user={user}
-                // isOnwer={text.creatorId === user.uid}
+                isOnwer={text.creatorId === user?.uid}
               />
             );
           })}
         </div>
+        <Footer />
       </div>
     </>
   );
