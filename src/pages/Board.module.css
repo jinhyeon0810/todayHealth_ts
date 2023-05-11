@@ -1,0 +1,79 @@
+.wrapper {
+  background-color: rgb(230, 227, 227);
+}
+.auth {
+  text-align: center;
+  font-size: 18px;
+  margin-top: 50px;
+}
+
+.board {
+  border: 1px solid rgb(183, 180, 180);
+  height: 100vh;
+  margin: 0 250px;
+  background-color: #f9f9f9;
+}
+
+.topTitle {
+  font-size: 40px;
+  font-weight: bold;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.title {
+  display: flex;
+  padding: 50px 20px 10px 95px;
+  position: relative;
+  font-size: 20px;
+}
+
+.modal {
+  width: 70px;
+  border-radius: 6px;
+  border: 1px solid #d0d7de;
+  box-shadow: 0 8px 24px rgba(140, 149, 159, 0.2);
+  background: #ffffff;
+  position: absolute;
+  z-index: 99;
+}
+
+.item {
+  font-size: 12px;
+  margin-bottom: 4px;
+  cursor: pointer;
+}
+
+.click {
+  cursor: pointer;
+}
+.clickhere {
+  display: flex;
+  font-size: 11px;
+  margin-left: 10px;
+  align-items: center;
+}
+
+.x {
+  display: flex;
+  justify-content: right;
+}
+
+.button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 10px;
+}
+.input {
+  width: 80%;
+  height: 60px;
+  font-size: 20px;
+  border: none;
+  padding-left: 10px;
+}
+
+.contentTitle {
+  display: flex;
+  justify-content: center;
+}

@@ -1,0 +1,14 @@
+.wrapper {
+  background-color: rgb(47, 52, 55);
+  height: 100vh;
+}
+.write {
+  text-align: center;
+  padding: 15px;
+  cursor: pointer;
+}
+
+.title {
+  text-align: center;
+  padding: 10px;
+}
