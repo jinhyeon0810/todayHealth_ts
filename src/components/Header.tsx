@@ -5,8 +5,8 @@ import { logout, onUserStateChange } from "../api/firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 interface Props {
-  setUser: React.Dispatch<React.SetStateAction<boolean>>;
-  user: boolean;
+  setUser: React.Dispatch<React.SetStateAction<{ uid: string }>>;
+  user?: { uid: string };
 }
 
 export default function Header({ user, setUser }: Props): React.ReactElement {
@@ -24,7 +24,11 @@ export default function Header({ user, setUser }: Props): React.ReactElement {
   };
 
   const clickLogOut = () => {
-    logout().then(setUser);
+    const conFirm = confirm("정말 로그아웃 하시겠습니까?");
+    if (conFirm) {
+      logout().then(setUser);
+      navigate("/");
+    }
   };
 
   const clickHome = () => {
@@ -61,11 +65,12 @@ export default function Header({ user, setUser }: Props): React.ReactElement {
               로그아웃
             </NavEl>
           )}
-
-          <NavEl onClick={clickMy} style={{ margin: "0 20px" }}>
-            나의 <br />
-            운동일지
-          </NavEl>
+          {user && (
+            <NavEl onClick={clickMy} style={{ margin: "0 20px" }}>
+              나의 <br />
+              운동일지
+            </NavEl>
+          )}
         </NavRight>
       </Nav>
     </>
