@@ -8,10 +8,12 @@ import MyPage from "./pages/MyPage";
 import SharePage from "./pages/SharePage";
 import { useState } from "react";
 import Board from "./pages/board";
+import BoardDetail from "./pages/BoardDetail";
 
 function App(): React.ReactElement {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState("");
+  const [imageList, setImageList] = useState([]);
 
   return (
     <Router>
@@ -32,11 +34,36 @@ function App(): React.ReactElement {
         <Route path="/my" element={<MyPage user={user} setUser={setUser} />} />
         <Route
           path="/share"
-          element={<SharePage user={user} setUser={setUser} />}
+          element={
+            <SharePage
+              user={user}
+              setUser={setUser}
+              imageList={imageList}
+              setImageList={setImageList}
+            />
+          }
         />
         <Route
           path="/board"
-          element={<Board user={user} setUser={setUser} />}
+          element={
+            <Board
+              user={user}
+              setUser={setUser}
+              imageList={imageList}
+              setImageList={setImageList}
+            />
+          }
+        />
+        <Route
+          path="/:id"
+          element={
+            <BoardDetail
+              user={user}
+              setUser={setUser}
+              imageList={imageList}
+              setImageList={setImageList}
+            />
+          }
         />
       </Routes>
     </Router>

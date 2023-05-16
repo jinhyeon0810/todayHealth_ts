@@ -11,19 +11,25 @@ export default function Pagination({
   maxPage,
   currentPage,
   onClickPageButton,
+  prevButton,
+  nextButton,
 }: Props): React.ReactElement {
   return (
     <div className={styles.wrapper}>
-      <button>{"< Previous"}</button>
+      <button onClick={prevButton}>{"< Previous"}</button>
       {new Array(maxPage).fill(null).map((_, i) => (
-        <PageButton number={i + 1} />
+        <PageButton number={i + 1} key={i} onClick={onClickPageButton} />
       ))}
 
-      <button>{"Next >"}</button>
+      <button onClick={nextButton}>{"Next >"}</button>
     </div>
   );
 }
 
-function PageButton({ number }): React.ReactElement {
-  return <button className={styles.button}>{number}</button>;
+function PageButton({ number, onClick }): React.ReactElement {
+  return (
+    <button className={styles.button} onClick={() => onClick(number)}>
+      {number}
+    </button>
+  );
 }
