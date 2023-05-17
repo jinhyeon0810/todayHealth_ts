@@ -31,7 +31,7 @@ export default function BoardDetail({
   setUser,
   imageList,
   setImageList,
-}: Props) {
+}: Props): React.ReactElement {
   const storage = getStorage();
   const imageListRef = ref(storage, "images/");
   useEffect(() => {

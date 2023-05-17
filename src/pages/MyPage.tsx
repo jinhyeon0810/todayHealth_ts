@@ -3,6 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "./MyPage.module.css";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 interface Props {
   setUser: React.Dispatch<React.SetStateAction<{ uid: string }>>;
@@ -25,6 +26,9 @@ export default function MyPage({ user, setUser }: Props): React.ReactElement {
       <div className={styles.body}>
         <h1 className={styles.title}> 진행한 운동</h1>
         <div className={styles.desc}>완료한 운동이 없어요...😥</div>
+      </div>
+      <div className={styles.footerArea}>
+        <Footer />
       </div>
     </div>
   );

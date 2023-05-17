@@ -16,12 +16,16 @@ export default function Pagination({
 }: Props): React.ReactElement {
   return (
     <div className={styles.wrapper}>
-      <button onClick={prevButton}>{"< Previous"}</button>
+      <button onClick={prevButton} className={styles.prevButton}>
+        {"< Previous"}
+      </button>
       {new Array(maxPage).fill(null).map((_, i) => (
         <PageButton number={i + 1} key={i} onClick={onClickPageButton} />
       ))}
 
-      <button onClick={nextButton}>{"Next >"}</button>
+      <button onClick={nextButton} className={styles.nextButton}>
+        {"Next >"}
+      </button>
     </div>
   );
 }

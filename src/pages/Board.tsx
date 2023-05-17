@@ -1,14 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import styles from "./Board.module.css";
+
+import { useNavigate } from "react-router-dom";
+import BoardComponent from "../components/BoardComponent.js";
 
 interface Props {
   setUser: React.Dispatch<React.SetStateAction<string>>;
   user?: { uid: string };
 }
 
-export default function Board({ user, setUser }: Props) {
+export default function Board({
+  user,
+  setUser,
+  imageList,
+  setImageList,
+}: Props): React.ReactElement {
   const [type, setType] = useState("Category");
+
+  const navigate = useNavigate();
+
   return (
     <>
       <div className={styles.wrapper}>
@@ -18,14 +29,22 @@ export default function Board({ user, setUser }: Props) {
             <span className={styles.topTitle}>오.운.완</span>
             <br /> 같이 인증해보아요 ✔
           </div>
-          <div className={styles.title}>
-            <Filter type={type} setType={setType}>
-              {type}
-            </Filter>
-            <span className={styles.clickhere}>👈click</span>
-          </div>
-          <div className={styles.contentTitle}>
-            <input placeholder="제목" className={styles.input} />
+          <BoardComponent
+            type={type}
+            setType={setType}
+            user={user}
+            setUser={setUser}
+            imageList={imageList}
+            setImageList={setImageList}
+          />
+          <div className={styles.backToShareArea}>
+            <button
+              onClick={() => navigate("/share")}
+              className={styles.backToSharePage}
+            >
+              {" "}
+              게시판으로 돌아가기
+            </button>
           </div>
         </div>
       </div>
@@ -33,9 +52,9 @@ export default function Board({ user, setUser }: Props) {
   );
 }
 
-function Filter({ children, type, setType }) {
+export function Filter({ children, type, setType }) {
   const [showModal, setShowModal] = useState(false);
-
+  // const [show, setShow] = useState(false);
   const onClick = (item) => {
     setShowModal(false);
     setType(item);
@@ -45,13 +64,14 @@ function Filter({ children, type, setType }) {
 
   return (
     <>
-      <div
+      <button
         className={styles.click}
         onClick={() => setShowModal(true)}
         style={{ marginRight: "0" }}
+        // disabled={!editing}
       >
         {children}
-      </div>
+      </button>
       {showModal && (
         <div className={styles.modal}>
           <div className={styles.x}>

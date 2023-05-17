@@ -4,7 +4,7 @@
   width: 100%;
   background: rgb(47, 52, 55);
   color: white;
-  height: 100vh;
+  height: 100%;
 }
 .width {
   width: 35%;
@@ -44,4 +44,14 @@
   width: 70%;
   margin: 0 auto;
   margin-bottom: 20px;
+}
+
+.timerButton {
+  cursor: pointer;
+}
+
+.timerButton:disabled {
+  cursor: text;
+  color: black;
+  background-color: #f0f0f0;
 }

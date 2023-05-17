@@ -56,15 +56,13 @@ export default function SignUpPage(): React.ReactElement {
     } else if (pw !== rePw) {
       setNotAllow(true);
     }
-    console.log(pw);
-    console.log(rePw);
   }, [pw, rePw]);
 
   const handleSignUp = async () => {
     const auth = getAuth();
     try {
       const result = await createUserWithEmailAndPassword(auth, email, pw);
-      console.log(result);
+
       navigate("/");
     } catch (error) {
       setError(error.message);

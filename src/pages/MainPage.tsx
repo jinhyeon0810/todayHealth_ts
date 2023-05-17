@@ -14,6 +14,8 @@ import {
 import db from "../api/firebase";
 import Texts from "../components/Texts";
 import Footer from "../components/Footer";
+import Timer from "../components/Timer";
+import Snow from "../components/Snow";
 
 interface Props {
   setUser?: React.Dispatch<React.SetStateAction<{ uid: string }>>;
@@ -23,6 +25,7 @@ interface Props {
 export default function MainPage({ user, setUser }: Props): React.ReactElement {
   const [text, setText] = useState("");
   const [texts, setTexts] = useState([]);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     const q = query(collection(db, "details"), orderBy("createdAt", "desc"));
@@ -31,7 +34,7 @@ export default function MainPage({ user, setUser }: Props): React.ReactElement {
         id: doc.id,
         ...doc.data(),
       }));
-      console.log(textArr);
+
       setTexts(textArr);
     });
   }, []);
@@ -55,7 +58,9 @@ export default function MainPage({ user, setUser }: Props): React.ReactElement {
   return (
     <>
       <Header user={user} setUser={setUser} />
+
       <div className={styles.wrapper}>
+        {/* <Snow /> */}
         <div className={styles.title}>
           <h1>오늘의 Health</h1>
           <form onSubmit={onSubmit} className={styles.form}>
@@ -98,6 +103,18 @@ export default function MainPage({ user, setUser }: Props): React.ReactElement {
             );
           })}
         </div>
+        {!show && (
+          <button
+            onClick={() => setShow(!show)}
+            className={styles.timerButton}
+            disabled={!user}
+          >
+            타이머 시작!! ⏰ <br />
+            <span style={{ fontSize: "9px" }}>운동 시간을 확인해보아요 ⏳</span>
+          </button>
+        )}
+        {show && <Timer />}
+
         <Footer />
       </div>
     </>

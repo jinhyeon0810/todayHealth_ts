@@ -1,78 +1,42 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "../pages/Board.module.css";
-
 import TextareaAutosize from "react-textarea-autosize";
-// import uploadImage from "../api/uploader.jsx";
-import db, { addNewProduct, imageUpload } from "../api/firebase.js";
-import {
-  addDoc,
-  collection,
-  doc,
-  onSnapshot,
-  orderBy,
-  query,
-  updateDoc,
-} from "firebase/firestore";
+import db, { imageUpload } from "../api/firebase.js";
+import { addDoc, collection } from "firebase/firestore";
 import { v4 } from "uuid";
-import {
-  getStorage,
-  listAll,
-  ref,
-  uploadBytesResumable,
-  getDownloadURL,
-} from "firebase/storage";
 import { Filter } from "../pages/board";
 import { useNavigate } from "react-router-dom";
-import App from "../App.js";
+
+interface Props {
+  type: string;
+  setType: React.Dispatch<React.SetStateAction<string>>;
+  setUser?: React.Dispatch<React.SetStateAction<{ uid: string }>>;
+  user?: { uid: string };
+  imageList: string[];
+  setImageList: React.Dispatch<React.SetStateAction<string>>;
+}
 
 export default function BoardComponent({
   type,
   setType,
   user,
-  setUser,
   imageList,
   setImageList,
-}) {
-  const [content, setContent] = useState("");
-
-  const [addFile, setAddFile] = useState(true);
-  const [editing, setEditing] = useState(true);
-
-  const [product, setProduct] = useState([]);
-
+}: Props): React.ReactElement {
+  const [title, setTitle] = useState<string>("");
+  const [content, setContent] = useState<string>("");
+  const [addFile, setAddFile] = useState<boolean>(true);
+  const [editing, setEditing] = useState<boolean>(true);
   const [file, setFile] = useState();
-  const [imageUpdate, setImageUpdate] = useState(false);
-
-  const [update, setUpdate] = useState(false);
+  const [imageUpdate, setImageUpdate] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  //   const [imageList, setImageList] = useState();
-
-  const storage = getStorage();
-  const imageListRef = ref(storage, "images/");
-
-  //storage에서 이미지 url 다운받아 ImageList에 넣는다.
-  // useEffect(() => {
-  //   function setImageList() {
-  //     listAll(imageListRef).then((response) =>
-  //       response.items.forEach((item) => {
-  //         getDownloadURL(item).then((url) => {
-  //           setImageList((prev) => [url, ...prev]);
-  //         });
-  //       })
-  //     );
-  //   }
-  //   setImageList();
-  // }, []);
-
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.name === "file") {
       setFile(e.target.files && e.target.files[0]);
       setAddFile(false);
-
       return;
     }
-    // setProduct((product) => ({ ...product, [e.target.name]: e.target.value }));
     if (e.target.name === "title") {
       setTitle(e.target.value);
     } else if (e.target.name === "content") {
@@ -80,23 +44,8 @@ export default function BoardComponent({
     }
   };
 
-  //   useEffect(() => {
-  //     const q = query(collection(db, "product"), orderBy("createdAt", "desc"));
-  //     onSnapshot(q, (snapshot) => {
-  //       const contentArr = snapshot.docs.map((doc) => ({
-  //         id: doc.id,
-  //         ...doc.data(),
-  //       }));
-  //
-  //       setProduct(contentArr);
-  //     });
-  //   }, []);
-
-  const [title, setTitle] = useState(product?.title);
-
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-
     if (title === "") {
       alert("제목을 입력하셔야죠 😊");
       return;
@@ -118,27 +67,19 @@ export default function BoardComponent({
       return;
     }
 
-    // imageUpload(file, v4, setImageList);
-
     addDoc(collection(db, "product"), {
       title,
       content,
       category: type,
-      creatorId: user.uid,
+      creatorId: user?.uid,
       createdAt: Date.now(),
       url: imageList[0],
-
-      //
     });
 
     setEditing(false);
-
     alert("등록 되었습니다 😎");
     navigate("/share");
   };
-  console.log(imageList[0]);
-  console.log(imageList);
-  console.log(imageList[2]);
 
   const imgOnClick = () => {
     imageUpload(file, v4, setImageList);
@@ -168,7 +109,7 @@ export default function BoardComponent({
               alt="local file"
             />
           )}
-          {file && !update && (
+          {file && (
             <div
               style={{
                 display: "flex",
