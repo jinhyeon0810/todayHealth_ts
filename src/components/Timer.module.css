@@ -1,0 +1,19 @@
+.stopWatch {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.buttons {
+  width: 80px;
+  height: 40px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.seconds {
+  font-size: 25px;
+  font-weight: bold;
+  margin: 0 15px;
+  color: #f9f9f9;
+}
