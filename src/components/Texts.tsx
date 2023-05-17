@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Texts.module.css";
 import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 import db from "../api/firebase";
 
-export default function Texts({ textObj, isOwner, user }) {
+export default function Texts({ textObj, isOwner, user }): React.ReactElement {
   const [editing, setEditing] = useState(false);
   const [newText, setNewText] = useState(textObj.text);
 
@@ -21,7 +21,8 @@ export default function Texts({ textObj, isOwner, user }) {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(newText, textObj);
+
+    //수정
     const updateRef = doc(db, "details", `${textObj.id}`);
     updateDoc(updateRef, {
       text: newText,

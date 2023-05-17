@@ -59,10 +59,6 @@ export default function FindPage({ user, setUser }: Props): React.ReactElement {
     setNotAllow(true);
   }, [emailValid]);
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
-
   return (
     <>
       <div className={styles.wrapper}>

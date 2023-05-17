@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import styles from "./Timer.module.css";
 
-export default function Timer() {
+export default function Timer(): React.ReactElement {
   const [seconds, setSeconds] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [hours, setHours] = useState(0);
