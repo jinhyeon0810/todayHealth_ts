@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Footer.module.css";
 
-export default function Footer() {
+export default function Footer(): React.ReactElement {
   return (
     <div className={styles.wrapper}>
       <span className={styles.footerTitle}>기록이 몸을 만든다</span>

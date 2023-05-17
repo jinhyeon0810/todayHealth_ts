@@ -14,7 +14,6 @@ export default function Header({ user, setUser }: Props): React.ReactElement {
 
   useEffect(() => {
     onUserStateChange((user) => {
-      console.log(user);
       setUser(user);
     });
   }, []);
@@ -48,7 +47,7 @@ export default function Header({ user, setUser }: Props): React.ReactElement {
       <Nav>
         <NavLeft>
           <NavEl onClick={clickHome}>홈</NavEl>
-          <NavEl>img</NavEl>
+          {/* <NavEl>img</NavEl> */}
         </NavLeft>
         <NavRight>
           <NavEl onClick={clickShare} style={{ margin: "0 20px" }}>
