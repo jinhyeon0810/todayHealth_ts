@@ -10,9 +10,10 @@ import { useState } from "react";
 import Board from "./pages/board";
 import BoardDetail from "./pages/BoardDetail";
 
+type User = { uid: string };
+
 function App(): React.ReactElement {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState<User[]>([]);
   const [imageList, setImageList] = useState([]);
 
   return (
