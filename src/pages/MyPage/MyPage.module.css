@@ -1,0 +1,30 @@
+.wrapper {
+  background-color: rgb(47, 52, 55);
+}
+.datePicker {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.title {
+  margin-left: 20px;
+}
+
+.body {
+  background-color: white;
+  height: 60vh;
+  margin: 0 100px;
+  border-radius: 6px;
+  padding: 20px;
+}
+
+.desc {
+  background-color: rgb(237, 237, 237);
+  min-height: 150px;
+  margin: 0 20px;
+}
+
+.footerArea {
+  margin-top: 50px;
+}
