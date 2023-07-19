@@ -22,8 +22,13 @@ export default function MyPage({ user, setUser }: Props): React.ReactElement {
   const [texts, setTexts] = useRecoilState(textState);
   console.log(texts);
 
-  const pickerDate = startDate.toISOString().split("T")[0];
+  const year = startDate.getFullYear();
+  const month = String(startDate.getMonth() + 1).padStart(2, "0");
+  const day = String(startDate.getDate()).padStart(2, "0");
+
+  const pickerDate = `${year}-${month}-${day}`;
   console.log(pickerDate);
+  console.log(startDate);
 
   //서버에서 운동기록 데이터 가져오기
   useEffect(() => {
@@ -36,11 +41,11 @@ export default function MyPage({ user, setUser }: Props): React.ReactElement {
 
       setTexts(
         textArr.filter((t) => {
-          return t.creatorId === user.uid;
+          return t.creatorId === user.uid && pickerDate === t.createdAt;
         })
       );
     });
-  }, [setTexts, user.uid]);
+  }, [setTexts, user.uid, startDate, pickerDate]);
   return (
     <div className={styles.wrapper}>
       <Header user={user} setUser={setUser} />
@@ -62,7 +67,7 @@ export default function MyPage({ user, setUser }: Props): React.ReactElement {
             );
           })
         ) : (
-          <div className={styles.desc}>완료한 운동이 없어요...😥</div>
+          <div className={styles.desc}> 완료한 운동이 없습니다. </div>
         )}
       </div>
       <div className={styles.footerArea}>
