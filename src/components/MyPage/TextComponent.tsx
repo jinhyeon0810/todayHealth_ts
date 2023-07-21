@@ -1,9 +1,9 @@
-import React from "react";
+import styles from "./TextComponent.module.css";
 
 export default function TextComponent({ text }) {
   return (
     <>
-      <div>{text.text}</div>
+      <pre className={styles.text}>{text.text}</pre>
     </>
   );
 }

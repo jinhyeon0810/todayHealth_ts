@@ -88,14 +88,13 @@ const Nav = styled.div`
   flex-direction: rows;
   justify-content: space-between;
   align-items: center;
-  background-color: black;
+  background-color: rgb(73, 77, 79);
   cursor: pointer;
   color: #ffffffe6;
   font-weight: bold;
   width: 100%;
   border-bottom: 1px solid #828282;
   color: white;
-  opacity: 0.7;
   z-index: 10;
   font-weight: bold;
 `;

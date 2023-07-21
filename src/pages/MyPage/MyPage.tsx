@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
+import { GiMuscleUp } from "react-icons/gi";
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "./MyPage.module.css";
 import Footer from "../../components/Footer/Footer";
-import Header from "../../components/Header";
-import { useRecoilState } from "recoil";
-import { textState } from "../../utils/Atom";
+import Header from "../../components/Header/Header";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import db from "../../api/firebase";
-import Texts from "../../components/Texts/Texts";
 import TextComponent from "../../components/MyPage/TextComponent";
-import dateString from "../../utils/Date";
 
 interface Props {
   setUser: React.Dispatch<React.SetStateAction<{ uid: string }>>;
@@ -19,7 +16,7 @@ interface Props {
 
 export default function MyPage({ user, setUser }: Props): React.ReactElement {
   const [startDate, setStartDate] = useState(new Date());
-  const [texts, setTexts] = useRecoilState(textState);
+  const [texts, setTexts] = useState([]);
   console.log(texts);
 
   const year = startDate.getFullYear();
@@ -27,18 +24,18 @@ export default function MyPage({ user, setUser }: Props): React.ReactElement {
   const day = String(startDate.getDate()).padStart(2, "0");
 
   const pickerDate = `${year}-${month}-${day}`;
-  console.log(pickerDate);
-  console.log(startDate);
-
+  // console.log(pickerDate);
+  // console.log(startDate);
+  // console.log(texts);
   //서버에서 운동기록 데이터 가져오기
   useEffect(() => {
-    const q = query(collection(db, "details"), orderBy("createdAt", "desc"));
+    const q = query(collection(db, "details"), orderBy("timeStamp", "desc"));
     onSnapshot(q, (snapshot) => {
       const textArr = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
-
+      console.log(textArr);
       setTexts(
         textArr.filter((t) => {
           return t.creatorId === user.uid && pickerDate === t.createdAt;
@@ -47,32 +44,40 @@ export default function MyPage({ user, setUser }: Props): React.ReactElement {
     });
   }, [setTexts, user.uid, startDate, pickerDate]);
   return (
-    <div className={styles.wrapper}>
-      <Header user={user} setUser={setUser} />
-      <div className={styles.datePicker}>
-        <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} inline className={styles.datePicker} />
+    <>
+      <div className={styles.wrapper}>
+        <Header user={user} setUser={setUser} />
+        <article className={styles.layout}>
+          <div className={styles.datePicker}>
+            <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} inline className={styles.datePicker} maxDate={new Date()} />
+          </div>
+          <div className={styles.body}>
+            <h1 className={styles.title}>
+              {" "}
+              진행한 운동 <GiMuscleUp /> / <span className={styles.exerciseDay}>{pickerDate}</span>
+            </h1>
+            <ul className={styles.desc}>
+              {texts?.length > 0 ? (
+                texts?.map((text) => {
+                  return (
+                    text.creatorId === user?.uid &&
+                    pickerDate === text.createdAt && (
+                      <div className={styles.recordComponent}>
+                        <TextComponent text={text} />
+                      </div>
+                    )
+                  );
+                })
+              ) : (
+                <div className={styles.noDesc}> 완료한 운동이 없습니다.😓 </div>
+              )}
+            </ul>
+          </div>
+        </article>
+        <div className={styles.footerArea}>
+          <Footer />
+        </div>
       </div>
-      <div className={styles.body}>
-        <h1 className={styles.title}> 진행한 운동</h1>
-
-        {texts.length > 0 ? (
-          texts.map((text) => {
-            return (
-              text.creatorId === user?.uid &&
-              pickerDate === text.createdAt && (
-                <div className={styles.desc}>
-                  <TextComponent text={text} />
-                </div>
-              )
-            );
-          })
-        ) : (
-          <div className={styles.desc}> 완료한 운동이 없습니다. </div>
-        )}
-      </div>
-      <div className={styles.footerArea}>
-        <Footer />
-      </div>
-    </div>
+    </>
   );
 }

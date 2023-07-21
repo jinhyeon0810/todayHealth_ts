@@ -1,6 +1,6 @@
 .textList {
   display: flex;
-  flex-direction: row;
+  /* flex-direction: row; */
   margin-bottom: 30px;
   /* border: 1px solid black; */
   border-radius: 6px;
@@ -43,7 +43,13 @@
   color: black;
   padding: 30px;
   border-radius: 6px 0 0 6px;
-  min-width: 500px;
+  width: 500px;
+  margin: 0;
+}
+.textArea {
+  white-space: pre-wrap;
+  word-break: break-all;
+  overflow: auto;
 }
 
 .form {

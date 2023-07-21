@@ -42,7 +42,15 @@ export default function Texts({ textObj, isOwner, user }): React.ReactElement {
           {editing ? (
             <>
               <form onSubmit={onSubmit} className={styles.form}>
-                <input type="text" placeholder="수정하세요" value={newText} required onChange={onChange} className={styles.textContents} />
+                <textarea
+                  type="text"
+                  placeholder="수정하세요"
+                  value={newText}
+                  required
+                  onChange={onChange}
+                  className={styles.textContents}
+                  wrap="on"
+                />
 
                 <input type="submit" value="확인" className={styles.ok} />
                 <button onClick={toggleEditing} className={styles.cancel}>
@@ -52,7 +60,7 @@ export default function Texts({ textObj, isOwner, user }): React.ReactElement {
             </>
           ) : (
             <>
-              <button className={styles.textArea}>{textObj.text}</button>
+              <pre className={styles.textArea}>{textObj.text}</pre>
               {!isOwner && (
                 <>
                   <button onClick={toggleEditing} className={styles.fix}>
