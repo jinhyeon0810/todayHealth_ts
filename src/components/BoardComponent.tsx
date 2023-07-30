@@ -1,38 +1,34 @@
 import React, { useState } from "react";
-import styles from "../pages/Board.module.css";
+import styles from "../pages/Board/Board.module.css";
 import TextareaAutosize from "react-textarea-autosize";
 import db, { imageUpload } from "../api/firebase.js";
-import { addDoc, collection } from "firebase/firestore";
+import { Timestamp, addDoc, collection } from "firebase/firestore";
 import { v4 } from "uuid";
-import { Filter } from "../pages/board";
+import { Filter } from "../pages/Board/Board.js";
 import { useNavigate } from "react-router-dom";
+import dateString from "../utils/Date.js";
 
 interface Props {
   type: string;
   setType: React.Dispatch<React.SetStateAction<string>>;
-  setUser?: React.Dispatch<React.SetStateAction<{ uid: string }>>;
   user?: { uid: string };
-  imageList: string[];
-  setImageList: React.Dispatch<React.SetStateAction<string>>;
+  imageList: string | undefined;
+  setImageList: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
-export default function BoardComponent({
-  type,
-  setType,
-  user,
-  imageList,
-  setImageList,
-}: Props): React.ReactElement {
+export default function BoardComponent({ type, setType, user, imageList, setImageList }: Props): React.ReactElement {
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [addFile, setAddFile] = useState<boolean>(true);
   const [editing, setEditing] = useState<boolean>(true);
-  const [file, setFile] = useState();
+  const timeStamp = Timestamp.now();
+  const [file, setFile] = useState<File | null>(null);
   const [imageUpdate, setImageUpdate] = useState<boolean>(false);
   const navigate = useNavigate();
+  console.log(imageList);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.name === "file") {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
+    if (e.target.name === "file" && e.target instanceof HTMLInputElement) {
       setFile(e.target.files && e.target.files[0]);
       setAddFile(false);
       return;
@@ -44,7 +40,7 @@ export default function BoardComponent({
     }
   };
 
-  const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (title === "") {
       alert("제목을 입력하셔야죠 😊");
@@ -72,8 +68,9 @@ export default function BoardComponent({
       content,
       category: type,
       creatorId: user?.uid,
-      createdAt: Date.now(),
-      url: imageList[0],
+      createdAt: dateString,
+      url: imageList,
+      timeStamp,
     });
 
     setEditing(false);
@@ -88,7 +85,7 @@ export default function BoardComponent({
   };
 
   const onClickCancel = () => {
-    setFile();
+    setFile(null);
     setAddFile(true);
   };
 
@@ -96,19 +93,11 @@ export default function BoardComponent({
     <div className={styles.height}>
       <>
         <div className={styles.title}>
-          <Filter type={type} setType={setType} editing={editing}>
-            {type}
-          </Filter>
+          <Filter setType={setType}>{type}</Filter>
           {editing && <span className={styles.clickhere}>👈click</span>}
         </div>
         <div className={styles.addImage}>
-          {file && (
-            <img
-              className={styles.img}
-              src={URL.createObjectURL(file)}
-              alt="local file"
-            />
-          )}
+          {file && <img className={styles.img} src={URL.createObjectURL(file)} alt="local file" />}
           {file && (
             <div
               style={{
@@ -127,15 +116,7 @@ export default function BoardComponent({
           )}
         </div>
         <div className={styles.contentTitle}>
-          {editing && (
-            <input
-              placeholder="제목"
-              className={styles.input}
-              onChange={handleChange}
-              name="title"
-              value={title ?? ""}
-            />
-          )}
+          {editing && <input placeholder="제목" className={styles.input} onChange={handleChange} name="title" value={title ?? ""} />}
         </div>
 
         <div className={styles.textareaList}>
@@ -156,26 +137,15 @@ export default function BoardComponent({
         </div>
         {addFile && (
           <div className={styles.fileArea}>
-            <input
-              type="file"
-              accept="image/*"
-              name="file"
-              required
-              className={styles.file}
-              onChange={handleChange}
-            />
+            <input type="file" accept="image/*" name="file" required className={styles.file} onChange={handleChange} />
           </div>
         )}
 
-        <div className={styles.confirm}>
-          <button
-            type="submit"
-            onClick={handleSubmit}
-            className={styles.submitButton}
-          >
+        <form className={styles.confirm}>
+          <button type="submit" onClick={handleSubmit} className={styles.submitButton}>
             등록
           </button>
-        </div>
+        </form>
       </>
     </div>
   );
