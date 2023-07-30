@@ -1,6 +1,11 @@
 import styles from "./TextComponent.module.css";
 
-export default function TextComponent({ text }) {
+interface TextCompoProps {
+  text: {
+    text: string;
+  };
+}
+export default function TextComponent({ text }: TextCompoProps) {
   return (
     <>
       <pre className={styles.text}>{text.text}</pre>

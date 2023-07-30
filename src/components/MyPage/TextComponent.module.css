@@ -1,0 +1,9 @@
+.text {
+  margin-bottom: 30px;
+  font-weight: bold;
+  text-align: center;
+  font-size: 25px;
+  white-space: pre-wrap;
+  word-break: break-all;
+  overflow: auto;
+}

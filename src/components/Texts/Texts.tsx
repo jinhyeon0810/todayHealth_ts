@@ -1,11 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./Texts.module.css";
 import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 import db from "../../api/firebase";
+import { useRecoilState } from "recoil";
+import { textIdState } from "../../utils/Atom";
 
-export default function Texts({ textObj, isOwner, user }): React.ReactElement {
+interface TextsProps {
+  textObj: {
+    id: string;
+    text: string;
+  };
+  isOwner: boolean;
+  user?: { uid: string };
+}
+
+export default function Texts({ textObj, isOwner, user }: TextsProps): React.ReactElement {
   const [editing, setEditing] = useState(false);
   const [newText, setNewText] = useState(textObj.text);
+  const [textId, setTextId] = useRecoilState(textIdState);
 
   const onDeleteClick = () => {
     const ok = window.confirm("정말 삭제하실꺼죠?");
@@ -20,7 +32,7 @@ export default function Texts({ textObj, isOwner, user }): React.ReactElement {
     setEditing((prev) => !prev);
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     //수정값을 서버로 보냄
@@ -31,8 +43,15 @@ export default function Texts({ textObj, isOwner, user }): React.ReactElement {
     setEditing(false);
   };
 
-  const onChange = (e) => {
+  const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNewText(e.target.value);
+  };
+
+  const dragOver = (e: React.DragEvent<Element>) => {
+    e.preventDefault();
+    const target = e.target as HTMLElement;
+    setTextId(target.id);
+    console.log(textId);
   };
 
   return (
@@ -42,15 +61,7 @@ export default function Texts({ textObj, isOwner, user }): React.ReactElement {
           {editing ? (
             <>
               <form onSubmit={onSubmit} className={styles.form}>
-                <textarea
-                  type="text"
-                  placeholder="수정하세요"
-                  value={newText}
-                  required
-                  onChange={onChange}
-                  className={styles.textContents}
-                  wrap="on"
-                />
+                <textarea placeholder="수정하세요" value={newText} required onChange={onChange} className={styles.textContents} wrap="on" />
 
                 <input type="submit" value="확인" className={styles.ok} />
                 <button onClick={toggleEditing} className={styles.cancel}>
@@ -60,7 +71,9 @@ export default function Texts({ textObj, isOwner, user }): React.ReactElement {
             </>
           ) : (
             <>
-              <pre className={styles.textArea}>{textObj.text}</pre>
+              <pre className={styles.textArea} draggable="true" onDragOver={dragOver} id={textObj.id}>
+                {textObj.text}
+              </pre>
               {!isOwner && (
                 <>
                   <button onClick={toggleEditing} className={styles.fix}>
