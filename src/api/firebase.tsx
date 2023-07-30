@@ -1,23 +1,8 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { v4 as uuid } from "uuid";
-
-import {
-  getAuth,
-  signInWithPopup,
-  GoogleAuthProvider,
-  signOut,
-  onAuthStateChanged,
-} from "firebase/auth";
-
+import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
-import {
-  getDownloadURL,
-  getStorage,
-  ref,
-  uploadBytes,
-  uploadBytesResumable,
-} from "firebase/storage";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -45,7 +30,8 @@ export async function logout() {
   return signOut(auth).then(() => null);
 }
 
-export function onUserStateChange(callback) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function onUserStateChange(callback: any) {
   onAuthStateChanged(auth, (user) => {
     callback(user);
   });
@@ -55,13 +41,13 @@ export default db;
 
 // export async function addNewProduct(product, imageUrl) {}
 
-export function imageUpload(file, v4, setImageList) {
+export function imageUpload(file: File | null, v4: () => string, setImageList: React.Dispatch<React.SetStateAction<string | undefined>>) {
   if (file === null) return;
   const storage = getStorage();
   const storageRef = ref(storage, `images/${file.name + v4()} `);
   uploadBytes(storageRef, file).then((snapshot) =>
     getDownloadURL(snapshot.ref).then((url) => {
-      setImageList((prev) => [url, ...prev]);
+      setImageList(url);
     })
   );
 }
