@@ -9,19 +9,29 @@ import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import db from "../../api/firebase";
 import TextComponent from "../../components/MyPage/TextComponent";
 
+type User = { uid: string };
+
 interface Props {
-  setUser: React.Dispatch<React.SetStateAction<{ uid: string }>>;
+  setUser?: React.Dispatch<React.SetStateAction<User | undefined>>;
   user?: { uid: string };
 }
 
+interface textArrProps {
+  id: string;
+  text: string;
+  createdAt: string;
+  creatorId: string;
+}
+[];
+
 export default function MyPage({ user, setUser }: Props): React.ReactElement {
-  const [startDate, setStartDate] = useState(new Date());
-  const [texts, setTexts] = useState([]);
+  const [startDate, setStartDate] = useState<Date | null>(new Date());
+  const [texts, setTexts] = useState<textArrProps[]>([]);
   console.log(texts);
 
-  const year = startDate.getFullYear();
-  const month = String(startDate.getMonth() + 1).padStart(2, "0");
-  const day = String(startDate.getDate()).padStart(2, "0");
+  const year = startDate?.getFullYear();
+  const month = String((startDate as Date)?.getMonth() + 1).padStart(2, "0");
+  const day = String(startDate?.getDate()).padStart(2, "0");
 
   const pickerDate = `${year}-${month}-${day}`;
   // console.log(pickerDate);
@@ -34,15 +44,15 @@ export default function MyPage({ user, setUser }: Props): React.ReactElement {
       const textArr = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
-      }));
+      })) as textArrProps[];
       console.log(textArr);
       setTexts(
-        textArr.filter((t) => {
-          return t.creatorId === user.uid && pickerDate === t.createdAt;
+        textArr.filter((t: textArrProps) => {
+          return t.creatorId === user?.uid && pickerDate === t.createdAt;
         })
       );
     });
-  }, [setTexts, user.uid, startDate, pickerDate]);
+  }, [setTexts, user?.uid, startDate, pickerDate]);
   return (
     <>
       <div className={styles.wrapper}>
@@ -75,7 +85,7 @@ export default function MyPage({ user, setUser }: Props): React.ReactElement {
           </div>
         </article>
         <div className={styles.footerArea}>
-          <Footer />
+          <Footer user={user} />
         </div>
       </div>
     </>

@@ -1,0 +1,16 @@
+.filter {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.inputFilter {
+  width: 500px;
+  height: 20px;
+}
+
+.searchBar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}
