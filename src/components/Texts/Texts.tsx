@@ -53,7 +53,7 @@ export default function Texts({ textObj, isOwner, user }: TextsProps): React.Rea
     setTextId(target.id);
     console.log(textId);
   };
-
+  console.log(isOwner);
   return (
     <>
       {user && (
@@ -74,7 +74,7 @@ export default function Texts({ textObj, isOwner, user }: TextsProps): React.Rea
               <pre className={styles.textArea} draggable="true" onDragOver={dragOver} id={textObj.id}>
                 {textObj.text}
               </pre>
-              {!isOwner && (
+              {isOwner && (
                 <>
                   <button onClick={toggleEditing} className={styles.fix}>
                     수정
