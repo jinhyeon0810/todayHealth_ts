@@ -1,25 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { logout, onUserStateChange } from "../../api/firebase";
-import { HiOutlineBars3 } from "react-icons/hi2";
-import TopicModal from "./TopicModal";
-import styles from "./Header.module.css";
+
+type User = { uid: string };
 
 interface Props {
-  setUser: React.Dispatch<React.SetStateAction<{ uid: string }>>;
+  setUser?: React.Dispatch<React.SetStateAction<User | undefined>>;
   user?: { uid: string };
 }
-
 export default function Header({ user, setUser }: Props): React.ReactElement {
   const navigate = useNavigate();
-  const [topicOpen, setTopicOpen] = useState(false);
   useEffect(() => {
-    onUserStateChange((user) => {
-      setUser(user);
-    });
-  }, []);
-  console.log(topicOpen);
+    if (setUser) {
+      onUserStateChange((user: { uid: string }) => {
+        setUser(user);
+      });
+    }
+  }, [setUser]);
+
   const clickLogIn = () => {
     navigate("/login");
   };
@@ -27,7 +26,7 @@ export default function Header({ user, setUser }: Props): React.ReactElement {
   const clickLogOut = () => {
     const conFirm = confirm("정말 로그아웃 하시겠습니까?");
     if (conFirm) {
-      logout().then(setUser);
+      logout();
       navigate("/");
     }
   };
@@ -44,11 +43,24 @@ export default function Header({ user, setUser }: Props): React.ReactElement {
     navigate("/my");
   };
 
+  const moveToSignUpPage = () => {
+    navigate("/signup");
+  };
+
+  const moveToLocation = () => {
+    if (user) {
+      navigate("/location");
+    } else {
+      alert("로그인 하셔야 이용 가능합니다 🙂");
+    }
+  };
+
   return (
     <>
       <Nav>
         <NavLeft>
           <NavEl onClick={moveToHome}>홈</NavEl>
+          <NavEl onClick={moveToLocation}>위치</NavEl>
         </NavLeft>
         <NavRight>
           <NavEl onClick={clickShare} style={{ margin: "0 20px" }}>
@@ -60,6 +72,12 @@ export default function Header({ user, setUser }: Props): React.ReactElement {
               로그인
             </NavEl>
           )}
+          {!user && (
+            <NavEl onClick={moveToSignUpPage} style={{ margin: "0 20px" }}>
+              회원가입
+            </NavEl>
+          )}
+
           {user && (
             <NavEl onClick={clickLogOut} style={{ margin: "0 20px" }}>
               로그아웃
@@ -73,11 +91,6 @@ export default function Header({ user, setUser }: Props): React.ReactElement {
           )}
         </NavRight>
       </Nav>
-      {topicOpen && (
-        <div className={topicOpen && styles.down}>
-          <TopicModal />
-        </div>
-      )}
     </>
   );
 }
