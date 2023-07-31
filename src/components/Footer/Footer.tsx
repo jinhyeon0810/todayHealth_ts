@@ -25,6 +25,7 @@ export default function Footer({ user }: FooterProps): React.ReactElement {
         </button>
       )}
       {show && <Timer setShow={setShow} />}
+
       <div className={styles.wrapper}>
         <span className={styles.footerTitle}>기록이 몸을 만든다</span>
         <div className={styles.footerDesc}>운동, 매번 하고 있지만 진짜 성장하고 있는지 궁금하지 않으세요? (●'◡'●)</div>

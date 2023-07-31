@@ -96,3 +96,21 @@
   padding-top: 20px;
   cursor: pointer;
 }
+
+.footerArea {
+  width: 100%;
+}
+
+@media (max-width: 660px) {
+  .textArticle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .width {
+    width: 70%;
+    height: 50px;
+  }
+}

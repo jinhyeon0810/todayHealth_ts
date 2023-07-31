@@ -49,7 +49,7 @@
 .textArea {
   white-space: pre-wrap;
   word-break: break-all;
-  overflow: auto;
+  /* overflow: auto; */
   cursor: pointer;
 }
 
@@ -57,4 +57,36 @@
   display: flex;
   width: 100%;
   justify-content: center;
+}
+
+@media (min-width: 1201px) {
+  .textArea {
+    width: 300px;
+  }
+}
+
+@media (min-width: 900px) and (max-width: 1200px) {
+  .textArea {
+    width: 200px;
+  }
+}
+
+@media (max-width: 899px) {
+  .textArea {
+    width: 100px;
+  }
+}
+
+@media (max-width: 447px) {
+  .textArea {
+    width: 100%;
+    padding: 20px;
+  }
+}
+
+@media (min-width: 447px) and (max-width: 660px) {
+  .textArea {
+    width: 300px;
+    padding: 20px;
+  }
 }

@@ -27,3 +27,28 @@
   width: 100%;
   cursor: pointer;
 }
+
+@media (min-width: 280px) and (max-width: 450px) {
+  .footerTitle {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  .wrapper {
+    padding: 30px 20px 30px;
+  }
+  .footerDesc {
+    font-size: 12px;
+  }
+}
+@media (min-width: 450px) and (max-width: 1000px) {
+  .footerTitle {
+    font-size: 35px;
+    font-weight: bold;
+  }
+  .wrapper {
+    padding: 40px 30px 30px;
+  }
+  .footerDesc {
+    font-size: 14px;
+  }
+}

@@ -110,6 +110,9 @@ const Nav = styled.div`
   color: white;
   z-index: 10;
   font-weight: bold;
+  overflow: hidden;
+  @media (min-width: 447px) and (max-width: 660px) {
+  }
 `;
 const NavEl = styled.div`
   &:hover {
@@ -118,6 +121,24 @@ const NavEl = styled.div`
   padding: 10px 60px;
 
   text-align: center;
+
+  @media (min-width: 654px) and (max-width: 955px) {
+    padding: 10px 30px;
+  }
+  @media (min-width: 570px) and (max-width: 654px) {
+    padding: 10px 20px;
+  }
+  @media (min-width: 447px) and (max-width: 654px) {
+    padding: 10px 8px;
+  }
+  @media (min-width: 280px) and (max-width: 447px) {
+    padding: 5px;
+    font-size: 12px;
+  }
+  @media (max-width: 280px) {
+    padding: 10px;
+    font-size: 11px;
+  }
 `;
 
 const NavRight = styled.div`

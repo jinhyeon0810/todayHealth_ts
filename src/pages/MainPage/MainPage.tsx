@@ -112,7 +112,7 @@ export default function MainPage({ user, setUser }: Props): React.ReactElement {
     <>
       <div className={styles.wrapper}>
         <Header user={user} setUser={setUser} />
-        <article className={styles.mainArticle}>
+        <article>
           <div className={styles.title}>
             <h1>오늘의 Health</h1>
             <form onSubmit={onSubmit} className={styles.form}>
@@ -213,7 +213,9 @@ export default function MainPage({ user, setUser }: Props): React.ReactElement {
             )}
           </section>
         </article>
-        <Footer user={user} />
+        <div className={styles.footerArea}>
+          <Footer user={user} />
+        </div>
       </div>
     </>
   );
