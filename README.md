@@ -24,7 +24,7 @@
   * 스톱워치 기능
 
 
-![운동커뮤니티_시연_AdobeExpress](https://github.com/jinhyeon0810/todayHealth_ts/assets/121710757/c88e1c0a-d257-4a31-b58e-834456a83d21)
+<img src="https://github.com/jinhyeon0810/todayHealth_ts/assets/121710757/c88e1c0a-d257-4a31-b58e-834456a83d21" width="500px"/>
 
 
 
@@ -34,44 +34,56 @@
   * 비밀번호 재확인 기능
 
 
-![운동커뮤니티_시연_회원가입](https://github.com/jinhyeon0810/todayHealth_ts/assets/121710757/070acb81-d707-4d4d-aada-4ae84a076701)
-
+<img src="https://github.com/jinhyeon0810/todayHealth_ts/assets/121710757/070acb81-d707-4d4d-aada-4ae84a076701" width="500px"/>
 
 ### 3. 게시물 페이지
   * 제목 기반 검색 기능
 
 
-   ![운동커뮤니티_시연_AdobeExpress](https://github.com/jinhyeon0810/todayHealth_ts/assets/121710757/c893a184-e17e-4dfb-aed8-0f3869550ed0)<br/>
+   <img src="https://github.com/jinhyeon0810/todayHealth_ts/assets/121710757/c893a184-e17e-4dfb-aed8-0f3869550ed0" width="500px"/>
    
-   
-   
-   
-   * 비로그인 유저 사용 불가능
-
-
-  ![운동커뮤니티_시연_비로그인](https://github.com/jinhyeon0810/todayHealth_ts/assets/121710757/173cbdba-9999-41b1-8e4f-106ee0b602e4)
-
 
   * 페이지네이션 기능
  
 
 
-![운동커뮤니티_시연_AdobeExpress](https://github.com/jinhyeon0810/todayHealth_ts/assets/121710757/42a5565f-34ac-4793-a423-7f87dd574d40)
-
+<img src="https://github.com/jinhyeon0810/todayHealth_ts/assets/121710757/42a5565f-34ac-4793-a423-7f87dd574d40" width="500px"/>
 
 
 ### 4. 게시물 작성 페이지
   * 카테고리 / 제목 / 내용 / 이미지 등록
 
 
-![운동커뮤니티_시연_AdobeExpress](https://github.com/jinhyeon0810/todayHealth_ts/assets/121710757/6fa31499-a6fa-430a-87e1-1bbb03054ef4)
-
+<img src="https://github.com/jinhyeon0810/todayHealth_ts/assets/121710757/6fa31499-a6fa-430a-87e1-1bbb03054ef4" width="500px"/>
 
 
   * 카테고리 / 제목 / 내용 수정
 
 
-![운동커뮤니티_시연_게시물수정](https://github.com/jinhyeon0810/todayHealth_ts/assets/121710757/3e140eae-15c5-4a49-9ac5-07df84cf2e16)
+<img src="https://github.com/jinhyeon0810/todayHealth_ts/assets/121710757/3e140eae-15c5-4a49-9ac5-07df84cf2e16" width="500px"/>
+
+
+# 2023.07 ~ 이후로 추가한기능
+### 1. 메인페이지
+  - 메인페이지에 캘린더를 추가하여 지난기록과 오늘의 기록을 한 눈에 비교 가능
+
+<img src="https://github.com/jinhyeon0810/FirstTimeGit/assets/121710757/31cebb94-9634-42d5-bf5a-eee3f8a83dc6" width="500px"/>
+
+  - 드래그 앤 드랍 기능을 이용하여 운동기록 삭제 가능
+    
+<img src="https://github.com/jinhyeon0810/FirstTimeGit/assets/121710757/2538c8ef-a94b-4148-a107-d648cd2a30b4" width="500px"/>
+
+
+### 2. 위치 페이지 추가
+  - 카카오 오픈 API를 이용하여 지역마다 헬스장 위치 찾기 기능
+    
+<img src="https://github.com/jinhyeon0810/FirstTimeGit/assets/121710757/04f5e2a0-d010-458d-a3af-74985e12898d" width="500px"/>
+
+
+### 3. 나의 운동일지 페이지 기능 추가
+  - 날짜 별로 기록했던 운동 확인 가능
+    
+<img src="https://github.com/jinhyeon0810/FirstTimeGit/assets/121710757/7a423b7a-3e99-4cc8-9036-c4842875c596" width="500px"/>
 
 
 # Project 회고
@@ -95,5 +107,10 @@
 이를 통해 여러 페이지나 컴포넌트들을 만든는 것이 데이터들을 보관하는데 더 용이하다는 것을 깨달았고, 코드 가독성도 훨씬 좋아지는 것을 느꼈습니다.
 
 다만 너무 기본적인 기능 위주로만 구성되어있어 추후 학습을 통해 꾸준히 기능을 추가 할 생각입니다.
+
+## 추가 기능 구현 후 2023.08 ~
+
+제로베이스 개인프로젝트 라는 기회를 통해 처음으로 커뮤니티를 기획부터 개발까지 경험했습니다. 당시에 모든 것이 처음이라 간단한 개발에도 시간 소요가 심했고, 기간 내에 만족할만한 기능들을 모두 넣지 못했습니다.
+제로베이스 팀프로젝트를 경험하고 난 후, 다시 프로젝트로 돌아와보니 예전에는 구현하기 까다로웠던 것들이 하나 둘씩 구현이 가능해지기 시작했습니다. 아직 많이 부족하지만  앞으로도 추가 학습을 통해 코드의 가독성, 사용자 편의에 초점을 맞춘 기능들 추가, 성능향상 등 여러가지 시도들을 계속 할 생각입니다.  
 
 
