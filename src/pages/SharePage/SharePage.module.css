@@ -54,3 +54,27 @@
 .next:hover {
   color: white;
 }
+@media (min-width: 892px) and (max-width: 1270px) {
+  .cardStyle {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
+    place-items: center;
+  }
+}
+@media (min-width: 632px) and (max-width: 892px) {
+  .cardStyle {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-align: center;
+    place-items: center;
+  }
+}
+@media (max-width: 632px) {
+  .cardStyle {
+    display: grid;
+    grid-template-columns: 1fr;
+    text-align: center;
+    place-items: center;
+  }
+}

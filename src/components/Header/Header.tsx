@@ -20,7 +20,7 @@ export default function Header({ user, setUser }: Props): React.ReactElement {
   }, [setUser]);
 
   const clickLogIn = () => {
-    navigate("/login");
+    navigate("/");
   };
 
   const clickLogOut = () => {
@@ -32,7 +32,7 @@ export default function Header({ user, setUser }: Props): React.ReactElement {
   };
 
   const moveToHome = () => {
-    navigate("/");
+    navigate("/main");
   };
 
   const clickShare = () => {
@@ -111,8 +111,6 @@ const Nav = styled.div`
   z-index: 10;
   font-weight: bold;
   overflow: hidden;
-  @media (min-width: 447px) and (max-width: 660px) {
-  }
 `;
 const NavEl = styled.div`
   &:hover {
@@ -132,12 +130,13 @@ const NavEl = styled.div`
     padding: 10px 8px;
   }
   @media (min-width: 280px) and (max-width: 447px) {
-    padding: 5px;
-    font-size: 12px;
+    padding: 0px;
+    font-size: 10px;
   }
   @media (max-width: 280px) {
-    padding: 10px;
-    font-size: 11px;
+    padding: 0px;
+    font-size: 5px;
+    overflow: hidden;
   }
 `;
 

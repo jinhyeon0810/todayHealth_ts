@@ -22,9 +22,9 @@ function App(): React.ReactElement {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<MainPage user={user} setUser={setUser} />} />
+        <Route path="/main" element={<MainPage user={user} setUser={setUser} />} />
         <Route path="/location" element={<Location />} />
-        <Route path="/login" element={<LoginPage user={user} />} />
+        <Route path="/" element={<LoginPage user={user} />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/addProfile" element={<AddProfile />} />
         <Route path="/find" element={<FindPage />} />

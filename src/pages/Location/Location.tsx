@@ -77,7 +77,7 @@ export default function Location() {
   };
 
   const moveToHome = () => {
-    navigate("/");
+    navigate("/main");
   };
 
   return (

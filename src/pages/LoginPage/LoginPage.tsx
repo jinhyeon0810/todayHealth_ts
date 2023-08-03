@@ -48,21 +48,24 @@ export default function LoginPage({ user }: Props): React.ReactElement {
 
   const handleGoogleLogIn = () => {
     console.log("구글로그인");
-    login();
-    navigate("/");
+    login().then((result) => {
+      console.log(result);
+      if (result) {
+        navigate("/main");
+      }
+    });
   };
 
   const handleLogIn = async () => {
     console.log("로그인");
     const auth = getAuth();
     const result = await signInWithEmailAndPassword(auth, email, pw);
-    console.log(result);
-    navigate("/");
-  };
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
+    console.log(result);
+    if (result) {
+      navigate("/main");
+    }
+  };
 
   const moveToSignUp = () => {
     navigate("/signup");

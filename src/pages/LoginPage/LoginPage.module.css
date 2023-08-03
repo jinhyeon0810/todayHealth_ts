@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100vh;
+  min-height: 1000px;
   background: rgb(47, 52, 55);
   color: white;
   justify-content: center;
@@ -86,4 +86,60 @@
   width: 60%;
   display: flex;
   justify-content: flex-end;
+}
+
+@media (max-width: 570px) {
+  .login {
+    font-size: 60px;
+  }
+  .signUp {
+    padding: 15px 25px;
+    font-size: 12px;
+  }
+  .findInfo {
+    padding: 15px 25px;
+    font-size: 12px;
+  }
+}
+@media (max-width: 406px) {
+  .login {
+    font-size: 45px;
+  }
+  .loginPage {
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+  .signUp {
+    padding: 10px 20px;
+    font-size: 12px;
+  }
+  .findInfo {
+    padding: 10px 20px;
+    font-size: 12px;
+  }
+}
+@media (max-width: 367px) {
+  .login {
+    font-size: 30px;
+  }
+  .signUp {
+    padding: 10px 10px;
+    font-size: 8px;
+  }
+  .findInfo {
+    padding: 10px 10px;
+    font-size: 8px;
+  }
+  .loginMain {
+    margin-bottom: 10px;
+  }
+  .loginButton {
+    margin-top: 5px;
+    padding: 8px 15px;
+    font-size: 9px;
+  }
+  .googleLoginButton {
+    padding: 8px 15px;
+    font-size: 9px;
+  }
 }

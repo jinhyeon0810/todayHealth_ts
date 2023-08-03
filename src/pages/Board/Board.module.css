@@ -176,3 +176,42 @@
   width: 50px;
   cursor: pointer;
 }
+
+@media (max-width: 1000px) {
+  .board {
+    margin: 0 150px;
+  }
+}
+@media (max-width: 800px) {
+  .board {
+    margin: 0 150px;
+  }
+
+  .title {
+    padding-left: 70px;
+  }
+}
+@media (max-width: 620px) {
+  .board {
+    margin: 0 100px;
+  }
+
+  .title {
+    padding-left: 30px;
+  }
+}
+@media (max-width: 450px) {
+  .board {
+    margin: 0 50px;
+  }
+
+  .title {
+    padding-left: 30px;
+  }
+  .topTitle {
+    font-size: 25px;
+  }
+  .backToSharePage {
+    font-size: 14px;
+  }
+}
