@@ -5,11 +5,7 @@ import { login } from "../../api/firebase";
 import { useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
-interface Props {
-  user?: { uid: string };
-}
-
-export default function LoginPage({ user }: Props): React.ReactElement {
+export default function LoginPage(): React.ReactElement {
   const [email, setEmail] = useState("");
   const [pw, setPw] = useState("");
 

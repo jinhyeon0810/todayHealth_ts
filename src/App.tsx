@@ -24,7 +24,7 @@ function App(): React.ReactElement {
       <Routes>
         <Route path="/main" element={<MainPage user={user} setUser={setUser} />} />
         <Route path="/location" element={<Location />} />
-        <Route path="/" element={<LoginPage user={user} />} />
+        <Route path="/" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/addProfile" element={<AddProfile />} />
         <Route path="/find" element={<FindPage />} />
