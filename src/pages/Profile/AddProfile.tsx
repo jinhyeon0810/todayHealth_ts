@@ -10,7 +10,7 @@ export default function AddProfile() {
     setNickName(e.target.value);
   };
   const onSubmitNickName = () => {
-    navigate("/");
+    navigate("/main");
   };
   return (
     <article className={styles.article}>
