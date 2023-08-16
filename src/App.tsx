@@ -31,7 +31,7 @@ function App(): React.ReactElement {
         <Route path="/my" element={<MyPage user={user} setUser={setUser} />} />
         <Route path="/share" element={<SharePage user={user} setUser={setUser} />} />
         <Route path="/board" element={<Board user={user} imageList={imageList} setImageList={setImageList} />} />
-        <Route path="/:id" element={<BoardDetail user={user} setImageList={setImageList} />} />
+        <Route path="/:id" element={<BoardDetail user={user} />} />
       </Routes>
     </Router>
   );

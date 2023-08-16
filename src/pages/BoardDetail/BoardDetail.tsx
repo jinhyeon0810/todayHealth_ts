@@ -5,12 +5,11 @@ import db from "../../api/firebase.js";
 import { Timestamp, addDoc, collection, deleteDoc, doc, onSnapshot, orderBy, query, updateDoc, where } from "firebase/firestore";
 import { useNavigate, useParams } from "react-router-dom";
 import Comment from "../../components/Comment/Comment.js";
-import { getDownloadURL, getStorage, listAll, ref } from "firebase/storage";
+// import { getDownloadURL, getStorage, listAll, ref } from "firebase/storage";
 import dateString from "../../utils/Date.js";
 
 interface Props {
   user?: { uid: string };
-  setImageList: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
 interface ProductProps {
@@ -32,18 +31,18 @@ interface TextArrProps {
 }
 [];
 
-export default function BoardDetail({ user, setImageList }: Props): React.ReactElement {
-  const storage = getStorage();
-  const imageListRef = ref(storage, "images/");
-  useEffect(() => {
-    listAll(imageListRef).then((response) =>
-      response.items.forEach((item) => {
-        getDownloadURL(item).then((url) => {
-          setImageList(url);
-        });
-      })
-    );
-  }, [imageListRef, setImageList]);
+export default function BoardDetail({ user }: Props): React.ReactElement {
+  // const storage = getStorage();
+  // const imageListRef = ref(storage, "images/");
+  // useEffect(() => {
+  //   listAll(imageListRef).then((response) =>
+  //     response.items.forEach((item) => {
+  //       getDownloadURL(item).then((url) => {
+  //         setImageList(url);
+  //       });
+  //     })
+  //   );
+  // }, []);
 
   const [text, setText] = useState<string>("");
   const [texts, setTexts] = useState<TextArrProps[]>([]);
