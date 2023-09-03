@@ -8,6 +8,7 @@ import Header from "../../components/Header/Header";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import db from "../../api/firebase";
 import TextComponent from "../../components/MyPage/TextComponent";
+import Flower from "../../components/Flower/Flower";
 
 type User = { uid: string };
 
@@ -34,11 +35,13 @@ export default function MyPage({ user, setUser }: Props): React.ReactElement {
   const day = String(startDate?.getDate()).padStart(2, "0");
 
   const pickerDate = `${year}-${month}-${day}`;
-  // console.log(pickerDate);
-  // console.log(startDate);
-  // console.log(texts);
+
   //서버에서 운동기록 데이터 가져오기
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
     const q = query(collection(db, "details"), orderBy("timeStamp", "desc"));
     onSnapshot(q, (snapshot) => {
       const textArr = snapshot.docs.map((doc) => ({
@@ -55,6 +58,7 @@ export default function MyPage({ user, setUser }: Props): React.ReactElement {
   }, [setTexts, user?.uid, startDate, pickerDate]);
   return (
     <>
+      <Flower />
       <div className={styles.wrapper}>
         <Header user={user} setUser={setUser} />
         <article className={styles.layout}>

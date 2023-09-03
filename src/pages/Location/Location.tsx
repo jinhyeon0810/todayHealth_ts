@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import styles from "./Location.module.css";
 import { useNavigate } from "react-router-dom";
+import Flower from "../../components/Flower/Flower";
 
 declare global {
   interface Window {
@@ -16,6 +17,10 @@ export default function Location() {
   const [keyword, setKeyword] = useState("");
   const [keywordLocation, setKeywordLocation] = useState("");
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
     const infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
 
     const mapContainer = document.getElementById("map"), // 지도를 표시할 div
@@ -82,6 +87,7 @@ export default function Location() {
 
   return (
     <>
+      <Flower />
       <article className={styles.article}>
         <h1 className={styles.main} onClick={moveToHome}>
           홈으로 가기

@@ -8,6 +8,7 @@ import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import db from "../../api/firebase";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import ReactPaginate from "react-paginate";
+import Flower from "../../components/Flower/Flower";
 
 type User = { uid: string };
 
@@ -64,6 +65,10 @@ export default function SharePage({ user, setUser }: Props): React.ReactElement 
   }, []);
 
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
     getData();
   }, [getData]);
 
@@ -80,6 +85,7 @@ export default function SharePage({ user, setUser }: Props): React.ReactElement 
 
   return (
     <>
+      <Flower />
       <div className={styles.sharePage}>
         <Header user={user} setUser={setUser} />
 

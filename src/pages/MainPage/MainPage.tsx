@@ -10,6 +10,7 @@ import dateString from "../../utils/Date";
 import { BsFillTrashFill } from "react-icons/bs";
 import { textIdState } from "../../utils/Atom";
 import { useRecoilValue } from "recoil";
+import Flower from "../../components/Flower/Flower";
 
 type User = { uid: string };
 
@@ -54,6 +55,10 @@ export default function MainPage({ user, setUser }: Props): React.ReactElement {
 
   //서버에서 데이터 받아와서 texts 에 배열로 저장
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
     const q = query(collection(db, "details"), orderBy("timeStamp", "desc"));
     onSnapshot(q, (snapshot) => {
       const textArr = snapshot.docs.map((doc) => ({
@@ -107,9 +112,11 @@ export default function MainPage({ user, setUser }: Props): React.ReactElement {
   const dragOver = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
   };
+  console.log(texts);
 
   return (
     <>
+      <Flower />
       <div className={styles.wrapper}>
         <Header user={user} setUser={setUser} />
         <article>
@@ -201,13 +208,7 @@ export default function MainPage({ user, setUser }: Props): React.ReactElement {
               <div className={styles.textList}>
                 <div className={styles.textTitle}>오늘의 기록</div>
                 {texts.map((text) => {
-                  return (
-                    text.creatorId === user?.uid && (
-                      <>
-                        <Texts textObj={text} key={text.id} user={user} isOwner={text.creatorId === user?.uid} />
-                      </>
-                    )
-                  );
+                  return text.creatorId === user?.uid && <Texts textObj={text} key={text.id} user={user} isOwner={text.creatorId === user?.uid} />;
                 })}
               </div>
             )}
