@@ -42,7 +42,8 @@ export default function LoginPage(): React.ReactElement {
     setNotAllow(true);
   }, [emailValid, pwValid]);
 
-  const handleGoogleLogIn = () => {
+  const handleGoogleLogIn = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
     console.log("구글로그인");
     login().then((result) => {
       console.log(result);
@@ -52,7 +53,8 @@ export default function LoginPage(): React.ReactElement {
     });
   };
 
-  const handleLogIn = async () => {
+  const handleLogIn = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
     console.log("로그인");
     const auth = getAuth();
     const result = await signInWithEmailAndPassword(auth, email, pw);
@@ -75,41 +77,46 @@ export default function LoginPage(): React.ReactElement {
   };
 
   return (
-    <div className={styles.wrapper}>
-      <h1 className={styles.todayHealth} onClick={moveToMain}>
-        오늘의 Health
-      </h1>
-      <div className={styles.loginMain}>
-        <div className={styles.login}>LOG IN</div>
-        <div className={styles.loginPage}>
-          <input className={styles.input} type="email" placeholder="ID (이메일 주소)" value={email} onChange={handleEmail} />
-          <div className={styles.errorMessage}>{!emailValid && email.length > 0 && <div>올바른 이메일을 입력해주세요</div>}</div>
-          <input
-            className={styles.input}
-            type="password"
-            placeholder="PW (영문, 숫자, 특수문자 포함 8자 이상)"
-            style={{ marginTop: "15px" }}
-            value={pw}
-            onChange={handlePassword}
-          />
-          <div className={styles.errorMessage}>{!pwValid && pw.length > 0 && <div>영문, 숫자, 특수문자 포함 8자 이상 입력해주세요</div>}</div>
-          <button className={styles.loginButton} disabled={notAllow} onClick={handleLogIn}>
-            로그인
-          </button>
+    <>
+      <section className={styles.section}>
+        <div className={styles.wrapper}>
+          <h1 className={styles.todayHealth} onClick={moveToMain}>
+            오늘의 Health
+          </h1>
+          <div className={styles.loginMain}>
+            <div className={styles.login}>LOG IN</div>
+            <form className={styles.loginPage}>
+              <input className={styles.input} name="email" type="email" placeholder="ID (이메일 주소)" value={email} onChange={handleEmail} />
+              <div className={styles.errorMessage}>{!emailValid && email.length > 0 && <div>올바른 이메일을 입력해주세요</div>}</div>
+              <input
+                className={styles.input}
+                type="password"
+                name="password"
+                placeholder="PW (영문, 숫자, 특수문자 포함 8자 이상)"
+                style={{ marginTop: "15px" }}
+                value={pw}
+                onChange={handlePassword}
+              />
+              <div className={styles.errorMessage}>{!pwValid && pw.length > 0 && <div>영문, 숫자, 특수문자 포함 8자 이상 입력해주세요</div>}</div>
+              <button className={styles.loginButton} disabled={notAllow} onClick={handleLogIn}>
+                로그인
+              </button>
 
-          <button className={styles.googleLoginButton} onClick={handleGoogleLogIn}>
-            Google 로그인
-          </button>
+              <button className={styles.googleLoginButton} onClick={handleGoogleLogIn}>
+                Google 로그인
+              </button>
+            </form>
+          </div>
+          <div className={styles.loginBottom}>
+            <button className={styles.signUp} onClick={moveToSignUp}>
+              회원가입
+            </button>
+            <button className={styles.findInfo} onClick={moveToFind}>
+              비밀번호 찾기
+            </button>
+          </div>
         </div>
-      </div>
-      <div className={styles.loginBottom}>
-        <button className={styles.signUp} onClick={moveToSignUp}>
-          회원가입
-        </button>
-        <button className={styles.findInfo} onClick={moveToFind}>
-          비밀번호 찾기
-        </button>
-      </div>
-    </div>
+      </section>
+    </>
   );
 }
