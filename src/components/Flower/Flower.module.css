@@ -1,0 +1,60 @@
+.flower {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: none;
+  animation: flower 8s linear infinite;
+  opacity: 0;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.flower:nth-of-type(2n) {
+  width: 25px;
+  height: 25px;
+  animation-duration: 9s;
+  animation-delay: 0.5s;
+}
+.flower:nth-of-type(2n + 1) {
+  animation-duration: 7s;
+  animation-delay: 1.5s;
+}
+.flower:nth-of-type(9n) {
+  animation-duration: 8s;
+  animation-delay: 3s;
+}
+.flower:nth-of-type(3n) {
+  animation-duration: 9s;
+  animation-delay: 2s;
+}
+.flower:nth-of-type(10n) {
+  animation-duration: 11s;
+  animation-delay: 2.5s;
+}
+
+@keyframes flower {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(-30px, 15vh);
+  }
+  40% {
+    opacity: 1;
+    transform: translate(30px, 35vh);
+  }
+  60% {
+    opacity: 1;
+    transform: translate(-30px, 45vh);
+  }
+  80% {
+    opacity: 1;
+    transform: translate(30px, 55vh);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(65vh);
+  }
+}
