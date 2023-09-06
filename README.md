@@ -9,6 +9,7 @@
 ## Install
   * 패키지 : yarn
   * 실행 : yarn dev
+<br/>
 
 ## 기술 스택
 - 프레임워크로 Vite를 사용합니다.
@@ -17,6 +18,12 @@
 - 로컬 상태관리를 위해 recoil을 사용합니다.
 - Css Module를 사용하여 유지보수가 용이합니다.
 - TypeScript를 통해 코드의 안정성을 높였습니다.
+<br/>
+
+## 시스템 Architecture
+![개인프로젝트아키텍쳐](https://github.com/jinhyeon0810/study/assets/121710757/fe0ff121-6f0d-4c43-9312-424f08c448c9)
+
+<br/>
 
 ## Pages
 
@@ -41,7 +48,7 @@
 
    <img src="https://github.com/jinhyeon0810/todayHealth_ts/assets/121710757/c893a184-e17e-4dfb-aed8-0f3869550ed0" width="500px"/>
    
-  * 페이지네이션 기능
+  * 페이지네이션 기능 : Grid를 사용하였습니다
  
 <img src="https://github.com/jinhyeon0810/todayHealth_ts/assets/121710757/42a5565f-34ac-4793-a423-7f87dd574d40" width="500px"/>
 
@@ -65,7 +72,7 @@
   - 날짜 별로 기록했던 운동 확인 가능
     
 <img src="https://github.com/jinhyeon0810/FirstTimeGit/assets/121710757/7a423b7a-3e99-4cc8-9036-c4842875c596" width="500px"/>
-
+<br/>
 
 ## 프로젝트 회고
 지속적으로 develop 중 입니다.
