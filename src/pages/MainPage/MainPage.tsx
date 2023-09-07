@@ -1,15 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./MainPage.module.css";
-import {
-  collection,
-  addDoc,
-  onSnapshot,
-  orderBy,
-  query,
-  Timestamp,
-  deleteDoc,
-  doc,
-} from "firebase/firestore";
+import { collection, addDoc, onSnapshot, orderBy, query, Timestamp, deleteDoc, doc } from "firebase/firestore";
 import DatePicker from "react-datepicker";
 import Texts from "../../components/Texts/Texts";
 import Footer from "../../components/Footer/Footer";
@@ -21,13 +12,6 @@ import { useSelector } from "react-redux/es/hooks/useSelector";
 import Flower from "../../components/Flower/Flower";
 import { RootState } from "../../utils/Store";
 
-type User = { uid: string };
-
-interface Props {
-  setUser?: React.Dispatch<React.SetStateAction<User | undefined>>;
-  user?: { uid: string };
-}
-
 interface TextArrProps {
   id: string;
   text: string;
@@ -38,7 +22,9 @@ interface TextArrProps {
 }
 [];
 
-export default function MainPage({ user, setUser }: Props): React.ReactElement {
+export default function MainPage(): React.ReactElement {
+  const user = useSelector((state: RootState) => state.user);
+
   const [text, setText] = useState("");
   const [texts, setTexts] = useState<TextArrProps[]>([]);
   const textarea = useRef<HTMLTextAreaElement>(null);
@@ -46,7 +32,6 @@ export default function MainPage({ user, setUser }: Props): React.ReactElement {
   const textId = useSelector((state: RootState) => state.textId.textId);
   const [addModal, setAddModal] = useState(false);
   const timeStamp = Timestamp.now();
-
   //Date Picker
   // 하루 전날 계산하는 공식 ( 기본값이 하루 전날로 세팅)
   const currentDate = new Date();
@@ -127,7 +112,7 @@ export default function MainPage({ user, setUser }: Props): React.ReactElement {
     <>
       <Flower />
       <div className={styles.wrapper}>
-        <Header user={user} setUser={setUser} />
+        <Header />
         <article>
           <div className={styles.title}>
             <h1>오늘의 Health</h1>
@@ -180,11 +165,7 @@ export default function MainPage({ user, setUser }: Props): React.ReactElement {
                   <section className={styles.datePickerSection}>
                     <div className={styles.textTitle}>지난 기록</div>
                     <div className={styles.datePicker}>
-                      <DatePicker
-                        selected={startDate}
-                        onChange={(date) => setStartDate(date)}
-                        maxDate={oneDayBefore}
-                      />
+                      <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} maxDate={oneDayBefore} />
                     </div>
                   </section>
                 )}
@@ -193,12 +174,7 @@ export default function MainPage({ user, setUser }: Props): React.ReactElement {
                     record.creatorId === user?.uid &&
                     record.createdAt === pickerDate && (
                       <div className={styles.textArea}>
-                        <Texts
-                          textObj={record}
-                          key={record.id}
-                          user={user}
-                          isOwner={record.creatorId === user?.uid}
-                        />
+                        <Texts textObj={record} key={record.id} isOwner={record.creatorId === user?.uid} />
                       </div>
                     )
                   );
@@ -211,20 +187,12 @@ export default function MainPage({ user, setUser }: Props): React.ReactElement {
                     <section className={styles.datePickerSection}>
                       <div className={styles.textTitle}>지난 기록</div>
                       <div className={styles.datePicker}>
-                        <DatePicker
-                          selected={startDate}
-                          onChange={(date) => setStartDate(date)}
-                          maxDate={oneDayBefore}
-                        />
+                        <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} maxDate={oneDayBefore} />
                       </div>
                     </section>
                   )}
                   <div className={styles.textArea}>
-                    <Texts
-                      textObj={{ text: "휴식 하신 날입니다! 😎", id: " " }}
-                      user={user}
-                      isOwner={true}
-                    />
+                    <Texts textObj={{ text: "휴식 하신 날입니다! 😎", id: " " }} isOwner={true} />
                   </div>
                 </div>
               </>
@@ -234,23 +202,14 @@ export default function MainPage({ user, setUser }: Props): React.ReactElement {
               <div className={styles.textList}>
                 <div className={styles.textTitle}>오늘의 기록</div>
                 {texts.map((text) => {
-                  return (
-                    text.creatorId === user?.uid && (
-                      <Texts
-                        textObj={text}
-                        key={text.id}
-                        user={user}
-                        isOwner={text.creatorId === user?.uid}
-                      />
-                    )
-                  );
+                  return text.creatorId === user?.uid && <Texts textObj={text} key={text.id} isOwner={text.creatorId === user?.uid} />;
                 })}
               </div>
             )}
           </section>
         </article>
         <div className={styles.footerArea}>
-          <Footer user={user} />
+          <Footer />
         </div>
       </div>
     </>

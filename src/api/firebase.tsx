@@ -39,8 +39,6 @@ export function onUserStateChange(callback: any) {
 const db = getFirestore(app);
 export default db;
 
-// export async function addNewProduct(product, imageUrl) {}
-
 export function imageUpload(file: File | null, v4: () => string, setImageList: React.Dispatch<React.SetStateAction<string | undefined>>) {
   if (file === null) return;
   const storage = getStorage();

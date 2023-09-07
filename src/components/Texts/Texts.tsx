@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./Texts.module.css";
 import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 import db from "../../api/firebase";
-import { useSelector, useDispatch } from "react-redux/es/exports";
+import { useDispatch, useSelector } from "react-redux/es/exports";
 import { RootState, changeData } from "../../utils/Store";
 interface TextsProps {
   textObj: {
@@ -10,16 +10,15 @@ interface TextsProps {
     text: string;
   };
   isOwner: boolean;
-  user?: { uid: string };
 }
 
-export default function Texts({ textObj, isOwner, user }: TextsProps): React.ReactElement {
+export default function Texts({ textObj, isOwner }: TextsProps): React.ReactElement {
+  const user = useSelector((state: RootState) => state.user);
+
   const [editing, setEditing] = useState(false);
   const [newText, setNewText] = useState(textObj.text);
 
-  let textId = useSelector((state: RootState) => state.textId.textId);
   let dispatch = useDispatch();
-  console.log(textId);
 
   const onDeleteClick = () => {
     const ok = window.confirm("정말 삭제하실꺼죠?");
@@ -60,14 +59,7 @@ export default function Texts({ textObj, isOwner, user }: TextsProps): React.Rea
           {editing ? (
             <>
               <form onSubmit={onSubmit} className={styles.form}>
-                <textarea
-                  placeholder="수정하세요"
-                  value={newText}
-                  required
-                  onChange={onChange}
-                  className={styles.textContents}
-                  wrap="on"
-                />
+                <textarea placeholder="수정하세요" value={newText} required onChange={onChange} className={styles.textContents} wrap="on" />
 
                 <input type="submit" value="확인" className={styles.ok} />
                 <button onClick={toggleEditing} className={styles.cancel}>
@@ -77,12 +69,7 @@ export default function Texts({ textObj, isOwner, user }: TextsProps): React.Rea
             </>
           ) : (
             <>
-              <pre
-                className={styles.textArea}
-                draggable="true"
-                onDragStart={dragStart}
-                id={textObj.id}
-              >
+              <pre className={styles.textArea} draggable="true" onDragStart={dragStart} id={textObj.id}>
                 {textObj.text}
               </pre>
               {isOwner && (

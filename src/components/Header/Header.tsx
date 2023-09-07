@@ -2,22 +2,21 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { logout, onUserStateChange } from "../../api/firebase";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, changeUser } from "../../utils/Store";
 
-type User = { uid: string };
-
-interface Props {
-  setUser?: React.Dispatch<React.SetStateAction<User | undefined>>;
-  user?: { uid: string };
-}
-export default function Header({ user, setUser }: Props): React.ReactElement {
+export default function Header(): React.ReactElement {
   const navigate = useNavigate();
+  const user = useSelector((state: RootState) => state.user);
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    if (setUser) {
+    if (changeUser) {
       onUserStateChange((user: { uid: string }) => {
-        setUser(user);
+        dispatch(changeUser(user?.uid));
       });
     }
-  }, [setUser]);
+  }, [changeUser]);
 
   const clickLogIn = () => {
     navigate("/");

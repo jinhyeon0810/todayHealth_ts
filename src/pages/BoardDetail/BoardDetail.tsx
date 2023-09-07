@@ -7,10 +7,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import Comment from "../../components/Comment/Comment.js";
 // import { getDownloadURL, getStorage, listAll, ref } from "firebase/storage";
 import dateString from "../../utils/Date.js";
-
-interface Props {
-  user?: { uid: string };
-}
+import { useSelector } from "react-redux";
+import { RootState } from "../../utils/Store.js";
 
 interface ProductProps {
   title: string;
@@ -31,18 +29,8 @@ interface TextArrProps {
 }
 [];
 
-export default function BoardDetail({ user }: Props): React.ReactElement {
-  // const storage = getStorage();
-  // const imageListRef = ref(storage, "images/");
-  // useEffect(() => {
-  //   listAll(imageListRef).then((response) =>
-  //     response.items.forEach((item) => {
-  //       getDownloadURL(item).then((url) => {
-  //         setImageList(url);
-  //       });
-  //     })
-  //   );
-  // }, []);
+export default function BoardDetail(): React.ReactElement {
+  const user = useSelector((state: RootState) => state.user);
 
   const [text, setText] = useState<string>("");
   const [texts, setTexts] = useState<TextArrProps[]>([]);
@@ -229,7 +217,7 @@ export default function BoardDetail({ user }: Props): React.ReactElement {
             {texts.map((text) => {
               return (
                 <div key={text.id}>
-                  <Comment textObj={text} user={user} />
+                  <Comment textObj={text} />
                 </div>
               );
             })}

@@ -3,13 +3,8 @@ import styles from "./Board.module.css";
 import { useNavigate } from "react-router-dom";
 import BoardComponent from "./BoardComponent";
 
-interface Props {
-  user?: { uid: string };
-  imageList: string | undefined;
-  setImageList: React.Dispatch<React.SetStateAction<string | undefined>>;
-}
-
-export default function Board({ user, imageList, setImageList }: Props): React.ReactElement {
+export default function Board(): React.ReactElement {
+  const [imageList, setImageList] = useState<string | undefined>();
   const [type, setType] = useState("Category");
   const navigate = useNavigate();
 
@@ -21,13 +16,7 @@ export default function Board({ user, imageList, setImageList }: Props): React.R
             <span className={styles.topTitle}>오.운.완</span>
             <br /> 같이 인증해보아요 ✔
           </div>
-          <BoardComponent
-            type={type}
-            setType={setType}
-            user={user}
-            imageList={imageList}
-            setImageList={setImageList}
-          />
+          <BoardComponent type={type} setType={setType} imageList={imageList} setImageList={setImageList} />
           <div className={styles.backToShareArea}>
             <button onClick={() => navigate("/share")} className={styles.backToSharePage}>
               {" "}
@@ -55,11 +44,7 @@ export function Filter({ children, setType }: FilterProps) {
 
   return (
     <>
-      <button
-        className={styles.click}
-        onClick={() => setShowModal(true)}
-        style={{ marginRight: "0" }}
-      >
+      <button className={styles.click} onClick={() => setShowModal(true)} style={{ marginRight: "0" }}>
         {children}
       </button>
       {showModal && (

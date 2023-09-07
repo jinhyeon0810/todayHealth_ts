@@ -9,13 +9,8 @@ import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import db from "../../api/firebase";
 import TextComponent from "../../components/MyPage/TextComponent";
 import Flower from "../../components/Flower/Flower";
-
-type User = { uid: string };
-
-interface Props {
-  setUser?: React.Dispatch<React.SetStateAction<User | undefined>>;
-  user?: { uid: string };
-}
+import { useSelector } from "react-redux";
+import { RootState } from "../../utils/Store";
 
 interface textArrProps {
   id: string;
@@ -25,7 +20,9 @@ interface textArrProps {
 }
 [];
 
-export default function MyPage({ user, setUser }: Props): React.ReactElement {
+export default function MyPage(): React.ReactElement {
+  const user = useSelector((state: RootState) => state.user);
+
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [texts, setTexts] = useState<textArrProps[]>([]);
   console.log(texts);
@@ -60,7 +57,7 @@ export default function MyPage({ user, setUser }: Props): React.ReactElement {
     <>
       <Flower />
       <div className={styles.wrapper}>
-        <Header user={user} setUser={setUser} />
+        <Header />
         <article className={styles.layout}>
           <div className={styles.datePicker}>
             <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} inline className={styles.datePicker} maxDate={new Date()} />
@@ -89,7 +86,7 @@ export default function MyPage({ user, setUser }: Props): React.ReactElement {
           </div>
         </article>
         <div className={styles.footerArea}>
-          <Footer user={user} />
+          <Footer />
         </div>
       </div>
     </>

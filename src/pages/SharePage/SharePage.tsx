@@ -9,13 +9,8 @@ import db from "../../api/firebase";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import ReactPaginate from "react-paginate";
 import Flower from "../../components/Flower/Flower";
-
-type User = { uid: string };
-
-interface Props {
-  setUser?: React.Dispatch<React.SetStateAction<User | undefined>>;
-  user?: { uid: string };
-}
+import { RootState } from "../../utils/Store";
+import { useSelector } from "react-redux";
 
 interface ProductProps {
   title: string;
@@ -26,7 +21,9 @@ interface ProductProps {
   creatorId: string;
 }
 
-export default function SharePage({ user, setUser }: Props): React.ReactElement {
+export default function SharePage(): React.ReactElement {
+  const user = useSelector((state: RootState) => state.user);
+
   const [products, setProducts] = useState<ProductProps[]>([]);
   const navigate = useNavigate();
 
@@ -87,7 +84,7 @@ export default function SharePage({ user, setUser }: Props): React.ReactElement 
     <>
       <Flower />
       <div className={styles.sharePage}>
-        <Header user={user} setUser={setUser} />
+        <Header />
 
         <div className={styles.title}>전체게시물 📝</div>
 

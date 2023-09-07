@@ -7,22 +7,19 @@ import { v4 } from "uuid";
 import { Filter } from "./Board.js";
 import { useNavigate } from "react-router-dom";
 import dateString from "../../utils/Date.js";
+import { useSelector } from "react-redux";
+import { RootState } from "../../utils/Store.js";
 
 interface Props {
   type: string;
   setType: React.Dispatch<React.SetStateAction<string>>;
-  user?: { uid: string };
   imageList: string | undefined;
   setImageList: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
-export default function BoardComponent({
-  type,
-  setType,
-  user,
-  imageList,
-  setImageList,
-}: Props): React.ReactElement {
+export default function BoardComponent({ type, setType, imageList, setImageList }: Props): React.ReactElement {
+  const user = useSelector((state: RootState) => state.user);
+
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [addFile, setAddFile] = useState<boolean>(true);
@@ -33,9 +30,7 @@ export default function BoardComponent({
   const navigate = useNavigate();
   console.log(imageList);
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
     if (e.target.name === "file" && e.target instanceof HTMLInputElement) {
       setFile(e.target.files && e.target.files[0]);
       setAddFile(false);
@@ -124,15 +119,7 @@ export default function BoardComponent({
           )}
         </div>
         <div className={styles.contentTitle}>
-          {editing && (
-            <input
-              placeholder="제목"
-              className={styles.input}
-              onChange={handleChange}
-              name="title"
-              value={title ?? ""}
-            />
-          )}
+          {editing && <input placeholder="제목" className={styles.input} onChange={handleChange} name="title" value={title ?? ""} />}
         </div>
 
         <div className={styles.textareaList}>
@@ -153,14 +140,7 @@ export default function BoardComponent({
         </div>
         {addFile && (
           <div className={styles.fileArea}>
-            <input
-              type="file"
-              accept="image/*"
-              name="file"
-              required
-              className={styles.file}
-              onChange={handleChange}
-            />
+            <input type="file" accept="image/*" name="file" required className={styles.file} onChange={handleChange} />
           </div>
         )}
 

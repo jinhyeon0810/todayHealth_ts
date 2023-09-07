@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import styles from "./Comment.module.css";
 import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import db from "../../api/firebase";
+import { useSelector } from "react-redux";
+import { RootState } from "../../utils/Store";
 
 interface CommentProps {
   textObj: {
@@ -12,10 +14,11 @@ interface CommentProps {
     text: string;
     timeStamp: string;
   };
-  user?: { uid: string };
 }
 
-export default function Comment({ textObj, user }: CommentProps): React.ReactElement {
+export default function Comment({ textObj }: CommentProps): React.ReactElement {
+  const user = useSelector((state: RootState) => state.user);
+
   const [editing, setEditing] = useState(false);
   const [editNumber, setEditNumber] = useState(0);
   const [commentText, setCommentText] = useState(textObj.text);

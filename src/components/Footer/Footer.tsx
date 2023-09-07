@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import styles from "./Footer.module.css";
 import Timer from "../Timer/Timer";
+import { useSelector } from "react-redux";
+import { RootState } from "../../utils/Store";
 
-interface FooterProps {
-  user?: { uid: string };
-}
+export default function Footer(): React.ReactElement {
+  const user = useSelector((state: RootState) => state.user);
 
-export default function Footer({ user }: FooterProps): React.ReactElement {
   const [show, setShow] = useState(false);
 
   const onClickTimer = () => {
