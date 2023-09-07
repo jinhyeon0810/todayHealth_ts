@@ -1,6 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./MainPage.module.css";
-import { collection, addDoc, onSnapshot, orderBy, query, Timestamp, deleteDoc, doc } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  onSnapshot,
+  orderBy,
+  query,
+  Timestamp,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
 import DatePicker from "react-datepicker";
 import Texts from "../../components/Texts/Texts";
 import Footer from "../../components/Footer/Footer";
@@ -8,9 +17,9 @@ import Header from "../../components/Header/Header";
 import db from "../../api/firebase";
 import dateString from "../../utils/Date";
 import { BsFillTrashFill } from "react-icons/bs";
-import { textIdState } from "../../utils/Atom";
-import { useRecoilValue } from "recoil";
+import { useSelector } from "react-redux/es/hooks/useSelector";
 import Flower from "../../components/Flower/Flower";
+import { RootState } from "../../utils/Store";
 
 type User = { uid: string };
 
@@ -34,7 +43,7 @@ export default function MainPage({ user, setUser }: Props): React.ReactElement {
   const [texts, setTexts] = useState<TextArrProps[]>([]);
   const textarea = useRef<HTMLTextAreaElement>(null);
   const [oldRecord, setOldRecord] = useState<TextArrProps[]>([]);
-  const textId = useRecoilValue(textIdState);
+  const textId = useSelector((state: RootState) => state.textId.textId);
   const [addModal, setAddModal] = useState(false);
   const timeStamp = Timestamp.now();
 
@@ -109,10 +118,10 @@ export default function MainPage({ user, setUser }: Props): React.ReactElement {
       setTexts(texts.filter((text) => text.id !== textId));
     }
   };
+
   const dragOver = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
   };
-  console.log(texts);
 
   return (
     <>
@@ -171,7 +180,11 @@ export default function MainPage({ user, setUser }: Props): React.ReactElement {
                   <section className={styles.datePickerSection}>
                     <div className={styles.textTitle}>지난 기록</div>
                     <div className={styles.datePicker}>
-                      <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} maxDate={oneDayBefore} />
+                      <DatePicker
+                        selected={startDate}
+                        onChange={(date) => setStartDate(date)}
+                        maxDate={oneDayBefore}
+                      />
                     </div>
                   </section>
                 )}
@@ -180,7 +193,12 @@ export default function MainPage({ user, setUser }: Props): React.ReactElement {
                     record.creatorId === user?.uid &&
                     record.createdAt === pickerDate && (
                       <div className={styles.textArea}>
-                        <Texts textObj={record} key={record.id} user={user} isOwner={record.creatorId === user?.uid} />
+                        <Texts
+                          textObj={record}
+                          key={record.id}
+                          user={user}
+                          isOwner={record.creatorId === user?.uid}
+                        />
                       </div>
                     )
                   );
@@ -193,12 +211,20 @@ export default function MainPage({ user, setUser }: Props): React.ReactElement {
                     <section className={styles.datePickerSection}>
                       <div className={styles.textTitle}>지난 기록</div>
                       <div className={styles.datePicker}>
-                        <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} maxDate={oneDayBefore} />
+                        <DatePicker
+                          selected={startDate}
+                          onChange={(date) => setStartDate(date)}
+                          maxDate={oneDayBefore}
+                        />
                       </div>
                     </section>
                   )}
                   <div className={styles.textArea}>
-                    <Texts textObj={{ text: "휴식 하신 날입니다! 😎", id: " " }} user={user} isOwner={true} />
+                    <Texts
+                      textObj={{ text: "휴식 하신 날입니다! 😎", id: " " }}
+                      user={user}
+                      isOwner={true}
+                    />
                   </div>
                 </div>
               </>
@@ -208,7 +234,16 @@ export default function MainPage({ user, setUser }: Props): React.ReactElement {
               <div className={styles.textList}>
                 <div className={styles.textTitle}>오늘의 기록</div>
                 {texts.map((text) => {
-                  return text.creatorId === user?.uid && <Texts textObj={text} key={text.id} user={user} isOwner={text.creatorId === user?.uid} />;
+                  return (
+                    text.creatorId === user?.uid && (
+                      <Texts
+                        textObj={text}
+                        key={text.id}
+                        user={user}
+                        isOwner={text.creatorId === user?.uid}
+                      />
+                    )
+                  );
                 })}
               </div>
             )}
