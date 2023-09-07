@@ -2,11 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import { RecoilRoot } from "recoil";
+import { Provider } from "react-redux";
+import Store from "./utils/Store.tsx";
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <RecoilRoot>
+    <Provider store={Store}>
       <App />
-    </RecoilRoot>
+    </Provider>
   </React.StrictMode>
 );
