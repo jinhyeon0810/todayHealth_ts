@@ -15,7 +15,7 @@ const { kakao } = window;
 export default function Location() {
   const navigate = useNavigate();
   const [keyword, setKeyword] = useState("");
-  const [keywordLocation, setKeywordLocation] = useState("");
+  const [keywordLocation, setKeywordLocation] = useState(" ");
   useEffect(() => {
     window.scrollTo({
       top: 0,
