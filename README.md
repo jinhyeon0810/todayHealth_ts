@@ -1,7 +1,7 @@
 # 오늘의 Health [개인프로젝트]
 
 <div align="center"><h2><a href="https://www.notion.so/Health-4eb978e518b543678e93060674303409">프로젝트 노션</a></h2></div>
-<div align="center"><h2><a href="https://youtu.be/iNabhY9My7I">Demo</a></h2></div>
+<div align="center"><h2><a href="https://today-health-ts.vercel.app/">Demo</a></h2> <span>ID : test@naver.com / PW : test1234!</span></p></div>
 
 # 프로젝트 소개
    자신의 운동을 기록하며 소통할 수 있는 커뮤니티 입니다. 
@@ -21,7 +21,7 @@
 <br/>
 
 ## 시스템 Architecture
-![개인프로젝트아키텍쳐](https://github.com/jinhyeon0810/study/assets/121710757/fe0ff121-6f0d-4c43-9312-424f08c448c9)
+![개인프로젝트아키텍쳐](https://github.com/jinhyeon0810/todayHealth_ts/assets/121710757/0c56ae84-79c8-4164-b5a8-6b2ebf3d496d)
 
 <br/>
 
