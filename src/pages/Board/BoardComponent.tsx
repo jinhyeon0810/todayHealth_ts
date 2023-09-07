@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import styles from "../pages/Board/Board.module.css";
+import styles from "./Board.module.css";
 import TextareaAutosize from "react-textarea-autosize";
-import db, { imageUpload } from "../api/firebase.js";
+import db, { imageUpload } from "../../api/firebase.js";
 import { Timestamp, addDoc, collection } from "firebase/firestore";
 import { v4 } from "uuid";
-import { Filter } from "../pages/Board/Board.js";
+import { Filter } from "./Board.js";
 import { useNavigate } from "react-router-dom";
-import dateString from "../utils/Date.js";
+import dateString from "../../utils/Date.js";
 
 interface Props {
   type: string;
@@ -16,7 +16,13 @@ interface Props {
   setImageList: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
-export default function BoardComponent({ type, setType, user, imageList, setImageList }: Props): React.ReactElement {
+export default function BoardComponent({
+  type,
+  setType,
+  user,
+  imageList,
+  setImageList,
+}: Props): React.ReactElement {
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [addFile, setAddFile] = useState<boolean>(true);
@@ -27,7 +33,9 @@ export default function BoardComponent({ type, setType, user, imageList, setImag
   const navigate = useNavigate();
   console.log(imageList);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
     if (e.target.name === "file" && e.target instanceof HTMLInputElement) {
       setFile(e.target.files && e.target.files[0]);
       setAddFile(false);
@@ -116,7 +124,15 @@ export default function BoardComponent({ type, setType, user, imageList, setImag
           )}
         </div>
         <div className={styles.contentTitle}>
-          {editing && <input placeholder="제목" className={styles.input} onChange={handleChange} name="title" value={title ?? ""} />}
+          {editing && (
+            <input
+              placeholder="제목"
+              className={styles.input}
+              onChange={handleChange}
+              name="title"
+              value={title ?? ""}
+            />
+          )}
         </div>
 
         <div className={styles.textareaList}>
@@ -137,7 +153,14 @@ export default function BoardComponent({ type, setType, user, imageList, setImag
         </div>
         {addFile && (
           <div className={styles.fileArea}>
-            <input type="file" accept="image/*" name="file" required className={styles.file} onChange={handleChange} />
+            <input
+              type="file"
+              accept="image/*"
+              name="file"
+              required
+              className={styles.file}
+              onChange={handleChange}
+            />
           </div>
         )}
 
