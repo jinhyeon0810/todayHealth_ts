@@ -21,7 +21,7 @@
 <br/>
 
 ## 시스템 Architecture
-![개인프로젝트아키텍쳐](https://github.com/jinhyeon0810/todayHealth_ts/assets/121710757/0c56ae84-79c8-4164-b5a8-6b2ebf3d496d)
+![vercel아키텍쳐](https://github.com/jinhyeon0810/todayHealth_ts/assets/121710757/f08c767b-5d06-4659-be42-9f52c8528938)
 
 <br/>
 
