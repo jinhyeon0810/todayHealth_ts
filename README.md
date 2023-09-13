@@ -1,7 +1,7 @@
 # 오늘의 Health [개인프로젝트]
 
 <div align="center"><h2><a href="https://www.notion.so/Health-4eb978e518b543678e93060674303409">프로젝트 노션</a></h2></div>
-<div align="center"><h2><a href="https://today-health-ts.vercel.app/">Demo</a></h2> <span>ID : test@naver.com / PW : test1234!</span></p></div>
+<div align="center"><h2><a href="https://d1icsui2guauqx.cloudfront.net/">Demo</a></h2> <span>ID : test@naver.com / PW : test1234!</span></p></div>
 
 # 프로젝트 소개
    자신의 운동을 기록하며 소통할 수 있는 커뮤니티 입니다. 
@@ -13,7 +13,7 @@
 
 ## 기술 스택
 - 프레임워크로 Vite를 사용합니다.
-- Vercel을 통해 CI/CD 배포 진행하였습니다.
+- AWS S3, CloudFront 를 활용하여 CI/CD 배포를 진행하였습니다.
 - Firebase 서비스를 이용하여 서버 구축 없이 빠르게 웹개발을 진행하였습니다.
 - 로컬 상태관리를 위해 Redux를 사용합니다.
 - Css Module를 사용하여 유지보수가 용이합니다.
@@ -21,7 +21,7 @@
 <br/>
 
 ## 시스템 Architecture
-![vercel아키텍쳐](https://github.com/jinhyeon0810/todayHealth_ts/assets/121710757/f08c767b-5d06-4659-be42-9f52c8528938)
+![vercel아키텍쳐](https://github.com/jinhyeon0810/team_project_zerobase/assets/121710757/ad5720a5-1822-4e86-92cd-3007ce803723)
 
 <br/>
 
