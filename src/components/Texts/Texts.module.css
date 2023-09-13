@@ -43,8 +43,14 @@
   color: black;
   padding: 30px;
   border-radius: 6px 0 0 6px;
-  width: 500px;
+  max-width: 300px;
   margin: 0;
+}
+.textList {
+  width: 100%;
+}
+.textContents {
+  width: 100%;
 }
 .textArea {
   white-space: pre-wrap;
