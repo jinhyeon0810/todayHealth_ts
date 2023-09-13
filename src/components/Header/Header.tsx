@@ -57,11 +57,10 @@ export default function Header(): React.ReactElement {
   return (
     <>
       <Nav>
-        <NavLeft>
+        <NavLeft></NavLeft>
+        <NavRight>
           <NavEl onClick={moveToHome}>홈</NavEl>
           <NavEl onClick={moveToLocation}>위치</NavEl>
-        </NavLeft>
-        <NavRight>
           <NavEl onClick={clickShare} style={{ margin: "0 20px" }}>
             오.운.완 <br />
             <span style={{ fontSize: "13px" }}>게시판</span>
@@ -100,13 +99,10 @@ const Nav = styled.div`
   flex-direction: rows;
   justify-content: space-between;
   align-items: center;
-  background-color: rgb(73, 77, 79);
+  background-color: rgba(0, 16, 22, 0.9);
   cursor: pointer;
-  color: #ffffffe6;
   font-weight: bold;
   width: 100%;
-  border-bottom: 1px solid #828282;
-  color: white;
   z-index: 10;
   font-weight: bold;
   overflow: hidden;
@@ -116,7 +112,7 @@ const NavEl = styled.div`
     color: #669dfd;
   }
   padding: 10px 60px;
-
+  color: #ffffffe6;
   text-align: center;
 
   @media (min-width: 654px) and (max-width: 955px) {
@@ -143,7 +139,6 @@ const NavRight = styled.div`
   display: flex;
   align-items: center;
 `;
-
 const NavLeft = styled.div`
   display: flex;
 `;

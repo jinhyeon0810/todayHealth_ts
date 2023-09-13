@@ -4,9 +4,9 @@
   padding: 50px 100px 100px 100px;
   text-align: center;
   border-top: 1px solid gray;
-  background-color: rgb(73, 77, 79);
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
   color: white;
-  min-height: 450px;
+  min-height: 10px;
 }
 .footerDesc {
   margin-bottom: 8px;
@@ -24,8 +24,17 @@
 }
 
 .timerButton {
-  width: 100%;
+  width: 50%;
+  height: 100px;
   cursor: pointer;
+  font-size: 35px;
+}
+.timerButton span {
+  font-size: 15px;
+}
+
+.footerContent {
+  margin-bottom: 50px;
 }
 
 @media (min-width: 280px) and (max-width: 450px) {
