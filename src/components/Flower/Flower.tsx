@@ -1,13 +1,28 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./Flower.module.css";
 
 function Flower() {
+  const [browserSize, setBrowserSize] = useState({ width: window.innerWidth, height: window.innerHeight });
+
   const flowerArray = [];
-  for (let i = 1; i <= 30; i++) {
+  for (let i = 1; i <= 50; i++) {
     flowerArray.push(i);
   }
   const IMG_SRC = "https://cdn.crowdpic.net/detail-thumb/thumb_d_2585BEDB390ADAC6CEB0FF3482B0D396.png";
-  console.log(flowerArray);
+
+  const handleResize = () => {
+    setBrowserSize({
+      width: window.innerWidth * 0.9,
+      height: window.innerHeight,
+    });
+  };
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <>
       {flowerArray.map((f) => {
@@ -17,8 +32,8 @@ function Flower() {
             className={styles.flower}
             src={IMG_SRC}
             style={{
-              marginLeft: Math.random() * window.innerWidth * 0.95,
-              top: Math.random() * window.innerHeight,
+              marginLeft: Math.random() * browserSize.width * 0.9,
+              top: Math.random() * browserSize.height,
             }}
           ></img>
         );

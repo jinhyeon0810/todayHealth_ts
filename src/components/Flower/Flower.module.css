@@ -3,7 +3,7 @@
   width: 20px;
   height: 20px;
   background: none;
-  animation: flower 8s linear infinite;
+  animation: flower 10s linear infinite;
   opacity: 0;
   overflow: hidden;
   z-index: 1;
@@ -43,11 +43,11 @@
   }
   40% {
     opacity: 1;
-    transform: translate(30px, 35vh);
+    transform: translate(30px, 30vh);
   }
   60% {
     opacity: 1;
-    transform: translate(-30px, 45vh);
+    transform: translate(-30px, 40vh);
   }
   80% {
     opacity: 1;
@@ -55,6 +55,6 @@
   }
   100% {
     opacity: 0;
-    transform: translateY(65vh);
+    transform: translateY(70vh);
   }
 }
