@@ -68,9 +68,6 @@ export default function LoginPage(): React.ReactElement {
   const moveToSignUp = () => {
     navigate("/signup");
   };
-  const moveToMain = () => {
-    navigate("/");
-  };
 
   const moveToFind = () => {
     navigate("/find");
@@ -80,9 +77,7 @@ export default function LoginPage(): React.ReactElement {
     <>
       <section className={styles.section}>
         <div className={styles.wrapper}>
-          <h1 className={styles.todayHealth} onClick={moveToMain}>
-            오늘의 Health
-          </h1>
+          <h1 className={styles.todayHealth}>오늘의 Health</h1>
           <div className={styles.loginMain}>
             <div className={styles.login}>LOG IN</div>
             <form className={styles.loginPage}>
