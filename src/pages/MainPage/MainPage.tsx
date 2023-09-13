@@ -11,6 +11,7 @@ import { BsFillTrashFill } from "react-icons/bs";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import Flower from "../../components/Flower/Flower";
 import { RootState } from "../../utils/Store";
+import { useNavigate } from "react-router-dom";
 
 interface TextArrProps {
   id: string;
@@ -23,6 +24,7 @@ interface TextArrProps {
 [];
 
 export default function MainPage(): React.ReactElement {
+  const navigate = useNavigate();
   const user = useSelector((state: RootState) => state.user);
 
   const [text, setText] = useState("");
@@ -59,11 +61,7 @@ export default function MainPage(): React.ReactElement {
         id: doc.id,
         ...doc.data(),
       })) as TextArrProps[];
-      setTexts(
-        textArr.filter((t: TextArrProps) => {
-          return t.creatorId === user?.uid && t.createdAt === dateString;
-        })
-      );
+      setTexts(textArr.filter((t: TextArrProps) => t.creatorId === user?.uid && t.createdAt === dateString));
       setOldRecord(
         textArr.filter((t: TextArrProps) => {
           return t.creatorId === user?.uid && t.createdAt === pickerDate;
@@ -107,12 +105,31 @@ export default function MainPage(): React.ReactElement {
   const dragOver = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
   };
+  const moveToPage = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target instanceof HTMLImageElement) {
+      if (e.target.alt === "운동내역화면") navigate("/my");
+      else navigate("/share");
+    }
+  };
 
   return (
     <>
       <Flower />
       <div className={styles.wrapper}>
         <Header />
+
+        <section className={styles.backgroundImage}>
+          <div>
+            <p>기록을 바탕으로 성장해보아요!</p>
+            <p>당신은 이미 성장중입니다</p>
+
+            <div onClick={moveToPage}>
+              <img src="./운동내역화면.png" className={styles.mainImage_one} alt="운동내역화면" />
+              <img src="./게시물작성화면.png" className={styles.mainImage_two} alt="게시물작성화면" />
+            </div>
+          </div>
+        </section>
+
         <article>
           <div className={styles.title}>
             <h1>오늘의 Health</h1>
@@ -152,7 +169,6 @@ export default function MainPage(): React.ReactElement {
             </div>
             {
               <span className={styles.trashExplain} style={{ opacity: addModal ? "1" : "0" }}>
-                {" "}
                 운동기록을 드래그 해서 삭제하실 수 있어요!
               </span>
             }

@@ -1,7 +1,59 @@
+.backgroundImage {
+  background: url("https://cdn.pixabay.com/photo/2016/01/08/01/53/gymer-1126999_640.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  height: 600px;
+  width: 100%;
+  font-size: 30px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  font-weight: bolder;
+}
+
+.backgroundImage div p {
+  margin: 0 0 0 50px;
+}
+
+.backgroundImage div img {
+  border-radius: 8px;
+}
+
+.mainImage_one {
+  position: absolute;
+  top: 25%;
+  right: 10%;
+  cursor: pointer;
+  width: 350px;
+  height: 300px;
+  transition: transform 0.5s ease-in-out;
+}
+
+.mainImage_one:hover {
+  transform: scale(1.1);
+}
+
+.mainImage_two {
+  position: absolute;
+  top: 25%;
+  right: 35%;
+  cursor: pointer;
+  width: 350px;
+  height: 300px;
+  transition: transform 0.5s ease-in-out;
+}
+
+.mainImage_two:hover {
+  transform: scale(1.1);
+}
+
 .wrapper {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 100vw;
   color: black;
   min-height: 100%;
 }
@@ -35,8 +87,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-top: 80px;
   margin-bottom: 20px;
+}
+.title h1 {
+  font-size: 40px;
 }
 
 .form {
@@ -112,5 +166,28 @@
   .width {
     width: 70%;
     height: 50px;
+  }
+
+  .backgroundImage {
+    height: 350px;
+    font-size: 25px;
+  }
+}
+
+@media (max-width: 1430px) {
+  .mainImage_one,
+  .mainImage_two {
+    width: 300px;
+    height: 200px;
+  }
+}
+
+@media (max-width: 1300px) {
+  .mainImage_one,
+  .mainImage_two {
+    display: none;
+  }
+  .backgroundImage {
+    height: 400px;
   }
 }
