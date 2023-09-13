@@ -64,7 +64,6 @@ export default function MyPage(): React.ReactElement {
           </div>
           <div className={styles.body}>
             <h1 className={styles.title}>
-              {" "}
               진행한 운동 <GiMuscleUp /> / <span className={styles.exerciseDay}>{pickerDate}</span>
             </h1>
             <ul className={styles.desc}>

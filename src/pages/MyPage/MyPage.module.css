@@ -1,5 +1,5 @@
 .wrapper {
-  background-color: rgb(47, 52, 55);
+  background: white;
 }
 .layout {
   padding-top: 65px;
@@ -9,6 +9,9 @@
   justify-content: center;
   margin-bottom: 30px;
   z-index: 0;
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.24);
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.24);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.24);
 }
 
 .title {
@@ -17,10 +20,12 @@
 }
 
 .body {
-  background-color: white;
   margin: 0 100px;
   border-radius: 6px;
   padding: 20px;
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.24);
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.24);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.24);
 }
 
 .desc {
