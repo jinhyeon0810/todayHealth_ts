@@ -1,33 +1,50 @@
 import React, { useState } from "react";
 import styles from "./Footer.module.css";
+import { AiFillCalendar } from "react-icons/ai";
+import { GiMuscleUp } from "react-icons/gi";
+import { BiSearchAlt2 } from "react-icons/bi";
+import { AiFillSetting } from "react-icons/ai";
 import Timer from "../Timer/Timer";
 import { useSelector } from "react-redux";
 import { RootState } from "../../utils/Store";
+import { useNavigate } from "react-router-dom";
 
 export default function Footer(): React.ReactElement {
+  const navigate = useNavigate();
   const user = useSelector((state: RootState) => state.user);
-
-  const [show, setShow] = useState(false);
-
-  const onClickTimer = () => {
-    if (user) {
-      setShow(!show);
-    } else {
-      alert("로그인 하셔야 이용가능합니다");
-    }
+  const handleSharePage = () => {
+    navigate("/share");
   };
+
+  // const [show, setShow] = useState(false);
+
+  // const onClickTimer = () => {
+  //   if (user) {
+  //     setShow(!show);
+  //   } else {
+  //     alert("로그인 하셔야 이용가능합니다");
+  //   }
+  // };
   return (
     <>
-      <div className={styles.wrapper}>
-        <span className={styles.footerTitle}>기록이 몸을 만든다</span>
-        <section className={styles.footerContent}>
-          <div className={styles.footerDesc}>운동, 매번 하고 있지만 진짜 성장하고 있는지 궁금하지 않으세요? (●'◡'●)</div>
-          <div className={styles.footerDesc}>오늘의 Helath로 기록하세요. 현실적으로, 간편하게 관리할 수 있습니다 😎</div>
-          <div>
-            <span className={styles.completed}>오.운.완 게시판</span>을 통해 다른 사람들과 소통하며 득근하세요 💪
-          </div>
-        </section>
-        {!show && (
+      <div className={styles.footerContainer}>
+        <div className={styles.footerFuncs}>
+          <AiFillCalendar className={styles.calendarIcon} />
+          <p>캘린더</p>
+        </div>
+        <div className={styles.footerFuncs}>
+          <GiMuscleUp className={styles.routineIcon} />
+          <p>루틴</p>
+        </div>
+        <div className={styles.footerFuncs} onClick={handleSharePage}>
+          <BiSearchAlt2 className={styles.searchIcon} />
+          <p>피드</p>
+        </div>
+        <div className={styles.footerFuncs}>
+          <AiFillSetting className={styles.setIcon} />
+          <p>설정</p>
+        </div>
+        {/* {!show && (
           <div>
             <button onClick={onClickTimer} className={styles.timerButton}>
               타이머 시작! ⏰ <br />
@@ -35,7 +52,7 @@ export default function Footer(): React.ReactElement {
             </button>
           </div>
         )}
-        {show && <Timer setShow={setShow} />}
+        {show && <Timer setShow={setShow} />} */}
       </div>
     </>
   );

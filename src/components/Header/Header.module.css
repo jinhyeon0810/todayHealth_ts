@@ -1,0 +1,29 @@
+.nav {
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 600px;
+  width: 100vw;
+  padding: 30px 0;
+  background: #000000;
+  background: -webkit-linear-gradient(to right, #434343, #000000);
+}
+
+.navTopic,
+.navList {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.navTopic {
+  font-size: 30px;
+  color: rgb(81, 196, 87);
+}
+
+.navList {
+  font-size: 45px;
+  color: #858484;
+  padding-right: 40px;
+}

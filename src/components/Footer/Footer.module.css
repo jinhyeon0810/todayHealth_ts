@@ -1,63 +1,28 @@
-.wrapper {
+.footerContainer {
   display: flex;
-  flex-direction: column;
-  padding: 50px 100px 100px 100px;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  box-shadow: -1px -8px 13px -1px rgba(180, 173, 173, 0.12);
+  -webkit-box-shadow: -1px -8px 13px -1px rgba(180, 173, 173, 0.12);
+  -moz-box-shadow: -1px -8px 13px -1px rgba(180, 173, 173, 0.12);
+  border-radius: 20px 20px 0 0;
+  border: 1px solid #6c6a6a;
+  border-bottom: none;
+}
+
+.footerFuncs {
   text-align: center;
-  border-top: 1px solid gray;
-  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
-  color: white;
-  min-height: 10px;
-}
-.footerDesc {
-  margin-bottom: 8px;
-}
-
-.footerTitle {
+  padding: 10px 5px;
+  color: #6c6a6a;
   font-weight: bold;
-  font-size: 40px;
-  margin-bottom: 40px;
-}
-
-.completed {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.timerButton {
-  width: 50%;
-  height: 100px;
   cursor: pointer;
-  font-size: 35px;
-}
-.timerButton span {
-  font-size: 15px;
 }
 
-.footerContent {
-  margin-bottom: 50px;
-}
-
-@media (min-width: 280px) and (max-width: 450px) {
-  .footerTitle {
-    font-size: 24px;
-    font-weight: bold;
-  }
-  .wrapper {
-    padding: 30px 20px 30px;
-  }
-  .footerDesc {
-    font-size: 12px;
-  }
-}
-@media (min-width: 450px) and (max-width: 1000px) {
-  .footerTitle {
-    font-size: 35px;
-    font-weight: bold;
-  }
-  .wrapper {
-    padding: 40px 30px 30px;
-  }
-  .footerDesc {
-    font-size: 14px;
-  }
+.calendarIcon,
+.routineIcon,
+.setIcon,
+.searchIcon {
+  font-size: 40px;
 }
