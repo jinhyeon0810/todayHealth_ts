@@ -10,6 +10,9 @@ import Location from "./pages/Location/Location";
 import Board from "./pages/Board/Board";
 import BoardDetail from "./pages/BoardDetail/BoardDetail";
 import AddProfile from "./pages/Profile/AddProfile";
+import IdPwLogIn from "./pages/LoginPage/IdPwLogIn";
+import RecordContainer from "./pages/Record/RecordContainer";
+import AddExerciseContainer from "./pages/AddExercise/AddExerciseContainer";
 
 function App(): React.ReactElement {
   return (
@@ -18,7 +21,10 @@ function App(): React.ReactElement {
         <Route path="/main" element={<MainPage />} />
         <Route path="/location" element={<Location />} />
         <Route path="/" element={<LoginPage />} />
+        <Route path="/login" element={<IdPwLogIn />} />
         <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/record" element={<RecordContainer />} />
+        <Route path="/addExercise" element={<AddExerciseContainer />} />
         <Route path="/addProfile" element={<AddProfile />} />
         <Route path="/find" element={<FindPage />} />
         <Route path="/my" element={<MyPage />} />
