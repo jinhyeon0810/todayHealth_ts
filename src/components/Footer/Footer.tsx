@@ -25,14 +25,20 @@ export default function Footer(): React.ReactElement {
   //     alert("로그인 하셔야 이용가능합니다");
   //   }
   // };
+  const handleCalendarPage = () => {
+    navigate("/my");
+  };
+  const handleMainPage = () => {
+    navigate("/main");
+  };
   return (
     <>
       <div className={styles.footerContainer}>
-        <div className={styles.footerFuncs}>
+        <div className={styles.footerFuncs} onClick={handleCalendarPage}>
           <AiFillCalendar className={styles.calendarIcon} />
           <p>캘린더</p>
         </div>
-        <div className={styles.footerFuncs}>
+        <div className={styles.footerFuncs} onClick={handleMainPage}>
           <GiMuscleUp className={styles.routineIcon} />
           <p>루틴</p>
         </div>
