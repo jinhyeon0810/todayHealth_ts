@@ -1,0 +1,73 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  background: #000000;
+  background: -webkit-linear-gradient(to right, #434343, #000000);
+  color: rgb(208, 204, 204);
+}
+
+.navFixed {
+  background: #000000;
+  background: -webkit-linear-gradient(to right, #434343, #000000);
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 20px 10px;
+  gap: 40px;
+}
+
+.backIcon {
+  margin-left: 20px;
+  font-size: 30px;
+  cursor: pointer;
+}
+.headerInput {
+  width: 40%;
+  border-radius: 10px;
+  background-color: rgb(255, 255, 255);
+  border: none;
+}
+
+.headerCancel {
+  margin-right: 20px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.exerciseType {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  font-size: 30px;
+  font-weight: bold;
+  width: 70%;
+  margin: 0 auto;
+  cursor: pointer;
+  background: #000000;
+  background: -webkit-linear-gradient(to right, #434343, #000000);
+}
+
+.exerciseType > div {
+  padding: 15px 20px;
+}
+
+.datas {
+  margin-top: 140px;
+}
+
+.bottomAddBtn {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: 30px 50px;
+  border-radius: 12px;
+  background-color: #ffff;
+  font-size: 30px;
+  cursor: pointer;
+}
