@@ -1,11 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import styles from "./Timer.module.css";
 
-interface TimerProp {
-  setShow: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-export default function Timer({ setShow }: TimerProp): React.ReactElement {
+export default function Timer(): React.ReactElement {
   const [seconds, setSeconds] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [hours, setHours] = useState(0);
@@ -33,9 +29,10 @@ export default function Timer({ setShow }: TimerProp): React.ReactElement {
 
   const onClickReset = () => {
     clearInterval(timer.current);
+    setMinutes(0);
+    setHours(0);
     setSeconds(0);
     setStop(true);
-    setShow(false);
   };
 
   const onClickStop = () => {
