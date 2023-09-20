@@ -1,25 +1,20 @@
 import { useState, useEffect } from "react";
 import typeData from "../../data/type.json";
 import { useNavigate } from "react-router-dom";
-import { Timestamp, addDoc, collection, onSnapshot, orderBy, query } from "firebase/firestore";
-import db, { onUserStateChange } from "../../api/firebase";
-import AddExercisePresenter from "./addExercisePresenter";
-import ExerciseType from "../../components/Type/ExerciseType";
+import { onUserStateChange } from "../../api/firebase";
+import AddExercisePresenter from "./AddExercisePresenter";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, changeUser, resetPickedDatas } from "../../utils/Store";
 
 export default function AddExerciseContainer() {
-  const timeStamp = Timestamp.now();
   const types = ["전체", "상체", "하체"];
-  const [importUpperDatas, setImportUpperDatas] = useState(false);
-  const [importLowerDatas, setImportLowerDatas] = useState(false);
-  const [allDatas, setAllDatas] = useState(true);
+  const [importUpperDatas, setImportUpperDatas] = useState<boolean>(false);
+  const [importLowerDatas, setImportLowerDatas] = useState<boolean>(false);
+  const [allDatas, setAllDatas] = useState<boolean>(true);
 
   const upperData = typeData.data.filter((data) => data.type === "상체");
   const lowerData = typeData.data.filter((data) => data.type === "하체");
-
-  const user = useSelector((state: RootState) => state.user);
-  const pickedDatas = useSelector((state) => state.pickedDatas.pickedDatas);
+  const pickedDatas = useSelector((state: RootState) => state.pickedDatas.pickedDatas);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -41,20 +36,20 @@ export default function AddExerciseContainer() {
       }
     } else navigate(-1);
   };
-  const handleType = (e) => {
+  const handleType = (e: React.MouseEvent<HTMLButtonElement>) => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
-    if (e.target.innerText === "상체") {
+    if ((e.target as HTMLElement).innerText === "상체") {
       setImportUpperDatas(true);
       setImportLowerDatas(false);
       setAllDatas(false);
-    } else if (e.target.innerText === "하체") {
+    } else if ((e.target as HTMLElement).innerText === "하체") {
       setImportLowerDatas(true);
       setImportUpperDatas(false);
       setAllDatas(false);
-    } else if (e.target.innerText === "전체") {
+    } else if ((e.target as HTMLElement).innerText === "전체") {
       setAllDatas(true);
       setImportUpperDatas(false);
       setImportLowerDatas(false);
@@ -62,18 +57,9 @@ export default function AddExerciseContainer() {
   };
 
   const handleRecordPage = () => {
-    //record화면에서 완료할때 추가할것
-    // pickedDatas.forEach((data) => {
-    //   addDoc(collection(db, "dataTypes"), {
-    //     type: data.type,
-    //     name: data.name,
-    //     creatorId: user.uid,
-    //     timeStamp,
-    //   });
-    // });
     navigate("/record");
   };
-
+  console.log(upperData);
   return (
     <>
       <AddExercisePresenter
@@ -87,7 +73,6 @@ export default function AddExerciseContainer() {
         importLowerDatas={importLowerDatas}
         handleType={handleType}
         pickedDatas={pickedDatas}
-        // setPickedDatas={setPickedDatas}
         handleRecordPage={handleRecordPage}
       />
     </>

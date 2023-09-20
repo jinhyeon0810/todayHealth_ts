@@ -1,11 +1,22 @@
-import React, { useState } from "react";
 import styles from "./addExercise.module.css";
 import { IoChevronBackSharp } from "react-icons/io5";
-import ExerciseType from "../../components/Type/ExerciseType";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../utils/Store";
+import ExerciseType from "../../components/ExerciseType/ExerciseType";
+import { RecordingProps, TypeDatas } from "../../utils/type";
 
-export default function AddExercisePresenter(props) {
+interface Props {
+  datas: TypeDatas[];
+  upperDatas: TypeDatas[];
+  lowerDatas: TypeDatas[];
+  types: string[];
+  handleGoback: () => void;
+  allDatas: boolean;
+  importUpperDatas: boolean;
+  importLowerDatas: boolean;
+  handleType: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  pickedDatas: RecordingProps[];
+  handleRecordPage: () => void;
+}
+export default function AddExercisePresenter(props: Props) {
   const {
     datas,
     upperDatas,
@@ -40,7 +51,7 @@ export default function AddExercisePresenter(props) {
         <section className={styles.datas}>
           {allDatas &&
             datas.map((data) => {
-              return <ExerciseType data={data} key={data.name} pickedDatas={pickedDatas} />;
+              return <ExerciseType data={data} key={data.name} />;
             })}
 
           {importUpperDatas &&

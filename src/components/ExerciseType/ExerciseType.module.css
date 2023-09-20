@@ -1,0 +1,43 @@
+.dataCard {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  border: 1px solid red;
+  padding: 25px 20px;
+  width: 70%;
+  margin: 0 auto;
+}
+
+.dataText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.dataName {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.dataSub {
+  font-weight: 500;
+}
+
+.heartIcon,
+.fillheartIcon {
+  font-size: 30px;
+  margin-top: 65px;
+  cursor: pointer;
+}
+
+.fillheartIcon {
+  color: red;
+}
+
+.imgSize {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  margin-left: 100px;
+}
