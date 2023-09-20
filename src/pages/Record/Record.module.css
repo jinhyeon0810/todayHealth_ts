@@ -1,0 +1,137 @@
+.container {
+  width: 100vw;
+  min-height: 100vh;
+  background: #000000;
+  background: -webkit-linear-gradient(to right, #434343, #000000);
+  color: rgb(208, 204, 204);
+}
+
+.header {
+  position: fixed;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px 10px;
+  gap: 40px;
+  background-color: #000000;
+  z-index: 2;
+}
+
+.header > h1 {
+  font-size: 35px;
+}
+
+.header > button {
+  padding: 15px 20px;
+  border-radius: 35px;
+  color: green;
+  font-weight: bold;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.backIcon {
+  font-size: 40px;
+  cursor: pointer;
+}
+
+.body {
+  padding-top: 107px;
+  font-size: 20px;
+  font-weight: bold;
+  min-height: 500px;
+}
+
+.addExercise {
+  font-size: 30px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+.recordContent {
+  border: 1px solid red;
+  position: relative;
+  width: 70%;
+  margin: 0 auto;
+  padding: 20px 30px;
+}
+
+.contentDelete {
+  position: absolute;
+  top: 0;
+  right: 5%;
+  top: 5%;
+  cursor: pointer;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 100px 100px 100px 100px;
+  text-align: center;
+  grid-gap: 20px;
+}
+
+.grid > input {
+  padding: 10px 15px;
+  border-radius: 10px;
+}
+.grid > button {
+  padding: 10px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.gridContainer {
+  width: 500px;
+  margin: 0 auto;
+}
+
+.gridButton::before {
+  position: absolute;
+  content: "V";
+  display: inline-block;
+  top: 35%;
+  left: 64.5%;
+  color: red;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.addSets,
+.deleteSets,
+.completeSets {
+  padding: 20px 50px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #3b3b3b;
+  border: none;
+}
+
+.setsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 40px;
+  margin: 0 auto;
+  margin-left: 60px;
+}
+
+.addSets {
+  color: rgb(177, 177, 1);
+}
+
+.deleteSets {
+  color: rgb(255, 0, 0);
+}
+
+.completeSets {
+  color: green;
+}
