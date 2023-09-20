@@ -1,14 +1,13 @@
 import React, { useEffect } from "react";
 import styles from "./Header.module.css";
 import { useNavigate } from "react-router-dom";
-import { logout, onUserStateChange } from "../../api/firebase";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState, changeUser } from "../../utils/Store";
+import { onUserStateChange } from "../../api/firebase";
+import { useDispatch } from "react-redux";
+import { changeUser } from "../../utils/Store";
 import { AiOutlineUnorderedList } from "react-icons/ai";
 
 export default function Header(): React.ReactElement {
   const navigate = useNavigate();
-  const user = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
 
   const handleMainPage = () => {
@@ -22,41 +21,21 @@ export default function Header(): React.ReactElement {
     }
   }, [changeUser]);
 
-  const clickLogIn = () => {
-    navigate("/");
-  };
+  // const clickLogIn = () => {
+  //   navigate("/");
+  // };
 
-  const clickLogOut = () => {
-    const conFirm = confirm("정말 로그아웃 하시겠습니까?");
-    if (conFirm) {
-      logout();
-      navigate("/");
-    }
-  };
+  // const clickLogOut = () => {
+  //   const conFirm = confirm("정말 로그아웃 하시겠습니까?");
+  //   if (conFirm) {
+  //     logout();
+  //     navigate("/");
+  //   }
+  // };
 
-  const moveToHome = () => {
-    navigate("/main");
-  };
-
-  const clickShare = () => {
-    navigate("/share");
-  };
-
-  const clickMy = () => {
-    navigate("/my");
-  };
-
-  const moveToSignUpPage = () => {
-    navigate("/signup");
-  };
-
-  const moveToLocation = () => {
-    if (user) {
-      navigate("/location");
-    } else {
-      alert("로그인 하셔야 이용 가능합니다 🙂");
-    }
-  };
+  // const moveToSignUpPage = () => {
+  //   navigate("/signup");
+  // };
 
   return (
     <>

@@ -10,7 +10,8 @@
   border-radius: 20px 20px 0 0;
   border: 1px solid #6c6a6a;
   border-bottom: none;
-  background-color: black;
+  background: #000000;
+  background: -webkit-linear-gradient(to right, #434343, #000000);
 }
 
 .footerFuncs {
