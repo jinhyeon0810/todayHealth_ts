@@ -1,16 +1,14 @@
 import React, { useCallback } from "react";
 import { useState, useEffect } from "react";
-import Header from "../../components/Header/Header";
 import styles from "./SharePage.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import TextCard from "../../components/TextCard/TextCard";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import db from "../../api/firebase";
-import SearchBar from "../../components/SearchBar/SearchBar";
 import ReactPaginate from "react-paginate";
-import Flower from "../../components/Flower/Flower";
 import { RootState } from "../../utils/Store";
 import { useSelector } from "react-redux";
+import Footer from "../../components/Footer/Footer";
 
 interface ProductProps {
   title: string;
@@ -23,11 +21,10 @@ interface ProductProps {
 
 export default function SharePage(): React.ReactElement {
   const user = useSelector((state: RootState) => state.user);
-
   const [products, setProducts] = useState<ProductProps[]>([]);
   const navigate = useNavigate();
 
-  const productsPerPage = 8;
+  const productsPerPage = 10;
   const [offset, setOffset] = useState(0);
   const endOffset = offset + productsPerPage;
   const currentProducts = products.slice(offset, endOffset);
@@ -82,15 +79,11 @@ export default function SharePage(): React.ReactElement {
 
   return (
     <>
-      <Flower />
-      <div className={styles.sharePage}>
-        <Header />
+      <article className={styles.sharePage}>
+        {/* <div className={styles.title}>전체게시물 📝</div>
 
-        <div className={styles.title}>전체게시물 📝</div>
-
-        <SearchBar search={search} setSearch={setSearch} />
-
-        <div className={styles.cardStyle}>
+        <SearchBar search={search} setSearch={setSearch} /> */}
+        <section className={styles.cardStyle}>
           {filterTitle.map((product) => {
             return (
               <Link
@@ -103,14 +96,9 @@ export default function SharePage(): React.ReactElement {
               </Link>
             );
           })}
-        </div>
+        </section>
 
-        <div className={styles.write} onClick={moveToBoard}>
-          {" "}
-          <span style={{ fontSize: "20px", fontWeight: "bold" }}>게시글</span> 작성하러 가기~🐱‍🏍
-        </div>
-
-        <div className={styles.wrapper}>
+        <section className={styles.wrapper}>
           <ReactPaginate
             pageCount={pageCount}
             pageRangeDisplayed={productsPerPage}
@@ -123,8 +111,14 @@ export default function SharePage(): React.ReactElement {
             previousClassName={styles.previous}
             nextClassName={styles.next}
           />
-        </div>
-      </div>
+        </section>
+
+        <section className={styles.write} onClick={moveToBoard}>
+          <span style={{ fontSize: "20px", fontWeight: "bold" }}>게시글</span> 작성하러 가기~🐱‍🏍
+        </section>
+
+        <Footer />
+      </article>
     </>
   );
 }
