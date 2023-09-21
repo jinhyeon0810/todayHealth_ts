@@ -70,7 +70,7 @@ export default function BoardComponent({ type, setType, imageList, setImageList 
       title,
       content,
       category: type,
-      creatorId: user?.uid,
+      creatorId: user?.displayName,
       createdAt: dateString,
       url: imageList,
       timeStamp,
@@ -91,65 +91,64 @@ export default function BoardComponent({ type, setType, imageList, setImageList 
     setFile(null);
     setAddFile(true);
   };
-
+  console.log(imageList);
+  console.log(file);
   return (
     <div className={styles.height}>
-      <>
-        <div className={styles.title}>
-          <Filter setType={setType}>{type}</Filter>
-          {editing && <span className={styles.clickhere}>👈click</span>}
-        </div>
-        <div className={styles.addImage}>
-          {file && <img className={styles.img} src={URL.createObjectURL(file)} alt="local file" />}
-          {file && (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "flex-end",
-                flexDirection: "column",
-              }}
-            >
-              <button className={styles.imgUpdate} onClick={imgOnClick}>
-                등록
-              </button>
-              <button className={styles.imgUpdate} onClick={onClickCancel}>
-                취소
-              </button>
-            </div>
-          )}
-        </div>
-        <div className={styles.contentTitle}>
-          {editing && <input placeholder="제목" className={styles.input} onChange={handleChange} name="title" value={title ?? ""} />}
-        </div>
-
-        <div className={styles.textareaList}>
-          {editing && (
-            <TextareaAutosize
-              className={styles.textarea}
-              autoFocus
-              rows={1}
-              placeholder="내용을 입력하세요."
-              id="content"
-              name="content"
-              value={content ?? ""}
-              onChange={handleChange}
-            >
-              {" "}
-            </TextareaAutosize>
-          )}
-        </div>
-        {addFile && (
-          <div className={styles.fileArea}>
-            <input type="file" accept="image/*" name="file" required className={styles.file} onChange={handleChange} />
+      <div className={styles.title}>
+        <Filter setType={setType}>{type}</Filter>
+        {editing && <span className={styles.clickhere}>👈click</span>}
+      </div>
+      <div className={styles.addImage}>
+        {file && <img className={styles.img} src={URL.createObjectURL(file)} alt="local file" />}
+        {file && !imageUpdate && (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+              flexDirection: "column",
+            }}
+          >
+            <button className={styles.imgUpdate} onClick={imgOnClick}>
+              등록
+            </button>
+            <button className={styles.imgUpdate} onClick={onClickCancel}>
+              취소
+            </button>
           </div>
         )}
+      </div>
+      <div className={styles.contentTitle}>
+        {editing && <input placeholder="제목" className={styles.input} onChange={handleChange} name="title" value={title ?? ""} />}
+      </div>
 
-        <form className={styles.confirm}>
-          <button type="submit" onClick={handleSubmit} className={styles.submitButton}>
-            등록
-          </button>
-        </form>
-      </>
+      <div className={styles.textareaList}>
+        {editing && (
+          <TextareaAutosize
+            className={styles.textarea}
+            autoFocus
+            rows={1}
+            placeholder="내용을 입력하세요."
+            id="content"
+            name="content"
+            value={content ?? ""}
+            onChange={handleChange}
+          >
+            {" "}
+          </TextareaAutosize>
+        )}
+      </div>
+      {addFile && (
+        <div className={styles.fileArea}>
+          <input type="file" accept="image/*" name="file" required className={styles.file} onChange={handleChange} />
+        </div>
+      )}
+
+      <form className={styles.confirm}>
+        <button type="submit" onClick={handleSubmit} className={styles.submitButton}>
+          등록
+        </button>
+      </form>
     </div>
   );
 }

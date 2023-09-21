@@ -1,30 +1,49 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Board.module.css";
 import { useNavigate } from "react-router-dom";
 import BoardComponent from "./BoardComponent";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, changeUser } from "../../utils/Store";
+import { onUserStateChange } from "../../api/firebase";
+import CannotAccess from "../../components/CannotAccess/CannotAccess";
 
 export default function Board(): React.ReactElement {
   const [imageList, setImageList] = useState<string | undefined>();
   const [type, setType] = useState("Category");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const user = useSelector((state: RootState) => state.user);
+  useEffect(() => {
+    if (changeUser) {
+      onUserStateChange((user: { uid: string; displayName: string; photoURL: string }) => {
+        dispatch(changeUser({ uid: user.uid, displayName: user.displayName, photoURL: user.photoURL }));
+      });
+    }
+  }, [changeUser]);
 
   return (
     <>
-      <div className={styles.wrapper}>
-        <div className={styles.board}>
-          <div className={styles.auth}>
-            <span className={styles.topTitle}>오.운.완</span>
-            <br /> 같이 인증해보아요 ✔
+      {user.uid ? (
+        <>
+          <div className={styles.wrapper}>
+            <div className={styles.board}>
+              <div className={styles.auth}>
+                <span className={styles.topTitle}>오.운.완</span>
+                <br /> 같이 인증해보아요 ✔
+              </div>
+              <BoardComponent type={type} setType={setType} imageList={imageList} setImageList={setImageList} />
+              <div className={styles.backToShareArea}>
+                <button onClick={() => navigate("/share")} className={styles.backToSharePage}>
+                  게시판으로 돌아가기
+                </button>
+              </div>
+            </div>
           </div>
-          <BoardComponent type={type} setType={setType} imageList={imageList} setImageList={setImageList} />
-          <div className={styles.backToShareArea}>
-            <button onClick={() => navigate("/share")} className={styles.backToSharePage}>
-              {" "}
-              게시판으로 돌아가기
-            </button>
-          </div>
-        </div>
-      </div>
+        </>
+      ) : (
+        <CannotAccess />
+      )}
     </>
   );
 }
