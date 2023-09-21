@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./FindPage.module.css";
 import { useNavigate } from "react-router-dom";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
+import { IoChevronBackSharp } from "react-icons/io5";
 
 export default function FindPage(): React.ReactElement {
   const [email, setEmail] = useState("");
@@ -38,10 +39,6 @@ export default function FindPage(): React.ReactElement {
     navigate("/login");
   };
 
-  const moveToMain = () => {
-    navigate("/");
-  };
-
   useEffect(() => {
     if (emailValid) {
       setNotAllow(false);
@@ -49,15 +46,17 @@ export default function FindPage(): React.ReactElement {
     }
     setNotAllow(true);
   }, [emailValid]);
-
+  const handleGoback = () => {
+    navigate(-1);
+  };
   return (
     <>
       <div className={styles.wrapper}>
         <div className={styles.loginMain}>
-          <div className={styles.todayHealth} onClick={moveToMain}>
-            오늘의 Health
-          </div>
           <div className={styles.find}>
+            <div className={styles.goBack}>
+              <IoChevronBackSharp onClick={handleGoback} />
+            </div>
             <div className={styles.login}>비밀번호 찾기</div>
           </div>
           <div className={styles.loginPage}>
