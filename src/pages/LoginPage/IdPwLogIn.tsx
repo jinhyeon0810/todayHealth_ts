@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./LoginPage.module.css";
 import { useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import NickName from "./NickName";
+import { IoChevronBackSharp } from "react-icons/io5";
 
 export default function IdPwLogIn() {
   const [email, setEmail] = useState("");
@@ -42,10 +42,19 @@ export default function IdPwLogIn() {
     }
   };
 
+  const handleGoback = () => {
+    navigate(-1);
+  };
+
   return (
     <div className={styles.section}>
       <div className={styles.loginMain}>
-        <div className={styles.login}>ID/PW를 입력해주세요</div>
+        <section className={styles.loginMainHeader}>
+          <div className={styles.goBack}>
+            <IoChevronBackSharp onClick={handleGoback} />
+          </div>
+          <div className={styles.login}>ID/PW를 입력해주세요</div>
+        </section>
         <form className={styles.loginPage}>
           <input className={styles.input} name="email" type="email" placeholder="ID (이메일 주소)" value={email} onChange={handleEmail} />
           <div className={styles.errorMessage}>{!emailValid && email.length > 0 && <div>올바른 이메일을 입력해주세요</div>}</div>
@@ -63,7 +72,6 @@ export default function IdPwLogIn() {
           </button>
         </form>
       </div>
-      <NickName />
     </div>
   );
 }

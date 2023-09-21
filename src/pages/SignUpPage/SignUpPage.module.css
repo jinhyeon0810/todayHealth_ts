@@ -3,7 +3,8 @@
   flex-direction: column;
   width: 100%;
   min-height: 100vh;
-  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+  background: #000000;
+  background: -webkit-linear-gradient(to right, #434343, #000000);
   color: white;
   justify-content: center;
   align-items: center;
@@ -13,13 +14,14 @@
   display: flex;
   align-items: center;
   width: 100%;
-  justify-content: space-around;
-  gap: 200px;
+  justify-content: center;
+  gap: 10px;
 }
 
 .goBack {
   font-size: 40px;
   cursor: pointer;
+  margin-top: 10px;
 }
 
 .todayHealth {
@@ -29,64 +31,86 @@
   font-weight: 800;
 }
 .login {
-  width: 100%;
   text-align: center;
-  padding: 30px 0;
+  padding: 30px 10px;
   font-size: 40px;
 }
 
 .title {
   margin: 0;
-  font-size: 13px;
-  margin-bottom: 20px;
+  font-size: 25px;
+  color: rgb(10, 117, 10);
 }
 .loginMain {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 1px solid white;
-  background-color: #ffffff;
-
-  color: black;
+  color: white;
   font-size: 20px;
   font-weight: 800;
   width: 60%;
   height: 100%;
 }
 
+.profileImg {
+  position: relative;
+  text-align: center;
+}
+.imgIcon {
+  cursor: pointer;
+  font-size: 100px;
+}
+.file {
+  cursor: pointer;
+}
+
+.imgContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.showingImg {
+  width: 96px;
+  height: 96px;
+  border-radius: 50px;
+}
+
 .loginPage {
   display: flex;
   flex-direction: column;
   padding: 20px 20px 20px 20px;
-  border: 1px solid rgb(211, 191, 191);
   border-radius: 6px;
-  margin-bottom: 50px;
   width: 70%;
 }
 
 .input {
-  padding: 10px 20px;
-  border-radius: 6px;
-  margin-bottom: 4px;
+  padding: 25px 10px;
+  border: none;
+}
+
+.input:first-of-type {
+  border-radius: 10px 10px 0 0;
+}
+.input:last-of-type {
+  border-radius: 0 0 10px 10px;
 }
 .errorMessage {
   margin-top: 4px;
   color: #ef0000;
   font-size: 12px;
 }
-.loginButton {
-  margin-top: 16px;
-}
 
-.loginButton,
-.googleLoginButton {
-  padding: 10px 20px;
-  margin-bottom: 4px;
+.loginButton {
+  padding: 25px 10px;
   border-radius: 6px;
   border: none;
-  background-color: #aaa9a9cd;
   cursor: pointer;
+  font-size: 20px;
+  background-color: #03c75a;
+  margin-top: 16px;
 }
 
 .signUp {

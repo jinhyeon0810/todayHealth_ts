@@ -25,13 +25,18 @@
   text-align: center;
   padding: 15px 0;
   font-size: 40px;
-  margin-bottom: 20px;
   color: white;
 }
 
 .loginMethod {
   margin-bottom: 150px;
   font-size: 30px;
+}
+.goBack {
+  margin-top: 10px;
+  color: white;
+  font-size: 35px;
+  cursor: pointer;
 }
 
 .loginMain {
@@ -47,6 +52,13 @@
   width: 60%;
 }
 
+.loginMainHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 20px;
+}
 .loginPage {
   display: flex;
   flex-direction: column;
