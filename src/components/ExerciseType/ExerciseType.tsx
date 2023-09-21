@@ -2,15 +2,13 @@ import React, { useState, useEffect } from "react";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import styles from "./ExerciseType.module.css";
 import { onUserStateChange } from "../../api/firebase";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState, addPickedDatas, changeUser, removePickedDatas } from "../../utils/Store";
+import { useDispatch } from "react-redux";
+import { addPickedDatas, changeUser, removePickedDatas } from "../../utils/Store";
 import { TypeDatas } from "../../utils/type";
 
 export default function ExerciseType({ data }: { data: TypeDatas }): React.ReactElement {
   const [isSelected, setIsSelected] = useState(false);
-  console.log(data);
   const dispatch = useDispatch();
-  const pickedDatas = useSelector((state: RootState) => state.pickedDatas.pickedDatas);
   useEffect(() => {
     if (changeUser) {
       onUserStateChange((user: { uid: string }) => {
@@ -22,7 +20,6 @@ export default function ExerciseType({ data }: { data: TypeDatas }): React.React
   const handleHeart = async (e: { stopPropagation: () => void; preventDefault: () => void }) => {
     e.stopPropagation();
     e.preventDefault();
-    console.log(e);
     setIsSelected((prev) => !prev);
     if (!isSelected) {
       dispatch(addPickedDatas(data));
@@ -30,8 +27,6 @@ export default function ExerciseType({ data }: { data: TypeDatas }): React.React
       dispatch(removePickedDatas(data));
     }
   };
-  console.log(pickedDatas);
-  console.log(data);
 
   return (
     <>

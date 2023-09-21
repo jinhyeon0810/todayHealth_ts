@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Record.module.css";
-import { useSelector } from "react-redux";
-import { RootState } from "../../utils/Store";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, changeUser } from "../../utils/Store";
 import { Timestamp, addDoc, collection } from "firebase/firestore";
-import db from "../../api/firebase";
+import db, { onUserStateChange } from "../../api/firebase";
 import dateString from "../../utils/Date";
 import { RecordingProps } from "../../utils/type";
 
@@ -17,12 +17,21 @@ export default function RecordingContent(props: Props): React.ReactElement {
   const { datas, i, handleDeleteRecordingData } = props;
 
   const user = useSelector((state: RootState) => state.user);
+  const dispatch = useDispatch();
   const timeStamp = Timestamp.now();
 
   const [kg, setKg] = useState<string[]>([]);
   const [reps, setReps] = useState<string[]>([]);
   const [isCompletedArray, setIsCompletedArray] = useState<boolean[]>([]);
   const [rowCount, setRowCount] = useState<number>(0);
+
+  useEffect(() => {
+    if (changeUser) {
+      onUserStateChange((user: { uid: string; displayName: string }) => {
+        dispatch(changeUser({ uid: user.uid, displayName: user.displayName }));
+      });
+    }
+  }, [changeUser]);
 
   const handleSets = (e: React.MouseEvent<HTMLButtonElement>) => {
     const targetId = e.currentTarget.id;
@@ -41,6 +50,10 @@ export default function RecordingContent(props: Props): React.ReactElement {
         break;
 
       case "complete":
+        if (kg.length === 0 || reps.length === 0) {
+          alert("정보를 입력해주세요");
+          return;
+        }
         addDoc(collection(db, "RecordFinish"), {
           name: datas.name,
           kg,
