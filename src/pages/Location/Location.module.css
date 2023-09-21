@@ -1,28 +1,30 @@
 .article {
+  padding-top: 50px;
   display: flex;
   flex-direction: column;
   gap: 30px;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-}
-
-.wrapper {
-  width: 50%;
+  background: #000000;
+  background: -webkit-linear-gradient(to right, #434343, #000000);
+  color: #676666;
+  font-weight: bold;
 }
 
 .section {
   display: flex;
-  flex-direction: rows;
+  flex-direction: row;
   justify-content: center;
 }
 
 .input {
-  padding: 20px 20px;
+  padding: 25px 10px;
   border: 1px solid black;
   border-radius: 6px 0 0 6px;
   border-right: none;
   outline: none;
+  width: 200px;
 }
 
 .checkButton {
@@ -37,10 +39,13 @@
 .main {
   text-align: center;
   cursor: pointer;
+  color: #51c457;
+  font-weight: bold;
+  font-size: 30px;
 }
 
 .findGym {
-  font-size: 20px;
+  font-size: 25px;
 }
 
 .locationExample {

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import styles from "./Location.module.css";
 import { useNavigate } from "react-router-dom";
 import Flower from "../../components/Flower/Flower";
+import Footer from "../../components/Footer/Footer";
 
 declare global {
   interface Window {
@@ -87,7 +88,6 @@ export default function Location() {
 
   return (
     <>
-      <Flower />
       <article className={styles.article}>
         <h1 className={styles.main} onClick={moveToHome}>
           홈으로 가기
@@ -96,7 +96,7 @@ export default function Location() {
           주변 헬스장을 검색해 보세요! 🐱‍🏍 <br />
           <span className={styles.locationExample}>(예시 : 북가좌동 헬스장)</span>
         </p>
-        <section className={styles.wrapper}>
+        <section>
           <form className={styles.section}>
             <input className={styles.input} placeholder="위치 :" value={keyword} onChange={onChangeKeyword} />
             <button className={styles.checkButton} onClick={onClickSearch}>
@@ -105,6 +105,7 @@ export default function Location() {
           </form>
         </section>
         <div id="map" className={styles.kakaoMap}></div>
+        <Footer />
       </article>
     </>
   );

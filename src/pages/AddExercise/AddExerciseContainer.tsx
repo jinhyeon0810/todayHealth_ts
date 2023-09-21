@@ -5,6 +5,7 @@ import { onUserStateChange } from "../../api/firebase";
 import AddExercisePresenter from "./AddExercisePresenter";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, changeUser, resetPickedDatas } from "../../utils/Store";
+import CannotAccess from "../../components/CannotAccess/CannotAccess";
 
 export default function AddExerciseContainer() {
   const types = ["전체", "상체", "하체"];
@@ -17,6 +18,7 @@ export default function AddExerciseContainer() {
   const pickedDatas = useSelector((state: RootState) => state.pickedDatas.pickedDatas);
   const dispatch = useDispatch();
 
+  const user = useSelector((state: RootState) => state.user);
   useEffect(() => {
     if (changeUser) {
       onUserStateChange((user: { uid: string }) => {
@@ -62,19 +64,25 @@ export default function AddExerciseContainer() {
   console.log(upperData);
   return (
     <>
-      <AddExercisePresenter
-        datas={typeData.data}
-        upperDatas={upperData}
-        lowerDatas={lowerData}
-        types={types}
-        handleGoback={handleGoback}
-        allDatas={allDatas}
-        importUpperDatas={importUpperDatas}
-        importLowerDatas={importLowerDatas}
-        handleType={handleType}
-        pickedDatas={pickedDatas}
-        handleRecordPage={handleRecordPage}
-      />
+      {user.uid ? (
+        <>
+          <AddExercisePresenter
+            datas={typeData.data}
+            upperDatas={upperData}
+            lowerDatas={lowerData}
+            types={types}
+            handleGoback={handleGoback}
+            allDatas={allDatas}
+            importUpperDatas={importUpperDatas}
+            importLowerDatas={importLowerDatas}
+            handleType={handleType}
+            pickedDatas={pickedDatas}
+            handleRecordPage={handleRecordPage}
+          />
+        </>
+      ) : (
+        <CannotAccess />
+      )}
     </>
   );
 }
