@@ -13,10 +13,12 @@ const textId = createSlice({
 
 const user = createSlice({
   name: "user",
-  initialState: { uid: null },
+  initialState: { uid: null, displayName: null, photoURL: null },
   reducers: {
     changeUser: (state, action) => {
-      state.uid = action.payload;
+      state.uid = action.payload.uid;
+      state.displayName = action.payload.displayName;
+      state.photoURL = action.payload.photoURL;
     },
   },
 });

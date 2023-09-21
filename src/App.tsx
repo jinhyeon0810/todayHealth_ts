@@ -9,10 +9,10 @@ import SharePage from "./pages/SharePage/SharePage";
 import Location from "./pages/Location/Location";
 import Board from "./pages/Board/Board";
 import BoardDetail from "./pages/BoardDetail/BoardDetail";
-import AddProfile from "./pages/Profile/AddProfile";
 import IdPwLogIn from "./pages/LoginPage/IdPwLogIn";
 import RecordContainer from "./pages/Record/RecordContainer";
 import AddExerciseContainer from "./pages/AddExercise/AddExerciseContainer";
+import SortContainer from "./pages/Sort/SortContainer";
 
 function App(): React.ReactElement {
   return (
@@ -25,12 +25,12 @@ function App(): React.ReactElement {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/record" element={<RecordContainer />} />
         <Route path="/addExercise" element={<AddExerciseContainer />} />
-        <Route path="/addProfile" element={<AddProfile />} />
         <Route path="/find" element={<FindPage />} />
         <Route path="/my" element={<MyPage />} />
         <Route path="/share" element={<SharePage />} />
         <Route path="/board" element={<Board />} />
         <Route path="/:id" element={<BoardDetail />} />
+        <Route path="/sort" element={<SortContainer />} />
       </Routes>
     </Router>
   );

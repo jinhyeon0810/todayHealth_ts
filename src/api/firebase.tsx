@@ -27,7 +27,13 @@ export async function login() {
 }
 
 export async function logout() {
-  return signOut(auth).then(() => null);
+  return signOut(auth)
+    .then(() => {
+      console.log("로그아웃 되었습니다");
+    })
+    .catch((error) => {
+      console.error("로그아웃 중 오류 발생했습니다", error);
+    });
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -46,6 +52,17 @@ export function imageUpload(file: File | null, v4: () => string, setImageList: R
   uploadBytes(storageRef, file).then((snapshot) =>
     getDownloadURL(snapshot.ref).then((url) => {
       setImageList(url);
+    })
+  );
+}
+
+export function profileImageUpload(file: File | null, v4: () => string, setPhoto: React.Dispatch<React.SetStateAction<string | undefined>>) {
+  if (file === null) return;
+  const storage = getStorage();
+  const storageRef = ref(storage, `profile/${file.name + v4()} `);
+  uploadBytes(storageRef, file).then((snapshot) =>
+    getDownloadURL(snapshot.ref).then((url) => {
+      setPhoto(url);
     })
   );
 }
