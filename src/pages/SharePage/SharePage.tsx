@@ -4,11 +4,12 @@ import styles from "./SharePage.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import TextCard from "../../components/TextCard/TextCard";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
-import db from "../../api/firebase";
+import db, { onUserStateChange } from "../../api/firebase";
 import ReactPaginate from "react-paginate";
-import { RootState } from "../../utils/Store";
-import { useSelector } from "react-redux";
+import { RootState, changeUser } from "../../utils/Store";
+import { useDispatch, useSelector } from "react-redux";
 import Footer from "../../components/Footer/Footer";
+import CannotAccess from "../../components/CannotAccess/CannotAccess";
 
 interface ProductProps {
   title: string;
@@ -18,17 +19,26 @@ interface ProductProps {
   url: string;
   creatorId: string;
 }
-
 export default function SharePage(): React.ReactElement {
   const user = useSelector((state: RootState) => state.user);
   const [products, setProducts] = useState<ProductProps[]>([]);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (changeUser) {
+      onUserStateChange((user: { uid: string; displayName: string; photoURL: string }) => {
+        dispatch(changeUser({ uid: user.uid, displayName: user.displayName, photoURL: user.photoURL }));
+      });
+    }
+  }, [changeUser]);
 
   const productsPerPage = 10;
   const [offset, setOffset] = useState(0);
   const endOffset = offset + productsPerPage;
   const currentProducts = products.slice(offset, endOffset);
   const pageCount = Math.ceil(products.length / productsPerPage);
+
   //페이지 클릭시 offset을 변경해주고, 그에따른 data를 불러옵니다.
   const handlePageClick = (e: { selected: number }) => {
     const newOffset = (e.selected * productsPerPage) % products.length;
@@ -73,52 +83,53 @@ export default function SharePage(): React.ReactElement {
     return product.title.toLocaleLowerCase().includes(search.toLocaleLowerCase());
   });
 
-  console.log(filterTitle);
+  console.log(products);
 
   console.log(search);
 
   return (
     <>
-      <article className={styles.sharePage}>
-        {/* <div className={styles.title}>전체게시물 📝</div>
+      {user.uid ? (
+        <article className={styles.sharePage}>
+          <section className={styles.cardStyle}>
+            {filterTitle.map((product) => {
+              return (
+                <Link
+                  to={{
+                    pathname: `/${product.id}`,
+                  }}
+                  key={product.id}
+                >
+                  <TextCard product={product} />
+                </Link>
+              );
+            })}
+          </section>
 
-        <SearchBar search={search} setSearch={setSearch} /> */}
-        <section className={styles.cardStyle}>
-          {filterTitle.map((product) => {
-            return (
-              <Link
-                to={{
-                  pathname: `/${product.id}`,
-                }}
-                key={product.id}
-              >
-                <TextCard product={product} />
-              </Link>
-            );
-          })}
-        </section>
+          <section className={styles.wrapper}>
+            <ReactPaginate
+              pageCount={pageCount}
+              pageRangeDisplayed={productsPerPage}
+              breakLabel={"..."}
+              previousLabel={"이전"}
+              nextLabel={"다음"}
+              onPageChange={handlePageClick}
+              containerClassName={styles.pagination}
+              activeClassName={styles.currentPage}
+              previousClassName={styles.previous}
+              nextClassName={styles.next}
+            />
+          </section>
 
-        <section className={styles.wrapper}>
-          <ReactPaginate
-            pageCount={pageCount}
-            pageRangeDisplayed={productsPerPage}
-            breakLabel={"..."}
-            previousLabel={"이전"}
-            nextLabel={"다음"}
-            onPageChange={handlePageClick}
-            containerClassName={styles.pagination}
-            activeClassName={styles.currentPage}
-            previousClassName={styles.previous}
-            nextClassName={styles.next}
-          />
-        </section>
+          <section className={styles.write} onClick={moveToBoard}>
+            <span style={{ fontSize: "20px", fontWeight: "bold" }}>게시글</span> 작성하러 가기~🐱‍🏍
+          </section>
 
-        <section className={styles.write} onClick={moveToBoard}>
-          <span style={{ fontSize: "20px", fontWeight: "bold" }}>게시글</span> 작성하러 가기~🐱‍🏍
-        </section>
-
-        <Footer />
-      </article>
+          <Footer />
+        </article>
+      ) : (
+        <CannotAccess />
+      )}
     </>
   );
 }

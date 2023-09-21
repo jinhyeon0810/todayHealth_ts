@@ -2,6 +2,7 @@
   background: #000000;
   background: -webkit-linear-gradient(to right, #434343, #000000);
   min-height: 100vh;
+  padding-bottom: 90px;
 }
 .layout {
   padding-top: 120px;
@@ -17,6 +18,7 @@
 }
 
 .dataContainer {
+  position: relative;
   margin: 0 auto;
   margin-bottom: 20px;
   background-color: rgb(84, 77, 77);
@@ -30,6 +32,7 @@
   gap: 20px;
   font-size: 20px;
   justify-content: center;
+  color: white;
 }
 
 .title {
@@ -55,6 +58,14 @@
   width: 100%;
 }
 
+.deleteContent {
+  position: absolute;
+  top: 1%;
+  font-size: 20px;
+  font-weight: bold;
+  right: 3%;
+  cursor: pointer;
+}
 .noDesc {
   display: flex;
   margin: 0 auto;
