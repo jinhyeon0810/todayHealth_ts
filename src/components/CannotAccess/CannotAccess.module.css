@@ -1,0 +1,15 @@
+.cannotAccess {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #000000;
+  background: -webkit-linear-gradient(to right, #434343, #000000);
+  color: white;
+  min-height: 100vh;
+  font-size: 40px;
+}
+.backToPage {
+  margin-top: 20px;
+  cursor: pointer;
+}
