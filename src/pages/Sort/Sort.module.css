@@ -1,0 +1,141 @@
+.wrapper {
+  padding-bottom: 90px;
+  background: #000000;
+  background: -webkit-linear-gradient(to right, #434343, #000000);
+  min-height: 100vh;
+  color: white;
+  overflow: hidden;
+}
+
+.header {
+  font-size: 40px;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.userProfile > div:first-of-type {
+  font-size: 35px;
+  font-weight: bold;
+  padding: 40px 20px 0 120px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
+.arrow,
+.content {
+  border: none;
+  background-color: black;
+  color: white;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 120px;
+}
+
+.arrow {
+  margin-right: 120px;
+  font-size: 40px;
+}
+
+.etc {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.etc > div:first-of-type {
+  font-size: 35px;
+  font-weight: bold;
+  padding: 40px 20px 0 120px;
+}
+
+.icons {
+  margin-top: 6px;
+  padding-right: 12px;
+}
+
+.modal {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  width: 500px;
+  border-radius: 10px 10px 10px 10px;
+  background-color: rgb(23, 22, 22);
+}
+
+.modal > div:first-of-type {
+  display: flex;
+  height: 120px;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+}
+
+.modalButtons {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  height: 70px;
+}
+
+.okModal {
+  padding: 10px 0;
+  flex: 1;
+  border-radius: 0 0 0 10px;
+  font-size: 25px;
+  cursor: pointer;
+  background-color: rgb(23, 22, 22);
+  color: red;
+  border: none;
+  border-top: 1px solid rgb(188, 188, 188);
+  border-right: 1px solid rgb(188, 188, 188);
+}
+
+.cancelModal {
+  flex: 0.5;
+  border-radius: 0 0 10px 0;
+  font-size: 25px;
+  background-color: rgb(23, 22, 22);
+  cursor: pointer;
+  color: rgb(114, 114, 114);
+  border: none;
+  border-top: 1px solid rgb(188, 188, 188);
+}
+
+.inputStyle {
+  width: 100%;
+  padding: 15px 20px;
+  background-color: #171616;
+  border: none;
+  color: white;
+  font-size: 20px;
+}
+
+.onLoading {
+  background-color: black;
+  color: white;
+  width: 100vw;
+  height: 100vh;
+}
