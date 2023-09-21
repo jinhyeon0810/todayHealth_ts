@@ -13,6 +13,7 @@ export default function Footer(): React.ReactElement {
   function pathName(locate: string) {
     return location.pathname.includes(locate);
   }
+
   const handleSharePage = () => {
     navigate("/share");
   };
@@ -24,6 +25,9 @@ export default function Footer(): React.ReactElement {
     navigate("/main");
   };
 
+  const handleSortPage = () => {
+    navigate("/sort");
+  };
   return (
     <>
       <div className={styles.footerContainer}>
@@ -39,8 +43,8 @@ export default function Footer(): React.ReactElement {
           <BiSearchAlt2 className={styles.searchIcon} style={{ color: pathName("/share") ? "51c457" : "" }} />
           <p>피드</p>
         </div>
-        <div className={styles.footerFuncs}>
-          <AiFillSetting className={styles.setIcon} />
+        <div className={styles.footerFuncs} onClick={handleSortPage}>
+          <AiFillSetting className={styles.setIcon} style={{ color: pathName("/sort") ? "51c457" : "" }} />
           <p>설정</p>
         </div>
       </div>

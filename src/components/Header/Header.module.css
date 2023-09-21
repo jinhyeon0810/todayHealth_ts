@@ -28,3 +28,24 @@
   color: #858484;
   padding-right: 40px;
 }
+
+.modal {
+  position: fixed;
+  transition: top 0.5s ease-in-out;
+  transform: translateY(50%);
+  right: 0;
+  background-color: rgba(67, 65, 65, 0.3);
+  border-radius: 0 0 0 20px;
+}
+
+.modalLists {
+  padding: 0;
+  list-style: none;
+  font-size: 20px;
+  color: #d0cccc;
+  cursor: pointer;
+}
+
+.modalLists > li {
+  padding: 50px 30px;
+}
