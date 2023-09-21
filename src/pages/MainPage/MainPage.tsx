@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { collection, deleteDoc, doc, onSnapshot, orderBy, query } from "firebase/firestore";
 import Timer from "../../components/Timer/Timer";
 import { pickedDataProps } from "../../utils/type";
+import CannotAccess from "../../components/CannotAccess/CannotAccess";
 
 // interface TextArrProps {
 //   id: string;
@@ -38,15 +39,14 @@ export default function MainPage(): React.ReactElement {
   // const [oldRecord, setOldRecord] = useState<TextArrProps[]>([]);
   // const textId = useSelector((state: RootState) => state.textId.textId);
   // const [addModal, setAddModal] = useState(false);
-
   useEffect(() => {
     if (changeUser) {
-      onUserStateChange((user: { uid: string }) => {
-        dispatch(changeUser(user?.uid));
+      onUserStateChange((user: { uid: string; displayName: string; photoURL: string }) => {
+        dispatch(changeUser({ uid: user.uid, displayName: user.displayName, photoURL: user.photoURL }));
       });
     }
   }, [changeUser]);
-
+  console.log(user);
   const handleStopWatch = () => {
     setUseStopWatch((prev) => !prev);
   };
@@ -102,7 +102,7 @@ export default function MainPage(): React.ReactElement {
       })) as pickedDataProps[];
       setPickedDatas(pickedArr.filter((picked) => picked.creatorId === user?.uid && picked.createdAt === dateString));
     });
-  }, []);
+  }, [user]);
 
   const handleDeleteData = (data: pickedDataProps) => {
     const ok = window.confirm("정말 삭제하실꺼죠?");
@@ -115,46 +115,44 @@ export default function MainPage(): React.ReactElement {
   };
   return (
     <>
-      <div className={styles.wrapper}>
-        <Header />
-        <article className={styles.mainContainer}>
-          <div className={styles.mainBody}>
-            <section className={styles.userImgAndId}>
-              <div className={styles.userImg}>
-                <FaUserCircle />
-              </div>
-              <div>
-                <h3 className={styles.userId}>{user.uid}님</h3>
-                <span className={styles.setExercise}>운동을 설정해주세요</span>
-              </div>
-            </section>
+      {user.uid ? (
+        <div className={styles.wrapper}>
+          <Header />
+          <article className={styles.mainContainer}>
+            <div className={styles.mainBody}>
+              <section className={styles.userImgAndId}>
+                <div className={styles.userImg}>{user.photoURL ? <img src={user.photoURL} className={styles.userPhotoImg} /> : <FaUserCircle />}</div>
+                <div>
+                  <h3 className={styles.userId}>{user.displayName} 님</h3>
+                  <span className={styles.setExercise}>운동을 설정해주세요</span>
+                </div>
+              </section>
 
-            <section className={styles.mainFunctions}>
-              <div className={styles.recordFunc} onClick={handleRecord}>
-                <CgGym className={styles.gymImg} />
-                <p>운동기록</p>
-              </div>
-              <div className={styles.chatFunc}>
-                <BsFillChatDotsFill className={styles.chatImg} />
-                <p>채팅하기</p>
-              </div>
-              <div className={styles.popularFunc} onClick={handleStopWatch}>
-                <BsStarFill className={styles.popImg} />
-                <p>스톱워치</p>
-              </div>
-            </section>
-          </div>
-          {useStopWatch && (
-            <div className={styles.timer}>
-              <Timer />
+              <section className={styles.mainFunctions}>
+                <div className={styles.recordFunc} onClick={handleRecord}>
+                  <CgGym className={styles.gymImg} />
+                  <p>운동기록</p>
+                </div>
+                <div className={styles.chatFunc}>
+                  <BsFillChatDotsFill className={styles.chatImg} />
+                  <p>채팅하기</p>
+                </div>
+                <div className={styles.popularFunc} onClick={handleStopWatch}>
+                  <BsStarFill className={styles.popImg} />
+                  <p>스톱워치</p>
+                </div>
+              </section>
             </div>
-          )}
-          <section className={styles.mainContent}>
-            <p className={styles.contentTitle}>오늘의 운동기록</p>
-            <section className={styles.dataWrapper}>
-              {pickedDatas.map((data, i) => {
-                return (
-                  <>
+            {useStopWatch && (
+              <div className={styles.timer}>
+                <Timer />
+              </div>
+            )}
+            <section className={styles.mainContent}>
+              <p className={styles.contentTitle}>오늘의 운동기록</p>
+              <section className={styles.dataWrapper}>
+                {pickedDatas.map((data, i) => {
+                  return (
                     <section className={styles.dataContainer} key={i}>
                       <div>
                         {i + 1}. {data.name}
@@ -162,13 +160,13 @@ export default function MainPage(): React.ReactElement {
                       <section className={styles.dataContent}>
                         <div>총 {data.kg.length}세트</div>
                         <div style={{ display: "flex", flexDirection: "column" }}>
-                          {data.kg.map((d) => (
-                            <div> {d + "kg"} </div>
+                          {data.kg.map((d, i) => (
+                            <div key={i}> {d + "kg"} </div>
                           ))}
                         </div>
                         <div style={{ display: "flex", flexDirection: "column" }}>
-                          {data.reps.map((d) => (
-                            <div> {d + "회"} </div>
+                          {data.reps.map((d, i) => (
+                            <div key={i}> {d + "회"} </div>
                           ))}
                         </div>
                         <div className={styles.deleteContent} onClick={() => handleDeleteData(data)}>
@@ -176,17 +174,21 @@ export default function MainPage(): React.ReactElement {
                         </div>
                       </section>
                     </section>
-                  </>
-                );
-              })}
+                  );
+                })}
+              </section>
             </section>
-          </section>
 
-          <section className={styles.mainFootArea}>
-            <Footer />
-          </section>
-        </article>
-      </div>
+            <section className={styles.mainFootArea}>
+              <Footer />
+            </section>
+          </article>
+        </div>
+      ) : (
+        <>
+          <CannotAccess />
+        </>
+      )}
     </>
   );
 }
