@@ -58,7 +58,7 @@ export default function Comment({ textObj }: CommentProps): React.ReactElement {
             <span>{textObj.creatorId.substr(0, 4)}</span>
             {editNumber > 0 ? textObj.text + "(수정됨)" : textObj.text}
             <div className={styles.buttonList}>
-              {textObj.creatorId == user?.uid && (
+              {textObj.creatorId == user?.displayName && (
                 <>
                   <button className={styles.button} onClick={onClickEdit}>
                     수정
@@ -76,7 +76,7 @@ export default function Comment({ textObj }: CommentProps): React.ReactElement {
             <input value={commentText} onChange={onChangeComment} className={styles.editValue} />
 
             <div className={styles.buttonList}>
-              {textObj.creatorId == user?.uid && (
+              {textObj.creatorId == user?.displayName && (
                 <>
                   <button className={styles.button} onClick={onClickEdited}>
                     확인

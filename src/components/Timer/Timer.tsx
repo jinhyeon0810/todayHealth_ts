@@ -32,7 +32,7 @@ export default function Timer(): React.ReactElement {
     setMinutes(0);
     setHours(0);
     setSeconds(0);
-    setStop(true);
+    setStop(false);
   };
 
   const onClickStop = () => {
@@ -57,7 +57,6 @@ export default function Timer(): React.ReactElement {
         </button>
       )}
       <div className={styles.seconds}>
-        {" "}
         {hours < 10 ? `0${hours}` : hours} : {minutes < 10 ? `0${minutes}` : minutes} : {seconds < 10 ? `0${seconds}` : seconds}
       </div>
       <button className={styles.buttons} onClick={onClickReset}>

@@ -16,3 +16,9 @@
   margin: 0 15px;
   color: white;
 }
+
+@media (max-width: 600px) {
+  .seconds {
+    font-size: 15px;
+  }
+}
