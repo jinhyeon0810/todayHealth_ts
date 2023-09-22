@@ -58,11 +58,10 @@
   text-align: center;
 }
 .imgIcon {
-  cursor: pointer;
   font-size: 100px;
 }
+
 .file {
-  cursor: pointer;
   width: 70px;
 }
 
