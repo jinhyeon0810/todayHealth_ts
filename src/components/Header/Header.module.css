@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: flex-end;
   gap: 600px;
-  width: 100vw;
+  width: 100%;
   padding: 30px 0;
   background: #000000;
   background: -webkit-linear-gradient(to right, #434343, #000000);
@@ -48,4 +48,36 @@
 
 .modalLists > li {
   padding: 50px 30px;
+}
+
+@media (max-width: 600px) {
+  .nav {
+    justify-content: space-between;
+    gap: 0;
+  }
+  .navTopic,
+  .navList {
+    font-size: 20px;
+    padding-left: 20px;
+  }
+  .modalLists > li {
+    padding: 15px 10px;
+    font-size: 10px;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 1000px) {
+  .nav {
+    justify-content: space-between;
+    gap: 0;
+  }
+  .navTopic,
+  .navList {
+    font-size: 30px;
+    padding-left: 30px;
+  }
+  .modalLists > li {
+    font-size: 15px;
+    padding: 30px 20px;
+  }
 }

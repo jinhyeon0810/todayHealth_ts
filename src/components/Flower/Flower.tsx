@@ -33,7 +33,7 @@ function Flower() {
             src={IMG_SRC}
             style={{
               marginLeft: Math.random() * browserSize.width * 0.9,
-              top: Math.random() * browserSize.height,
+              top: Math.random() * browserSize.height * 0.5,
             }}
           ></img>
         );

@@ -3,7 +3,7 @@
   width: 20px;
   height: 20px;
   background: none;
-  animation: flower 10s linear infinite;
+  animation: flower 7s linear infinite;
   opacity: 0;
   overflow: hidden;
   z-index: 1;
