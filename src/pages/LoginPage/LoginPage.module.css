@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   background: #000000;
   background: -webkit-linear-gradient(to right, #434343, #000000);
@@ -20,6 +20,33 @@
   z-index: 10;
 }
 
+.loginMethod {
+  margin-bottom: 150px;
+  font-size: 30px;
+}
+
+.googleLoginButton {
+  padding: 25px 0px;
+  margin-bottom: 10px;
+  border-radius: 30px;
+  border: none;
+  background-color: #aaa9a9cd;
+  cursor: pointer;
+  width: 50%;
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+  font-size: 18px;
+  background-color: rgb(51, 51, 235);
+  transition: transform 0.3s ease-in-out;
+}
+
+.googleLoginBtnText {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
 .login {
   width: 100%;
   text-align: center;
@@ -28,10 +55,6 @@
   color: white;
 }
 
-.loginMethod {
-  margin-bottom: 150px;
-  font-size: 30px;
-}
 .goBack {
   margin-top: 10px;
   color: white;
@@ -99,27 +122,6 @@
   color: rgb(255, 255, 255);
 }
 
-.googleLoginBtnText {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
-}
-
-.googleLoginButton {
-  padding: 25px 0px;
-  margin-bottom: 10px;
-  border-radius: 30px;
-  border: none;
-  background-color: #aaa9a9cd;
-  cursor: pointer;
-  width: 50%;
-  color: rgb(255, 255, 255);
-  font-weight: bold;
-  font-size: 18px;
-  background-color: rgb(51, 51, 235);
-  transition: transform 0.3s ease-in-out;
-}
 .googleLoginButton:hover,
 .idPwLoginBtn:hover,
 .signUp:hover,
@@ -149,58 +151,60 @@
   justify-content: flex-end;
 }
 
-@media (max-width: 570px) {
-  .login {
-    font-size: 60px;
+@media (max-width: 600px) {
+  .loginMethod {
+    font-size: 20px;
+    margin-bottom: 50px;
   }
-  .signUp {
-    padding: 15px 25px;
-    font-size: 12px;
-  }
+  .googleLoginBtnText,
+  .idPwLoginBtn,
+  .signUp,
   .findInfo {
-    padding: 15px 25px;
     font-size: 12px;
   }
-}
-@media (max-width: 406px) {
-  .login {
-    font-size: 45px;
-  }
-  .loginPage {
-    padding: 15px;
-    margin-bottom: 20px;
-  }
-  .signUp {
-    padding: 10px 20px;
+
+  .login,
+  .goBack {
     font-size: 12px;
   }
-  .findInfo {
-    padding: 10px 20px;
-    font-size: 12px;
-  }
-}
-@media (max-width: 367px) {
-  .login {
-    font-size: 30px;
-  }
-  .signUp {
-    padding: 10px 10px;
-    font-size: 8px;
-  }
-  .findInfo {
-    padding: 10px 10px;
-    font-size: 8px;
-  }
-  .loginMain {
+  .loginMainHeader {
     margin-bottom: 10px;
   }
-  .loginButton {
-    margin-top: 5px;
-    padding: 8px 15px;
-    font-size: 9px;
+
+  .loginMain {
+    width: 100%;
   }
-  .googleLoginButton {
-    padding: 8px 15px;
-    font-size: 9px;
+  .input {
+    padding: 10px 5px;
+    font-size: 10px;
+    width: 100%;
+  }
+
+  .loginButton {
+    padding: 10px 5px;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 800px) {
+  .loginMethod {
+    font-size: 30px;
+    margin-bottom: 150px;
+  }
+  .googleLoginBtnText,
+  .idPwLoginBtn,
+  .signUp,
+  .findInfo {
+    font-size: 18px;
+  }
+
+  .login,
+  .goBack {
+    font-size: 25px;
+  }
+
+  .loginMain {
+    width: 100%;
   }
 }
