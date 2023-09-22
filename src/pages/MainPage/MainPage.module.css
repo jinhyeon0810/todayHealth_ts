@@ -12,7 +12,7 @@
   background: #000000;
   background: -webkit-linear-gradient(to right, #434343, #000000);
   min-height: 100vh;
-  flex: 1;
+  min-width: 100%;
 }
 
 .userImgAndId {
@@ -144,7 +144,7 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
-  width: 70%;
+  width: 100%;
 }
 .mainBody h1 {
   font-size: 40px;
@@ -153,6 +153,7 @@
 .mainContent {
   background: #000000;
   background: -webkit-linear-gradient(to right, #434343, #000000);
+  width: 100%;
 }
 
 .dataContent {
@@ -168,9 +169,6 @@
   margin-bottom: 20px;
 }
 
-.dataWrapper {
-  border: 1px solid black;
-}
 .dataContainer {
   position: relative;
   margin: 0 auto;
@@ -201,17 +199,6 @@
   flex-direction: column;
 
   margin-bottom: 20px;
-}
-
-.timerButton {
-  width: 100%;
-  cursor: pointer;
-}
-
-.timerButton:disabled {
-  cursor: text;
-  color: black;
-  background-color: #f0f0f0;
 }
 
 .textTitle {
@@ -260,31 +247,71 @@
   padding: 40px 60px;
 }
 
-@media (max-width: 660px) {
-  .textArticle {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+@media (max-width: 600px) {
+  .mainFunctions {
+    gap: 15px;
+  }
+  .chatFunc,
+  .recordFunc,
+  .popularFunc {
+    padding: 10px 5px;
   }
 
-  .width {
-    width: 70%;
-    height: 50px;
+  .chatFunc > p,
+  .recordFunc > p,
+  .popularFunc > p {
+    font-size: 15px;
   }
 
-  .backgroundImage {
-    height: 350px;
-    font-size: 25px;
+  .contentTitle {
+    font-size: 30px;
+  }
+
+  .dataContainer {
+    padding: 10px 5px;
+    width: 80%;
+  }
+
+  .dataContainer > div:first-of-type {
+    font-size: 15px;
+  }
+  .dataContent {
+    font-size: 12px;
+  }
+  .timer {
+    padding: 10px 15px;
   }
 }
 
-@media (max-width: 1300px) {
-  .mainImage_one,
-  .mainImage_two {
-    display: none;
+@media (min-width: 600px) and (max-width: 1000px) {
+  .mainFunctions {
+    gap: 50px;
   }
-  .backgroundImage {
-    height: 400px;
+  .chatFunc,
+  .recordFunc,
+  .popularFunc {
+    padding: 30px 20px;
+  }
+
+  .chatFunc > p,
+  .recordFunc > p,
+  .popularFunc > p {
+    font-size: 20px;
+  }
+
+  .contentTitle {
+    font-size: 40px;
+  }
+
+  .dataContainer {
+    padding: 10px 5px;
+    width: 80%;
+  }
+
+  .dataContainer > div:first-of-type {
+    font-size: 25px;
+  }
+  .dataContent {
+    font-size: 18px;
   }
 }

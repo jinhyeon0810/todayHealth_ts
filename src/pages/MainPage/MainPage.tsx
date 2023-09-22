@@ -17,32 +17,21 @@ import Timer from "../../components/Timer/Timer";
 import { pickedDataProps } from "../../utils/type";
 import CannotAccess from "../../components/CannotAccess/CannotAccess";
 
-// interface TextArrProps {
-//   id: string;
-//   text: string;
-//   createdAt: string;
-//   creatorId: string;
-//   postId: string;
-//   timeStamp: string;
-// }
-// [];
-
 export default function MainPage(): React.ReactElement {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user);
   const [pickedDatas, setPickedDatas] = useState<pickedDataProps[]>([]);
   const navigate = useNavigate();
   const [useStopWatch, setUseStopWatch] = useState(false);
-  // const [text, setText] = useState("");
-  // const [texts, setTexts] = useState<TextArrProps[]>([]);
-  // const textarea = useRef<HTMLTextAreaElement>(null);
-  // const [oldRecord, setOldRecord] = useState<TextArrProps[]>([]);
-  // const textId = useSelector((state: RootState) => state.textId.textId);
-  // const [addModal, setAddModal] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
+    setLoading(true);
+
     if (changeUser) {
       onUserStateChange((user: { uid: string; displayName: string; photoURL: string }) => {
         dispatch(changeUser({ uid: user.uid, displayName: user.displayName, photoURL: user.photoURL }));
+        setLoading(false);
       });
     }
   }, [changeUser]);
@@ -50,40 +39,6 @@ export default function MainPage(): React.ReactElement {
   const handleStopWatch = () => {
     setUseStopWatch((prev) => !prev);
   };
-  // //서버에서 데이터 받아와서 texts 에 배열로 저장
-  // useEffect(() => {
-  //   window.scrollTo({
-  //     top: 0,
-  //     behavior: "smooth",
-  //   });
-  //   const q = query(collection(db, "details"), orderBy("timeStamp", "desc"));
-  //   onSnapshot(q, (snapshot) => {
-  //     const textArr = snapshot.docs.map((doc) => ({
-  //       id: doc.id,
-  //       ...doc.data(),
-  //     })) as TextArrProps[];
-  //     setTexts(textArr.filter((t: TextArrProps) => t.creatorId === user?.uid && t.createdAt === dateString));
-  //     setOldRecord(
-  //       textArr.filter((t: TextArrProps) => {
-  //         return t.creatorId === user?.uid && t.createdAt === pickerDate;
-  //       })
-  //     );
-  //   });
-  // }, [setTexts, user?.uid, setOldRecord, pickerDate]);
-
-  // // 메인페이지 기록 버튼 (서버에 데이터 저장)
-  // const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  //   if (text.length > 0) {
-  //     await addDoc(collection(db, "details"), {
-  //       text,
-  //       createdAt: dateString,
-  //       creatorId: user?.uid,
-  //       timeStamp,
-  //     });
-  //   }
-  //   setText("");
-  // };
 
   const handleRecord = () => {
     navigate("/record");
@@ -115,7 +70,7 @@ export default function MainPage(): React.ReactElement {
   };
   return (
     <>
-      {user.uid ? (
+      {user.uid && !loading && (
         <div className={styles.wrapper}>
           <Header />
           <article className={styles.mainContainer}>
@@ -184,7 +139,8 @@ export default function MainPage(): React.ReactElement {
             </section>
           </article>
         </div>
-      ) : (
+      )}
+      {!user.uid && loading && (
         <>
           <CannotAccess />
         </>
