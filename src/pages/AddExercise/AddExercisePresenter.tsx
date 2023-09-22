@@ -1,4 +1,4 @@
-import styles from "./addExercise.module.css";
+import styles from "./AddExercise.module.css";
 import { IoChevronBackSharp } from "react-icons/io5";
 import ExerciseType from "../../components/ExerciseType/ExerciseType";
 import { RecordingProps, TypeDatas } from "../../utils/type";
