@@ -139,3 +139,59 @@
   width: 100vw;
   height: 100vh;
 }
+
+@media (max-width: 600px) {
+  .header {
+    font-size: 30px;
+  }
+  .userProfile > div:first-of-type,
+  .etc > div:first-of-type {
+    font-size: 20px;
+    padding: 20px 50px;
+  }
+
+  .content {
+    font-size: 15px;
+    padding: 0 50px;
+    width: 100%;
+    padding: 0;
+    padding-left: 20px;
+  }
+
+  .arrow {
+    font-size: 15px;
+    margin-right: 50px;
+  }
+  .modal {
+    width: 200px;
+  }
+  .modal > div:first-of-type,
+  .okModal,
+  .cancelModal {
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 800px) {
+  .header {
+    font-size: 40px;
+  }
+  .userProfile > div:first-of-type,
+  .etc > div:first-of-type {
+    font-size: 30px;
+    padding: 30px 50px;
+  }
+
+  .content {
+    font-size: 20px;
+    padding: 0 50px;
+    width: 100%;
+    padding: 0;
+    padding-left: 50px;
+  }
+
+  .arrow {
+    font-size: 20px;
+    margin-right: 100px;
+  }
+}

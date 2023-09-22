@@ -9,8 +9,6 @@ import CannotAccess from "../../components/CannotAccess/CannotAccess";
 import { getAuth, onAuthStateChanged, updateProfile } from "firebase/auth";
 
 export default function SortContainer(): React.ReactElement {
-  const user = useSelector((state: RootState) => state);
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
@@ -19,12 +17,7 @@ export default function SortContainer(): React.ReactElement {
   const [nickNameModalOpen, setNickNameModalOpen] = useState(false);
   const [newNick, setNewNick] = useState("");
 
-  const handleLogOut = () => {
-    setLogoutModalOpen(true);
-  };
-
-  console.log(user);
-
+  const user = useSelector((state: RootState) => state);
   useEffect(() => {
     if (changeUser) {
       onUserStateChange((user: { uid: string; displayName: string; photoURL: string }) => {
@@ -33,33 +26,27 @@ export default function SortContainer(): React.ReactElement {
     }
   }, [changeUser]);
 
-  console.log(loading);
   const handleModal = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (!user) return;
     else if ((e.target as HTMLElement).innerText === "취소") {
       setLogoutModalOpen(false);
       setNickNameModalOpen(false);
-    } else if ((e.target as HTMLElement).innerText === "로그아웃") {
+    } //
+    else if ((e.target as HTMLElement).innerText === "로그아웃") {
+      const userData = { uid: null, displayName: null, photoURL: null };
       logout().then(() => {
         onUserStateChange(() => {
-          dispatch(
-            changeUser({
-              uid: null,
-              displayName: null,
-              photoURL: null,
-            })
-          );
+          dispatch(changeUser(userData));
           navigate("/");
         });
       });
-    } else if ((e.target as HTMLElement).innerText === "확인") {
+    } //
+    else if ((e.target as HTMLElement).innerText === "확인") {
       if (newNick.trim().length === 0) return;
       const auth = getAuth();
       onAuthStateChanged(auth, (user) => {
         if (user !== null) {
-          updateProfile(user, {
-            displayName: newNick,
-          })
+          updateProfile(user, { displayName: newNick })
             .then(() => {
               setLoading(true);
               window.location.reload();
@@ -72,12 +59,16 @@ export default function SortContainer(): React.ReactElement {
     setLoading(false);
   };
 
-  const handleNickName = () => {
-    setNickNameModalOpen(true);
-  };
-
   const onChangeNickName = (e: { target: { value: React.SetStateAction<string> } }) => {
     setNewNick(e.target.value);
+  };
+
+  const handleLogOut = () => {
+    setLogoutModalOpen(true);
+  };
+
+  const handleNickName = () => {
+    setNickNameModalOpen(true);
   };
 
   return (
