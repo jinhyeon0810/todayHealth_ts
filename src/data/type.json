@@ -4,70 +4,70 @@
       "type" : "상체",
       "sub" : "가슴",
       "name": "벤치프레스",
-      "url" : "../../public/exerciseTypes/벤치프레스.jpeg"
+      "url" : "/exerciseTypes/벤치프레스.jpeg"
     },
     {  "type" : "상체",
       "sub" : "가슴",
       "name": "인클라인 벤치프레스" ,
-      "url" : "../../public/exerciseTypes/인클라인벤치프레스.jpeg"
+      "url" : "/exerciseTypes/인클라인벤치프레스.jpeg"
     },
    
     { 
       "type" : "상체",
       "sub" : "가슴",
       "name": "머신 체스트 플라이",
-      "url" : "../../public/exerciseTypes/체스트플라잉.jpeg"          
+      "url" : "/exerciseTypes/체스트플라잉.jpeg"          
     },
     {  "type" : "상체",
       "sub" : "등",
       "name": "랫 풀 다운",
-      "url" : "../../public/exerciseTypes/렛풀다운.jpeg"
+      "url" : "/exerciseTypes/렛풀다운.jpeg"
     },  
     {  "type" : "상체",
       "sub" : "등",
       "name": "풀업",
-      "url" : "../../public/exerciseTypes/풀업.jpeg"
+      "url" : "/exerciseTypes/풀업.jpeg"
     },
       {  "type" : "상체",
       "sub" : "등",
       "name": "티바로우",
-      "url" : "../../public/exerciseTypes/티바로우.jpeg"
+      "url" : "/exerciseTypes/티바로우.jpeg"
     },
       {  
       "type" : "상체",
       "sub" : "등",
       "name": "시티드 로우",
-      "url" : "../../public/exerciseTypes/시티드로우.jpeg"
+      "url" : "/exerciseTypes/시티드로우.jpeg"
     },
       {
       "type" : "상체",
       "sub" : "어깨",
       "name": "오버헤드 프레스",
-      "url" : "../../public/exerciseTypes/오버헤드프레스.jpeg"
+      "url" : "/exerciseTypes/오버헤드프레스.jpeg"
     },
       {  
      "type" : "상체",
       "sub" : "이두",
       "name": "이두 덤벨컬",
-      "url" : "../../public/exerciseTypes/이두덤벨컬.jpeg"
+      "url" : "/exerciseTypes/이두덤벨컬.jpeg"
     },
       {  
       "type" : "상체",
       "sub" : "삼두",
       "name": "라잉 익스텐션",
-      "url" : "../../public/exerciseTypes/라잉익스텐션.jpeg"
+      "url" : "/exerciseTypes/라잉익스텐션.jpeg"
     },
      {  
       "type" : "상체",
       "sub" : "복근",
       "name": "싯 업",
-      "url" : "../../public/exerciseTypes/싯업.jpeg"
+      "url" : "/exerciseTypes/싯업.jpeg"
     },
     { 
     "type" : "하체",
     "sub" : "대퇴이두",
     "name": "데드리프트",
-    "url" : "../../public/exerciseTypes/데드리프트.jpeg"
+    "url" : "/exerciseTypes/데드리프트.jpeg"
   }
   ]
 }

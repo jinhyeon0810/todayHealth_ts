@@ -33,7 +33,7 @@ export default function SharePage(): React.ReactElement {
     }
   }, [changeUser]);
 
-  const productsPerPage = 9;
+  const productsPerPage = 10;
   const [offset, setOffset] = useState(0);
   const endOffset = offset + productsPerPage;
   const currentProducts = products.slice(offset, endOffset);
