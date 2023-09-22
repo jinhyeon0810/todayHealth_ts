@@ -11,8 +11,8 @@ export default function ExerciseType({ data }: { data: TypeDatas }): React.React
   const dispatch = useDispatch();
   useEffect(() => {
     if (changeUser) {
-      onUserStateChange((user: { uid: string }) => {
-        dispatch(changeUser(user?.uid));
+      onUserStateChange((user: { uid: string; displayName: string; photoURL: string }) => {
+        dispatch(changeUser({ uid: user.uid, displayName: user.displayName, photoURL: user.photoURL }));
       });
     }
   }, [changeUser]);
