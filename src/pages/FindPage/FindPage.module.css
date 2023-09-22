@@ -89,3 +89,39 @@
   display: flex;
   justify-content: flex-end;
 }
+
+@media (max-width: 600px) {
+  .goBack,
+  .login {
+    font-size: 20px;
+  }
+
+  .loginPage {
+    width: 100%;
+    padding: 0;
+  }
+
+  .input,
+  .loginButton {
+    padding: 10px 5px;
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 800px) {
+  .goBack,
+  .login {
+    font-size: 40px;
+  }
+
+  .loginPage {
+    width: 100%;
+    padding: 0;
+  }
+
+  .input,
+  .loginButton {
+    padding: 20px 10px;
+    font-size: 20px;
+  }
+}
