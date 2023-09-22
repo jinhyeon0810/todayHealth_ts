@@ -21,8 +21,8 @@ export default function AddExerciseContainer() {
   const user = useSelector((state: RootState) => state.user);
   useEffect(() => {
     if (changeUser) {
-      onUserStateChange((user: { uid: string }) => {
-        dispatch(changeUser(user?.uid));
+      onUserStateChange((user: { uid: string; displayName: string; photoURL: string }) => {
+        dispatch(changeUser({ uid: user.uid, displayName: user.displayName, photoURL: user.photoURL }));
       });
     }
   }, [changeUser]);
@@ -61,7 +61,7 @@ export default function AddExerciseContainer() {
   const handleRecordPage = () => {
     navigate("/record");
   };
-  console.log(upperData);
+  console.log(user);
   return (
     <>
       {user.uid ? (

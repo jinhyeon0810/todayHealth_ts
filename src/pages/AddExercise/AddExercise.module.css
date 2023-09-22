@@ -71,3 +71,18 @@
   font-size: 30px;
   cursor: pointer;
 }
+
+@media (max-width: 500px) {
+  .navFixed {
+    height: 150px;
+  }
+  .exerciseType {
+    font-size: 15px;
+  }
+  .exerciseType > div {
+    padding: 10px 5px;
+  }
+  .header {
+    gap: 20px;
+  }
+}
