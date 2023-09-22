@@ -1,5 +1,5 @@
 .container {
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
   background: #000000;
   background: -webkit-linear-gradient(to right, #434343, #000000);
@@ -133,4 +133,88 @@
 
 .completeSets {
   color: green;
+}
+
+@media (max-width: 600px) {
+  .header > h1 {
+    font-size: 20px;
+  }
+  .gridContainer {
+    width: 200px;
+  }
+  .recordContent {
+    padding: 15px 0;
+  }
+  .recordContent > h3 {
+    font-size: 20px;
+    padding-bottom: 15px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 25px 50px 50px 50px;
+    text-align: center;
+    grid-gap: 5px;
+  }
+
+  .grid > p {
+    font-size: 12px;
+  }
+  .grid > input {
+    padding: 5px 5px;
+  }
+
+  .setsContainer {
+    gap: 0;
+    margin-left: 0;
+  }
+
+  .addSets,
+  .deleteSets,
+  .completeSets {
+    padding: 10px 5px;
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 800px) {
+  .header > h1 {
+    font-size: 30px;
+  }
+  .gridContainer {
+    width: 500px;
+  }
+  .recordContent {
+    padding: 15px 0;
+  }
+  .recordContent > h3 {
+    font-size: 20px;
+    padding-bottom: 15px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 100px 100px 100px 100px;
+    text-align: center;
+    grid-gap: 10px;
+  }
+
+  .grid > p {
+    font-size: 20px;
+  }
+  .grid > input {
+    padding: 10px 5px;
+  }
+
+  .setsContainer {
+    gap: 15px;
+    margin-left: 0;
+  }
+
+  .addSets,
+  .deleteSets,
+  .completeSets {
+    padding: 25px 10px;
+    font-size: 25px;
+  }
 }

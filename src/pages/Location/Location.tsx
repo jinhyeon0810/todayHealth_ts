@@ -88,6 +88,7 @@ export default function Location() {
 
   return (
     <>
+      <Flower />
       <article className={styles.article}>
         <h1 className={styles.main} onClick={moveToHome}>
           홈으로 가기

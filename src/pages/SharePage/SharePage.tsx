@@ -33,7 +33,7 @@ export default function SharePage(): React.ReactElement {
     }
   }, [changeUser]);
 
-  const productsPerPage = 10;
+  const productsPerPage = 9;
   const [offset, setOffset] = useState(0);
   const endOffset = offset + productsPerPage;
   const currentProducts = products.slice(offset, endOffset);
@@ -77,22 +77,18 @@ export default function SharePage(): React.ReactElement {
   }, [getData]);
 
   // 검색창 만들기
-  const [search, setSearch] = useState<string>("");
+  // const [search, setSearch] = useState<string>("");
 
-  const filterTitle = currentProducts.filter((product) => {
-    return product.title.toLocaleLowerCase().includes(search.toLocaleLowerCase());
-  });
-
-  console.log(products);
-
-  console.log(search);
+  // const filterTitle = currentProducts.filter((product) => {
+  //   return product.title.toLocaleLowerCase().includes(search.toLocaleLowerCase());
+  // });
 
   return (
     <>
       {user.uid ? (
         <article className={styles.sharePage}>
           <section className={styles.cardStyle}>
-            {filterTitle.map((product) => {
+            {currentProducts.map((product) => {
               return (
                 <Link
                   to={{

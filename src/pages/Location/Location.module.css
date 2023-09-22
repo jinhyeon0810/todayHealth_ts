@@ -10,6 +10,7 @@
   background: -webkit-linear-gradient(to right, #434343, #000000);
   color: #676666;
   font-weight: bold;
+  padding-bottom: 150px;
 }
 
 .section {
@@ -34,6 +35,7 @@
 .kakaoMap {
   width: 500px;
   height: 400px;
+  z-index: 1;
 }
 
 .main {
