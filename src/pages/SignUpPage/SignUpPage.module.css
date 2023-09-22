@@ -63,6 +63,7 @@
 }
 .file {
   cursor: pointer;
+  width: 70px;
 }
 
 .imgContainer {
@@ -135,52 +136,50 @@
 }
 
 @media (max-width: 600px) {
-  .login {
-    font-size: 30px;
-  }
+  .login,
   .goBack {
-    font-size: 30px;
+    font-size: 15px;
   }
-  .todayHealth {
+  .login {
+    padding: 15px 5px;
+  }
+
+  .title {
     font-size: 12px;
   }
-  .header {
-    gap: 100px;
+
+  .imgIcon {
+    font-size: 80px;
   }
-}
-@media (max-width: 483px) {
-  .login {
-    font-size: 25px;
+  .file {
+    font-size: 5px;
+    width: 60px;
   }
-  .goBack {
-    font-size: 20px;
-  }
-  .todayHealth {
-    font-size: 10px;
-  }
-  .header {
-    gap: 80px;
-  }
-}
-@media (max-width: 400px) {
-  .login {
-    font-size: 15px;
-    padding: 20px 0;
-  }
-  .goBack {
-    font-size: 15px;
-  }
-  .todayHealth {
-    font-size: 7px;
-  }
-  .header {
-    gap: 80px;
-  }
-  .title {
-    font-size: 10px;
-    margin-bottom: 10px;
-  }
+
   .input {
-    padding: 5px 10px;
+    padding: 10px 5px;
+    font-size: 8px;
+  }
+  .loginButton {
+    padding: 10px 5px;
+    font-size: 14px;
+  }
+
+  .loginPage {
+    width: 120%;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 800px) {
+  .login,
+  .goBack {
+    font-size: 30px;
+  }
+  .login {
+    padding: 15px 5px;
+  }
+
+  .title {
+    font-size: 20px;
   }
 }
