@@ -120,7 +120,7 @@ export default function BoardDetail(): React.ReactElement {
         title,
         content,
         category: type,
-        creatorId: user?.uid,
+        creatorId: user?.displayName,
         createdAt: dateString,
         timeStamp,
       });
@@ -137,7 +137,7 @@ export default function BoardDetail(): React.ReactElement {
       await addDoc(collection(db, "comment"), {
         text,
         createdAt: dateString,
-        creatorId: user?.uid,
+        creatorId: user?.displayName,
         postId: String(id),
         timeStamp,
       });

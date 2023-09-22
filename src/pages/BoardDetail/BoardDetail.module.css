@@ -4,6 +4,7 @@
   background: #000000;
   background: -webkit-linear-gradient(to right, #434343, #000000);
   height: 100%;
+  min-width: 100%;
 }
 .auth {
   text-align: center;
@@ -14,8 +15,7 @@
 .board {
   border: 2px solid rgb(81, 79, 79);
   height: 100%;
-  margin: 0 250px;
-  /* background-color: #f9f9f9; */
+  margin: 0 100px;
 }
 
 .topTitle {
@@ -101,13 +101,16 @@
   height: 60px;
   font-size: 25px;
   border-radius: 8px;
-  padding-left: 40px;
+  padding: 10px 20px;
   background-color: black;
   color: white;
   display: flex;
   align-items: center;
   margin-bottom: 15px;
   font-weight: bold;
+  margin: 0 auto;
+  margin-top: 20px;
+  background-color: rgb(45, 40, 40);
 }
 .contentTitle {
   display: flex;
@@ -116,6 +119,9 @@
 .textareaList {
   display: flex;
   justify-content: center;
+  margin: 0 auto;
+  width: 80%;
+  margin-top: 20px;
 }
 
 .textarea {
@@ -166,14 +172,14 @@
 }
 
 .contentButton {
-  width: 81%;
   font-size: 20px;
   background-color: black;
   color: #f9f9f9;
   width: 100%;
-  padding: 20px 0 0 40px;
   border-radius: 8px;
   min-height: 200px;
+  background-color: rgb(45, 40, 40);
+  padding: 10px 20px;
 }
 
 .confirm {
@@ -230,6 +236,7 @@
 
 .image {
   width: 100%;
+  overflow: hidden;
 }
 .addImage {
   position: relative;
@@ -242,76 +249,33 @@
   flex-direction: column;
 }
 
-@media (max-width: 1000px) {
-  .board {
-    margin: 0 100px;
-  }
-}
-@media (max-width: 860px) {
-  .image {
-    width: 150px;
-    height: 150px;
-  }
-  .click {
-    position: absolute;
-    top: 300%;
-    height: 40px;
-  }
-}
-@media (max-width: 620px) {
-  .addImage {
-    justify-content: right;
-    margin-right: 30px;
-  }
-}
-@media (max-width: 500px) {
-  .click {
-    position: relative;
-  }
-  .addImage {
-    justify-content: center;
-    margin: 0 0 10px 0;
-  }
-  .contentButton {
-    margin-bottom: 20px;
-  }
-}
-@media (max-width: 400px) {
-  .click {
-    position: relative;
-
-    width: 100px;
-  }
-  .addImage {
-    justify-content: center;
-    margin: 0 0 10px 0;
-  }
-  .contentButton {
-    margin-bottom: 20px;
-  }
-  .backToSharePage {
-    font-size: 12px;
-    padding: 8px;
+@media (max-width: 600px) {
+  .userId {
+    font-size: 10px;
   }
   .ok,
   .cancel {
-    font-size: 9px;
-  }
-  .image {
-    width: 100px;
-    height: 100px;
+    padding: 10px 5px;
+    font-size: 12px;
   }
   .board {
-    margin: 0 50px;
+    margin: 0 10px;
   }
-  .topTitle {
+  .typeAndTime {
+    font-size: 10px;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 800px) {
+  .userId {
     font-size: 20px;
   }
-  .title {
-    padding-left: 60px;
+  .ok,
+  .cancel {
+    padding: 20px 10px;
+    font-size: 12px;
   }
-  .textarea {
-    padding: 5px;
-    margin-bottom: 50px;
+  .board {
+    margin: 0 10px;
   }
 }
