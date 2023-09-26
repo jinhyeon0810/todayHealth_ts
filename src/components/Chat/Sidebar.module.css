@@ -42,9 +42,22 @@
   border-bottom: 1px solid gray;
 }
 
-.serachForm {
-  padding: 10px;
+.searchForm > span {
+  color: green;
 }
+.dot {
+  font-size: 30px;
+  margin-top: 5px;
+}
+.searchForm {
+  display: flex;
+  padding: 10px;
+  color: white;
+  font-weight: bold;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .searchForm > input {
   background-color: transparent;
   border: none;
@@ -66,7 +79,7 @@
 .userChat:hover {
   background-color: #2f2d52;
 }
-.userChat > img {
+.userChatImg {
   width: 50px;
   height: 50px;
   border-radius: 50%;
