@@ -12,6 +12,7 @@ import { RootState, changeUser } from "../../utils/Store";
 import { useNavigate } from "react-router-dom";
 import { pickedDataProps } from "../../utils/type";
 import CannotAccess from "../../components/CannotAccess/CannotAccess";
+import IsLoading from "../../components/IsLoading/IsLoading";
 import { CgGym } from "react-icons/cg";
 
 export default function MyPage(): React.ReactElement {
@@ -39,7 +40,10 @@ export default function MyPage(): React.ReactElement {
 
   //서버에서 운동기록 데이터 가져오기
   useEffect(() => {
-    if (!user) return;
+    if (!user) {
+      setLoading(false);
+    }
+    setLoading(true);
     window.scrollTo({
       top: 0,
       behavior: "smooth",
@@ -69,69 +73,71 @@ export default function MyPage(): React.ReactElement {
   };
   return (
     <>
-      {user.uid ? (
-        <div className={styles.wrapper}>
-          <Header />
-          <article className={styles.layout}>
-            <div className={styles.datePicker}>
-              <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} inline className={styles.datePicker} maxDate={new Date()} />
-            </div>
-            <div className={styles.body}>
-              <h1 className={styles.title}>
-                진행한 운동 <GiMuscleUp /> / <span className={styles.exerciseDay}>{pickerDate}</span>
-              </h1>
-              <ul className={styles.desc}>
-                {loading && (
-                  <button className={styles.noDesc} onClick={handleRecordPage}>
-                    로딩중입니다 . . .
-                  </button>
-                )}
-                {pickedDatas?.length > 0 &&
-                  !loading &&
-                  pickedDatas?.map((data, i) => {
-                    return (
-                      data.creatorId === user?.uid &&
-                      pickerDate === data.createdAt && (
-                        <section className={styles.dataContainer} key={i}>
-                          <div className={styles.dataTop}>
-                            <div>
-                              <CgGym className={styles.babelIcon} />
-                            </div>{" "}
-                            {data.name}
-                          </div>
-                          <section className={styles.dataContent}>
-                            <div>총 {data.kg.length}세트</div>
-                            <div style={{ display: "flex", flexDirection: "column" }}>
-                              {data.kg.map((d, i) => (
-                                <div key={i}> {d + "kg"} </div>
-                              ))}
+      <div className={styles.wrapper}>
+        {loading && <IsLoading />}
+        {!user.uid && !loading && <CannotAccess />}
+        {user.uid && !loading && (
+          <>
+            <Header />
+            <article className={styles.layout}>
+              <div className={styles.datePicker}>
+                <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} inline className={styles.datePicker} maxDate={new Date()} />
+              </div>
+              <div className={styles.body}>
+                <h1 className={styles.title}>
+                  진행한 운동 <GiMuscleUp /> / <span className={styles.exerciseDay}>{pickerDate}</span>
+                </h1>
+                <ul className={styles.desc}>
+                  {loading && (
+                    <button className={styles.noDesc} onClick={handleRecordPage}>
+                      로딩중입니다 . . .
+                    </button>
+                  )}
+                  {pickedDatas?.length > 0 &&
+                    !loading &&
+                    pickedDatas?.map((data, i) => {
+                      return (
+                        data.creatorId === user?.uid &&
+                        pickerDate === data.createdAt && (
+                          <section className={styles.dataContainer} key={i}>
+                            <div className={styles.dataTop}>
+                              <div>
+                                <CgGym className={styles.babelIcon} />
+                              </div>{" "}
+                              {data.name}
                             </div>
-                            <div style={{ display: "flex", flexDirection: "column" }}>
-                              {data.reps.map((d, i) => (
-                                <div key={i}> {d + "회"} </div>
-                              ))}
-                            </div>
-                            <div className={styles.deleteContent} onClick={() => handleDeleteData(data)}>
-                              X
-                            </div>
+                            <section className={styles.dataContent}>
+                              <div>총 {data.kg.length}세트</div>
+                              <div style={{ display: "flex", flexDirection: "column" }}>
+                                {data.kg.map((d, i) => (
+                                  <div key={i}> {d + "kg"} </div>
+                                ))}
+                              </div>
+                              <div style={{ display: "flex", flexDirection: "column" }}>
+                                {data.reps.map((d, i) => (
+                                  <div key={i}> {d + "회"} </div>
+                                ))}
+                              </div>
+                              <div className={styles.deleteContent} onClick={() => handleDeleteData(data)}>
+                                X
+                              </div>
+                            </section>
                           </section>
-                        </section>
-                      )
-                    );
-                  })}
-                {pickedDatas?.length === 0 && !loading && (
-                  <button className={styles.noDesc} onClick={handleRecordPage}>
-                    운동기록을 추가해주세요 😁
-                  </button>
-                )}
-              </ul>
-            </div>
-            <Footer />
-          </article>
-        </div>
-      ) : (
-        <CannotAccess />
-      )}
+                        )
+                      );
+                    })}
+                  {pickedDatas?.length === 0 && !loading && (
+                    <button className={styles.noDesc} onClick={handleRecordPage}>
+                      운동기록을 추가해주세요 😁
+                    </button>
+                  )}
+                </ul>
+              </div>
+              <Footer />
+            </article>
+          </>
+        )}
+      </div>
     </>
   );
 }

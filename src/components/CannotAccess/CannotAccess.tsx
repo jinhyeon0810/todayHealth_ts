@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import styles from "./CannotAccess.module.css";
 import { useNavigate } from "react-router-dom";
 

@@ -4,8 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { getAuth, createUserWithEmailAndPassword, AuthError, updateProfile } from "firebase/auth";
 import { IoChevronBackSharp } from "react-icons/io5";
 import { FaUserCircle } from "react-icons/fa";
-import { profileImageUpload } from "../../api/firebase";
+import db, { profileImageUpload } from "../../api/firebase";
 import { v4 } from "uuid";
+import { doc, setDoc } from "firebase/firestore";
 
 export default function SignUpPage(): React.ReactElement {
   const [email, setEmail] = useState("");
@@ -16,6 +17,7 @@ export default function SignUpPage(): React.ReactElement {
   const [photo, setPhoto] = useState<string | undefined>(undefined);
   const [rePw, setRePw] = useState("");
   const [rePwValid, setRePwValid] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const [notAllow, setNotAllow] = useState(true);
 
@@ -59,11 +61,15 @@ export default function SignUpPage(): React.ReactElement {
       setNotAllow(true);
     }
   }, [pw, rePw]);
-  const handleSignUp = async () => {
+
+  const handleSignUp = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
     if (nickName.trim().length === 0) {
       alert("닉네임을 입력해주세요");
       return;
     }
+    setLoading(true);
+
     const auth = getAuth();
     try {
       const { user } = await createUserWithEmailAndPassword(auth, email, pw);
@@ -73,8 +79,24 @@ export default function SignUpPage(): React.ReactElement {
         displayName: nickName,
         photoURL,
       });
-      navigate("/main");
-      return user;
+
+      if (photoURL === undefined) {
+        await setDoc(doc(db, "users", user.uid), {
+          uid: user.uid,
+          displayName: nickName,
+          email,
+          photoURL: "",
+        });
+      } else {
+        await setDoc(doc(db, "users", user.uid), {
+          uid: user.uid,
+          displayName: nickName,
+          email,
+          photoURL,
+        });
+      }
+
+      await setDoc(doc(db, "userChats", user.uid), {});
     } catch (error) {
       console.log((error as AuthError).message);
       // eslint-disable-next-line no-constant-condition
@@ -87,8 +109,8 @@ export default function SignUpPage(): React.ReactElement {
         alert("회원 가입 중 오류가 발생했습니다.");
       }
     }
+    navigate("/main");
   };
-
   const navigate = useNavigate();
 
   const moveToBackPage = () => {
@@ -114,50 +136,55 @@ export default function SignUpPage(): React.ReactElement {
     <>
       <div className={styles.wrapper}>
         <div className={styles.loginMain}>
-          <div className={styles.header}>
-            <div className={styles.goBack} onClick={moveToBackPage}>
-              <IoChevronBackSharp />
-            </div>
-            <div className={styles.login}>회원가입 드루와~</div>
-          </div>
+          {loading && <div>로딩중...</div>}
+          {!loading && (
+            <>
+              <div className={styles.header}>
+                <div className={styles.goBack} onClick={moveToBackPage}>
+                  <IoChevronBackSharp />
+                </div>
+                <div className={styles.login}>회원가입 드루와~</div>
+              </div>
 
-          <p className={styles.title} onClick={() => navigate("/addProfile")}>
-            성장하는 나를 기록하세요 💪
-          </p>
-          <div className={styles.loginPage}>
-            <div className={styles.profileImg}>
-              {addFile && (
-                <>
-                  <div className={styles.imgContainer}>
-                    <FaUserCircle className={styles.imgIcon} />
-                    <input className={styles.file} type="file" accept="image/*" onChange={handleImgChange} />
-                  </div>
-                </>
-              )}
-              {file && <img className={styles.showingImg} src={URL.createObjectURL(file)} alt="local file" />}
-            </div>
-            <input className={styles.input} type="email" placeholder="ID (이메일 주소)" value={email} onChange={handleEmail} />
-            <div className={styles.errorMessage}>{!emailValid && email.length > 0 && <div>올바른 이메일을 입력해주세요</div>}</div>
-            <input
-              className={styles.input}
-              type="password"
-              placeholder="PW (영문, 숫자, 특수문자 포함 8자 이상)"
-              value={pw}
-              onChange={handlePassword}
-            />
-            <div className={styles.errorMessage}>{!pwValid && pw.length > 0 && <div>영문, 숫자, 특수문자 포함 8자 이상 입력해주세요</div>}</div>
-            <input className={styles.input} type="password" placeholder="비밀번호 확인" value={rePw} onChange={handleRePassword} />
-            <div className={styles.errorMessage}>
-              {!rePwValid && rePw.length > 0 && <div>영문, 숫자, 특수문자 포함 8자 이상 입력해주세요</div>}
-              {pw === rePw && pw.length > 7 && <div>비밀번호가 일치합니다</div>}
-              {pw !== rePw && rePw.length > 0 && <div>비밀번호가 다릅니다</div>}
-            </div>
-            <input className={styles.input} type="nickname" placeholder="닉네임" value={nickName} onChange={handleNickName} />
+              <p className={styles.title} onClick={() => navigate("/addProfile")}>
+                성장하는 나를 기록하세요 💪
+              </p>
+              <form className={styles.loginPage}>
+                <div className={styles.profileImg}>
+                  {addFile && (
+                    <>
+                      <div className={styles.imgContainer}>
+                        <FaUserCircle className={styles.imgIcon} />
+                        <input className={styles.file} type="file" accept="image/*" onChange={handleImgChange} />
+                      </div>
+                    </>
+                  )}
+                  {file && <img className={styles.showingImg} src={URL.createObjectURL(file)} alt="local file" />}
+                </div>
+                <input className={styles.input} type="email" placeholder="ID (이메일 주소)" value={email} onChange={handleEmail} />
+                <div className={styles.errorMessage}>{!emailValid && email.length > 0 && <div>올바른 이메일을 입력해주세요</div>}</div>
+                <input
+                  className={styles.input}
+                  type="password"
+                  placeholder="PW (영문, 숫자, 특수문자 포함 8자 이상)"
+                  value={pw}
+                  onChange={handlePassword}
+                />
+                <div className={styles.errorMessage}>{!pwValid && pw.length > 0 && <div>영문, 숫자, 특수문자 포함 8자 이상 입력해주세요</div>}</div>
+                <input className={styles.input} type="password" placeholder="비밀번호 확인" value={rePw} onChange={handleRePassword} />
+                <div className={styles.errorMessage}>
+                  {!rePwValid && rePw.length > 0 && <div>영문, 숫자, 특수문자 포함 8자 이상 입력해주세요</div>}
+                  {pw === rePw && pw.length > 7 && <div>비밀번호가 일치합니다</div>}
+                  {pw !== rePw && rePw.length > 0 && <div>비밀번호가 다릅니다</div>}
+                </div>
+                <input className={styles.input} type="nickname" placeholder="닉네임" value={nickName} onChange={handleNickName} />
 
-            <button className={styles.loginButton} onClick={handleSignUp} disabled={notAllow}>
-              회원가입
-            </button>
-          </div>
+                <button className={styles.loginButton} onClick={handleSignUp} disabled={notAllow}>
+                  회원가입
+                </button>
+              </form>
+            </>
+          )}
         </div>
       </div>
     </>

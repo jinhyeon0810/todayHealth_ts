@@ -5,9 +5,10 @@ import { onUserStateChange } from "../../api/firebase";
 import AddExercisePresenter from "./AddExercisePresenter";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, changeUser, resetPickedDatas } from "../../utils/Store";
-import CannotAccess from "../../components/CannotAccess/CannotAccess";
+import IsLoading from "../../components/IsLoading/IsLoading";
 
 export default function AddExerciseContainer(): React.ReactElement {
+  const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState<string>("");
   const types = ["전체", "상체", "하체"];
   const [importUpperDatas, setImportUpperDatas] = useState<boolean>(false);
@@ -24,6 +25,7 @@ export default function AddExerciseContainer(): React.ReactElement {
     if (changeUser) {
       onUserStateChange((user: { uid: string; displayName: string; photoURL: string }) => {
         dispatch(changeUser({ uid: user.uid, displayName: user.displayName, photoURL: user.photoURL }));
+        setLoading(false);
       });
     }
   }, [changeUser]);
@@ -70,7 +72,8 @@ export default function AddExerciseContainer(): React.ReactElement {
   console.log(user);
   return (
     <>
-      {user.uid ? (
+      {loading && <IsLoading />}
+      {user.uid && (
         <>
           <AddExercisePresenter
             datas={filteredAllData}
@@ -88,8 +91,6 @@ export default function AddExerciseContainer(): React.ReactElement {
             setSearch={setSearch}
           />
         </>
-      ) : (
-        <CannotAccess />
       )}
     </>
   );

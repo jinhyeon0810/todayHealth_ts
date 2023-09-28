@@ -169,17 +169,29 @@
   margin-bottom: 20px;
 }
 
+.babelIcon {
+  font-size: 40px;
+  color: red;
+}
 .dataContainer {
   position: relative;
   margin: 0 auto;
   margin-bottom: 20px;
-  background-color: rgb(84, 77, 77);
+  background-color: rgb(15, 15, 15);
   padding: 20px 60px;
   border-radius: 20px;
   width: 50%;
 }
 .dataContainer > div:first-of-type {
   font-size: 30px;
+}
+
+.dataTop {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+  margin-left: 20px;
 }
 .form {
   width: 100%;
@@ -245,6 +257,16 @@
   background-color: black;
   z-index: 10;
   padding: 40px 60px;
+}
+
+.isLoading {
+  text-align: center;
+  height: 100vh;
+  color: white;
+}
+
+.loadingGif {
+  width: 50px;
 }
 
 @media (max-width: 600px) {

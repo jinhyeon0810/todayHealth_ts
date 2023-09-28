@@ -24,7 +24,7 @@ import { dateString } from "../../utils/Date.js";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, changeChatUser, changeUser } from "../../utils/Store.js";
 import { FaUserCircle } from "react-icons/fa";
-import CannotAccess from "../../components/CannotAccess/CannotAccess.js";
+import IsLoading from "../../components/IsLoading/IsLoading.js";
 
 interface ProductProps {
   title: string;
@@ -51,6 +51,7 @@ interface TextArrProps {
 export default function BoardDetail(): React.ReactElement {
   const user = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
 
   const [text, setText] = useState<string>("");
   const [texts, setTexts] = useState<TextArrProps[]>([]);
@@ -86,6 +87,7 @@ export default function BoardDetail(): React.ReactElement {
     if (changeUser) {
       onUserStateChange((user: { uid: string; displayName: string; photoURL: string }) => {
         dispatch(changeUser({ uid: user.uid, displayName: user.displayName, photoURL: user.photoURL }));
+        setLoading(false);
       });
     }
   }, [changeUser]);
@@ -237,7 +239,8 @@ export default function BoardDetail(): React.ReactElement {
 
   return (
     <>
-      {user.uid ? (
+      {loading && <IsLoading />}
+      {user.uid && (
         <>
           <div className={styles.container}>
             <div className={styles.wrapper}>
@@ -269,7 +272,6 @@ export default function BoardDetail(): React.ReactElement {
                     {editing && (
                       <>
                         <input placeholder="제목" onChange={handleChange} name="title" value={title ?? ""} />
-                        {/* <label htmlFor="title"></label> */}
                       </>
                     )}
 
@@ -355,8 +357,6 @@ export default function BoardDetail(): React.ReactElement {
             </div>
           </div>
         </>
-      ) : (
-        <CannotAccess />
       )}
     </>
   );

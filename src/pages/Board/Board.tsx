@@ -5,9 +5,10 @@ import BoardComponent from "./BoardComponent";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, changeUser } from "../../utils/Store";
 import { onUserStateChange } from "../../api/firebase";
-import CannotAccess from "../../components/CannotAccess/CannotAccess";
+import IsLoading from "../../components/IsLoading/IsLoading";
 
 export default function Board(): React.ReactElement {
+  const [loading, setLoading] = useState(true);
   const [imageList, setImageList] = useState<string | undefined>();
   const [type, setType] = useState("Category");
   const navigate = useNavigate();
@@ -18,13 +19,15 @@ export default function Board(): React.ReactElement {
     if (changeUser) {
       onUserStateChange((user: { uid: string; displayName: string; photoURL: string }) => {
         dispatch(changeUser({ uid: user.uid, displayName: user.displayName, photoURL: user.photoURL }));
+        setLoading(false);
       });
     }
   }, [changeUser]);
 
   return (
     <>
-      {user.uid ? (
+      {loading && <IsLoading />}
+      {user.uid && !loading && (
         <>
           <div className={styles.wrapper}>
             <div className={styles.board}>
@@ -43,8 +46,6 @@ export default function Board(): React.ReactElement {
             </div>
           </div>
         </>
-      ) : (
-        <CannotAccess />
       )}
     </>
   );
