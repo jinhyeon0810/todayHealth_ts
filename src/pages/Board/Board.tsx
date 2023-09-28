@@ -31,11 +31,13 @@ export default function Board(): React.ReactElement {
               <div className={styles.auth}>
                 <span className={styles.topTitle}>오.운.완</span>
                 <br /> 같이 인증해보아요 ✔
+                <br />
+                <br /> 사진 인증은 필수 ✔
               </div>
               <BoardComponent type={type} setType={setType} imageList={imageList} setImageList={setImageList} />
               <div className={styles.backToShareArea}>
                 <button onClick={() => navigate("/share")} className={styles.backToSharePage}>
-                  게시판으로 돌아가기
+                  ✔ 게시판으로 돌아가기
                 </button>
               </div>
             </div>

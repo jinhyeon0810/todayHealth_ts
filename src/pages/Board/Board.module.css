@@ -122,10 +122,10 @@
   font-size: 15px;
   margin-bottom: 15px;
 }
-
-.fileArea {
-  display: flex;
-  justify-content: right;
+.fileIcon {
+  font-size: 50px;
+  cursor: pointer;
+  margin-right: 10px;
 }
 
 .contentButton {
@@ -149,6 +149,11 @@
 
 .submitButton {
   cursor: pointer;
+  padding: 15px 30px;
+  border-radius: 20px;
+  border: none;
+  font-size: 19px;
+  background-color: #8e8ef7;
 }
 
 .backToSharePage {

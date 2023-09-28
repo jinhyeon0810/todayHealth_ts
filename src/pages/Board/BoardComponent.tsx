@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import styles from "./Board.module.css";
+import { FcAddImage } from "react-icons/fc";
 import TextareaAutosize from "react-textarea-autosize";
 import db, { imageUpload } from "../../api/firebase.js";
 import { Timestamp, addDoc, collection } from "firebase/firestore";
 import { v4 } from "uuid";
 import { Filter } from "./Board.js";
 import { useNavigate } from "react-router-dom";
-import dateString from "../../utils/Date.js";
+import { dateString } from "../../utils/Date.js";
 import { useSelector } from "react-redux";
 import { RootState } from "../../utils/Store.js";
 
@@ -74,6 +75,8 @@ export default function BoardComponent({ type, setType, imageList, setImageList 
       createdAt: dateString,
       url: imageList,
       timeStamp,
+      uid: user?.uid,
+      photoURL: user?.photoURL,
     });
 
     setEditing(false);
@@ -138,13 +141,25 @@ export default function BoardComponent({ type, setType, imageList, setImageList 
           </TextareaAutosize>
         )}
       </div>
-      {addFile && (
-        <div className={styles.fileArea}>
-          <input type="file" accept="image/*" name="file" required className={styles.file} onChange={handleChange} />
-        </div>
-      )}
 
       <form className={styles.confirm}>
+        {addFile && (
+          <>
+            <input
+              type="file"
+              accept="image/*"
+              id="fileImg"
+              name="file"
+              required
+              className={styles.file}
+              onChange={handleChange}
+              style={{ display: "none" }}
+            />
+            <label htmlFor="fileImg" className={styles.iconContainer}>
+              <FcAddImage className={styles.fileIcon} />
+            </label>
+          </>
+        )}
         <button type="submit" onClick={handleSubmit} className={styles.submitButton}>
           등록
         </button>

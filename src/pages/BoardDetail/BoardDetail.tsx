@@ -2,13 +2,27 @@ import React, { useState, useEffect } from "react";
 import styles from "./BoardDetail.module.css";
 import TextareaAutosize from "react-textarea-autosize";
 import db, { onUserStateChange } from "../../api/firebase.js";
-import { Timestamp, addDoc, collection, deleteDoc, doc, onSnapshot, orderBy, query, updateDoc, where } from "firebase/firestore";
+import {
+  Timestamp,
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  onSnapshot,
+  orderBy,
+  query,
+  serverTimestamp,
+  setDoc,
+  updateDoc,
+  where,
+} from "firebase/firestore";
 import { useNavigate, useParams } from "react-router-dom";
 import Comment from "../../components/Comment/Comment.js";
 // import { getDownloadURL, getStorage, listAll, ref } from "firebase/storage";
-import dateString from "../../utils/Date.js";
+import { dateString } from "../../utils/Date.js";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState, changeUser } from "../../utils/Store.js";
+import { RootState, changeChatUser, changeUser } from "../../utils/Store.js";
 import { FaUserCircle } from "react-icons/fa";
 import CannotAccess from "../../components/CannotAccess/CannotAccess.js";
 
@@ -20,6 +34,8 @@ interface ProductProps {
   url: string;
   creatorId: string;
   createdAt: string;
+  photoURL: string | undefined;
+  uid: string | null;
 }
 
 interface TextArrProps {
@@ -39,6 +55,7 @@ export default function BoardDetail(): React.ReactElement {
   const [text, setText] = useState<string>("");
   const [texts, setTexts] = useState<TextArrProps[]>([]);
   const [nickName, setNickName] = useState<string | null>(null);
+  const [findUser, setFindUser] = useState<string | null>(null);
   const [time, setTime] = useState<string | null>(null);
   const [type, setType] = useState<string>("Category");
   const [num, setNum] = useState(0);
@@ -55,6 +72,8 @@ export default function BoardDetail(): React.ReactElement {
     url: "",
     creatorId: "",
     createdAt: "",
+    photoURL: undefined,
+    uid: null,
   });
 
   const [file, setFile] = useState<File | null>(null);
@@ -100,13 +119,13 @@ export default function BoardDetail(): React.ReactElement {
   useEffect(() => {
     if (product) {
       setNickName(product.creatorId);
+      setFindUser(product.uid);
       setTime(product.createdAt);
       setTitle(product.title);
       setContent(product.content);
       setType(product.category);
     }
   }, [product]);
-  console.log(product);
   const onClickUpdate = () => {
     if (title.length === 0) {
       alert("제목을 입력해주세요 😉");
@@ -156,7 +175,6 @@ export default function BoardDetail(): React.ReactElement {
       setTexts(textArr);
     });
   }, [id]);
-  console.log(texts);
   const onClickDelete = () => {
     const ok = window.confirm("정말 삭제하실꺼죠?");
 
@@ -170,6 +188,51 @@ export default function BoardDetail(): React.ReactElement {
     setNum((prev) => prev + 1);
     if (num >= 1) return;
     else alert("악플은 누군가를 죽일 수 있습니다");
+  };
+  console.log(product);
+
+  const handleChatRoom = async () => {
+    if (!user.uid) return;
+    //채팅하는 서로 다른 두 유저의 혼합ID를 만듭니다 : 대화방의 고유 id로 쓰일 예정
+    const combinedId = (user.uid as string) > (findUser as string) ? user.uid + findUser : findUser + user.uid;
+    try {
+      //클릭시 고유 id를 토대로 대화 데이터를 불러옵니다.
+      const res = await getDoc(doc(db, "chats", combinedId));
+      console.log(user.uid, findUser);
+      console.log(combinedId);
+
+      if (!res.exists()) {
+        //만약 대화 데이터가 없다면, 고유id를 토대로 만들어줍니다.
+        await setDoc(doc(db, "chats", combinedId), { messages: [] });
+
+        //대화 데이터가 없을 시 서로의 uid 안에 상대방의 정보를 저장합니다.
+        //이때 유저는 (현재 로그인 유저와 상대방 유저) 입니다.
+        await updateDoc(doc(db, "userChats", findUser as string), {
+          [combinedId + ".userInfo"]: {
+            uid: user.uid,
+            displayName: user.displayName,
+            photoURL: user.photoURL,
+          },
+          [combinedId + ".date"]: serverTimestamp(),
+        });
+
+        await updateDoc(doc(db, "userChats", user.uid as string), {
+          [combinedId + ".userInfo"]: {
+            uid: findUser,
+            displayName: nickName,
+            photoURL: product?.photoURL,
+          },
+          [combinedId + ".date"]: serverTimestamp(),
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+    const userInfo = { displayName: nickName, photoURL: product?.photoURL, uid: findUser };
+    const addInfo = { ...userInfo, currentUser: user };
+    dispatch(changeChatUser(addInfo));
+    setFindUser(null);
+    navigate("/chatroom");
   };
 
   return (
@@ -203,7 +266,12 @@ export default function BoardDetail(): React.ReactElement {
                     <div>{time}</div>
                   </div>
                   <div className={styles.contentTitle}>
-                    {editing && <input placeholder="제목" className={styles.input} onChange={handleChange} name="title" value={title ?? ""} />}
+                    {editing && (
+                      <>
+                        <input placeholder="제목" onChange={handleChange} name="title" value={title ?? ""} />
+                        {/* <label htmlFor="title"></label> */}
+                      </>
+                    )}
 
                     {!editing && <div className={styles.input}>{product?.title}</div>}
                   </div>
@@ -225,12 +293,12 @@ export default function BoardDetail(): React.ReactElement {
                     {file && <img className={styles.img} src={URL.createObjectURL(file)} alt="local file" />}
                   </div>
                   <div className={styles.fileArea}>
-                    {user?.uid === product?.creatorId && editing && (
+                    {user?.uid === product?.uid && editing && (
                       <input type="file" accept="image/*" name="file" required className={styles.file} onChange={handleChange} />
                     )}
                   </div>
                   <div className={styles.confirm}>
-                    {user?.uid === product?.creatorId && !editing && (
+                    {user?.uid === product?.uid && !editing && (
                       <>
                         <button onClick={() => setEditing(true)} className={styles.submitButton}>
                           게시글 수정
@@ -240,7 +308,7 @@ export default function BoardDetail(): React.ReactElement {
                         </button>
                       </>
                     )}
-                    {user?.uid === product?.creatorId && editing && (
+                    {user?.uid === product?.uid && editing && (
                       <button onClick={onClickUpdate} className={styles.submitButton}>
                         수정완료
                       </button>
@@ -276,6 +344,9 @@ export default function BoardDetail(): React.ReactElement {
                 </section>
 
                 <div className={styles.backToShareArea}>
+                  <button className={styles.chat} onClick={handleChatRoom}>
+                    채팅보내기
+                  </button>
                   <button onClick={() => navigate("/share")} className={styles.backToSharePage}>
                     게시판으로 돌아가기
                   </button>
