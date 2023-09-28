@@ -1,0 +1,10 @@
+.isLoading {
+  text-align: center;
+  height: 100vh;
+  color: white;
+  background-color: black;
+}
+
+.loadingGif {
+  width: 50px;
+}
