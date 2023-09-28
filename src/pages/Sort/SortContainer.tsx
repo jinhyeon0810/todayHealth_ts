@@ -5,13 +5,13 @@ import { logout, onUserStateChange } from "../../api/firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, changeUser } from "../../utils/Store";
-import CannotAccess from "../../components/CannotAccess/CannotAccess";
 import { getAuth, onAuthStateChanged, updateProfile } from "firebase/auth";
+import IsLoading from "../../components/IsLoading/IsLoading";
 
 export default function SortContainer(): React.ReactElement {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const [logoutModalOpen, setLogoutModalOpen] = useState(false);
   const [nickNameModalOpen, setNickNameModalOpen] = useState(false);
@@ -19,16 +19,17 @@ export default function SortContainer(): React.ReactElement {
 
   const user = useSelector((state: RootState) => state);
   useEffect(() => {
-    if (changeUser) {
-      onUserStateChange((user: { uid: string; displayName: string; photoURL: string }) => {
-        dispatch(changeUser({ uid: user.uid, displayName: user.displayName, photoURL: user.photoURL }));
-      });
-    }
-  }, [changeUser]);
+    onUserStateChange((user: { uid: string; displayName: string; photoURL: string }) => {
+      dispatch(changeUser({ uid: user.uid, displayName: user.displayName, photoURL: user.photoURL }));
+      setLoading(false);
+    });
+  }, [changeUser, user.user.uid]);
+
+  console.log(user.user.uid);
+  console.log(loading);
 
   const handleModal = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (!user) return;
-    else if ((e.target as HTMLElement).innerText === "취소") {
+    if ((e.target as HTMLElement).innerText === "취소") {
       setLogoutModalOpen(false);
       setNickNameModalOpen(false);
     } //
@@ -48,7 +49,7 @@ export default function SortContainer(): React.ReactElement {
         if (user !== null) {
           updateProfile(user, { displayName: newNick })
             .then(() => {
-              setLoading(true);
+              // setLoading(true);
               window.location.reload();
             })
             .catch((error) => console.error("프로필 업데이트 오류", error));
@@ -56,7 +57,7 @@ export default function SortContainer(): React.ReactElement {
       });
     }
     setNickNameModalOpen(false);
-    setLoading(false);
+    // setLoading(false);
   };
 
   const onChangeNickName = (e: { target: { value: React.SetStateAction<string> } }) => {
@@ -73,6 +74,7 @@ export default function SortContainer(): React.ReactElement {
 
   return (
     <div style={{ backgroundColor: "black" }}>
+      {!user.user.uid && loading && <IsLoading />}
       {user.user.uid && !loading && (
         <>
           <SortPresenter handleLogOut={handleLogOut} user={user} handleNickName={handleNickName} />
@@ -105,7 +107,6 @@ export default function SortContainer(): React.ReactElement {
           )}
         </>
       )}
-      {!user.user.uid && loading && <CannotAccess />}
     </div>
   );
 }

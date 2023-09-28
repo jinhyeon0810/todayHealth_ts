@@ -8,7 +8,7 @@ import { FiLogOut } from "react-icons/fi";
 interface Props {
   handleLogOut: () => void;
   user: {
-    user: { uid: string | null; displayName: string | null; photoURL: string | null };
+    user: { uid: string | null; displayName: string | null; photoURL: string | undefined };
   };
   handleNickName: () => void;
 }
