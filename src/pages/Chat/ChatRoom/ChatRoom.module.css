@@ -1,0 +1,97 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid red;
+  height: 100vh;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  height: 80%;
+  border: 1px solid black;
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 10px;
+  width: 70%;
+  overflow: hidden;
+}
+
+.message {
+  flex: 2;
+  height: 100%;
+}
+.header {
+  height: 50px;
+  background-color: #5d5b8d;
+  color: lightgray;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  justify-content: space-between;
+}
+
+.header > div:first-of-type {
+  cursor: pointer;
+}
+
+.chatCard {
+  display: flex;
+}
+.chatWrapper {
+  height: 100%;
+}
+
+.chatBody {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  height: 75%;
+  background-color: #ddddf7;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 5px 30px 0 15px;
+  border: 1px solid black;
+  padding-right: 15px;
+}
+.chatMsgInput {
+  width: 80%;
+  height: 90px;
+  padding: 10px;
+  resize: none;
+  border: none;
+  margin-right: 10px;
+}
+
+.chatSubmitBtn {
+  width: 70px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: teal;
+  color: white;
+}
+
+.notChatOpen {
+  color: rgb(190, 188, 188);
+  font-size: 40px;
+  padding: 30px;
+}
+
+.sendMsg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.sendIcon {
+  color: lightgray;
+  font-size: 30px;
+}
