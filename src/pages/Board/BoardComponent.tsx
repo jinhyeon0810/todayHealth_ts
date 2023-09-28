@@ -29,7 +29,6 @@ export default function BoardComponent({ type, setType, imageList, setImageList 
   const [file, setFile] = useState<File | null>(null);
   const [imageUpdate, setImageUpdate] = useState<boolean>(false);
   const navigate = useNavigate();
-  console.log(imageList);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
     if (e.target.name === "file" && e.target instanceof HTMLInputElement) {
@@ -94,8 +93,7 @@ export default function BoardComponent({ type, setType, imageList, setImageList 
     setFile(null);
     setAddFile(true);
   };
-  console.log(imageList);
-  console.log(file);
+
   return (
     <div className={styles.height}>
       <div className={styles.title}>

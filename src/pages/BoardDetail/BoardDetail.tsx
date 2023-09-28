@@ -191,7 +191,7 @@ export default function BoardDetail(): React.ReactElement {
     if (num >= 1) return;
     else alert("악플은 누군가를 죽일 수 있습니다");
   };
-  console.log(product);
+  product;
 
   const handleChatRoom = async () => {
     if (!user.uid) return;
@@ -200,8 +200,6 @@ export default function BoardDetail(): React.ReactElement {
     try {
       //클릭시 고유 id를 토대로 대화 데이터를 불러옵니다.
       const res = await getDoc(doc(db, "chats", combinedId));
-      console.log(user.uid, findUser);
-      console.log(combinedId);
 
       if (!res.exists()) {
         //만약 대화 데이터가 없다면, 고유id를 토대로 만들어줍니다.

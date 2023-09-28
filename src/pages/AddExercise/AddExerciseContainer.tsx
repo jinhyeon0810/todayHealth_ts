@@ -69,7 +69,6 @@ export default function AddExerciseContainer(): React.ReactElement {
   const filteredAllData = typeData.data.filter((data) => {
     return data.name.toLocaleLowerCase().includes(search.toLocaleLowerCase());
   });
-  console.log(user);
   return (
     <>
       {loading && <IsLoading />}

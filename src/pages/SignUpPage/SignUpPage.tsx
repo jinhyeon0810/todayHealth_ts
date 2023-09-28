@@ -74,7 +74,6 @@ export default function SignUpPage(): React.ReactElement {
     try {
       const { user } = await createUserWithEmailAndPassword(auth, email, pw);
       const photoURL = photo;
-      console.log(photoURL);
       await updateProfile(user, {
         displayName: nickName,
         photoURL,
@@ -129,8 +128,6 @@ export default function SignUpPage(): React.ReactElement {
       profileImageUpload(file, v4, setPhoto);
     }
   }, [file]);
-  console.log(file);
-  console.log(photo);
 
   return (
     <>

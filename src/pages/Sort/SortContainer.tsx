@@ -25,9 +25,6 @@ export default function SortContainer(): React.ReactElement {
     });
   }, [changeUser, user.user.uid]);
 
-  console.log(user.user.uid);
-  console.log(loading);
-
   const handleModal = (e: React.MouseEvent<HTMLButtonElement>) => {
     if ((e.target as HTMLElement).innerText === "취소") {
       setLogoutModalOpen(false);

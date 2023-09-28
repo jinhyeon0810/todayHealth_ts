@@ -43,12 +43,10 @@ export default function SharePage(): React.ReactElement {
   //페이지 클릭시 offset을 변경해주고, 그에따른 data를 불러옵니다.
   const handlePageClick = (e: { selected: number }) => {
     const newOffset = (e.selected * productsPerPage) % products.length;
-    console.log(newOffset);
     setOffset(newOffset);
     getData();
   };
-  console.log(offset);
-  console.log(endOffset);
+
   const moveToBoard = () => {
     if (!user) {
       alert("로그인 하셔야 되는데.. 😬");

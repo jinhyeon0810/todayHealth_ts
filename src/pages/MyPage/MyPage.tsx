@@ -58,7 +58,6 @@ export default function MyPage(): React.ReactElement {
       setLoading(false);
     });
   }, [pickerDate, user]);
-  console.log(loading);
   const handleRecordPage = () => {
     navigate("/record");
   };

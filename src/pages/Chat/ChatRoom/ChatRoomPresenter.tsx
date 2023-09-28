@@ -20,9 +20,6 @@ interface ChatRoomProps {
 
 export default function ChatRoomPresenter(props: ChatRoomProps): React.ReactElement {
   const { handleGoBack, sendMessage, currentMessage, onChangeMessage, user, isChatOpen, setIsChatOpen, chatContent, messages, setImg } = props;
-  console.log(messages?.messages);
-  console.log(chatContent.chatId);
-  console.log(isChatOpen);
 
   return (
     <article className={styles.wrapper}>

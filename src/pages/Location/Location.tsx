@@ -29,7 +29,6 @@ export default function Location() {
         center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
         level: 3, // 지도의 확대 레벨
       };
-    console.log(kakao.maps.InfoWidow);
     // 지도를 생성합니다
     const map = new kakao.maps.Map(mapContainer, mapOption);
 

@@ -37,10 +37,8 @@ export default function Chats(props: ChatsProps): React.ReactElement {
   const handleSelect = (userInfo: { uid: string; displayName: string; photoURL: string }) => {
     setIsChatOpen(true);
     const addInfo = { ...userInfo, currentUser: user };
-    console.log(userInfo);
     dispatch(changeChatUser(addInfo));
   };
-  console.log(chats);
   return (
     <div className={styles.chats}>
       {Object.entries(chats)

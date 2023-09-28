@@ -55,7 +55,6 @@ export default function Search(): React.ReactElement {
           },
           [combinedId + ".date"]: serverTimestamp(),
         });
-        console.log(combinedId);
 
         await updateDoc(doc(db, "userChats", user.uid), {
           [combinedId + ".userInfo"]: {
