@@ -1,15 +1,32 @@
-import React from "react";
+import { Message } from "../../utils/type";
 import styles from "./Sidebar.module.css";
+import { useEffect, useRef } from "react";
 
-export default function Messages({ own, msg }) {
+interface MessageProps {
+  own: boolean;
+  msg: Message;
+  user: { uid: string | null; displayName: string | null; photoURL: string | undefined };
+  chatContent: { chatId: null | string; user: { uid: string | null; displayName: string | null; photoURL: string | undefined } };
+}
+
+export default function Messages(props: MessageProps): React.ReactElement {
+  const { own, msg, user, chatContent } = props;
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    ref.current?.scrollIntoView({ behavior: "smooth" });
+  }, [msg]);
+
   return (
     <>
-      <div className={own ? styles.messagesOwn : styles.messages}>
+      <div className={own ? styles.messagesOwn : styles.messages} ref={ref}>
         <div className={styles.msgContents}>
-          <img src="" />
-          <p className={own ? styles.messageOwn : styles.message}>{msg.text}</p>
+          <img src={msg.senderId === user.displayName ? user.photoURL : chatContent.user.photoURL} />
+          <div className={own ? styles.messageOwn : styles.message}>
+            <p>{msg.text}</p>
+            {msg.img && <img src={msg.img} />}
+          </div>
         </div>
-        <p className={styles.msgBottom}>1 hour ago</p>
+        <p className={styles.msgBottom}>{msg.time}</p>
       </div>
     </>
   );
