@@ -13,6 +13,7 @@ import IdPwLogIn from "./pages/LoginPage/IdPwLogIn";
 import RecordContainer from "./pages/Record/RecordContainer";
 import AddExerciseContainer from "./pages/AddExercise/AddExerciseContainer";
 import SortContainer from "./pages/Sort/SortContainer";
+import ChatRoomContainer from "./pages/Chat/ChatRoom/ChatRoomContainer";
 
 function App(): React.ReactElement {
   return (
@@ -31,6 +32,7 @@ function App(): React.ReactElement {
         <Route path="/board" element={<Board />} />
         <Route path="/:id" element={<BoardDetail />} />
         <Route path="/sort" element={<SortContainer />} />
+        <Route path="/chatroom" element={<ChatRoomContainer />} />
       </Routes>
     </Router>
   );

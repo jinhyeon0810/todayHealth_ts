@@ -23,3 +23,17 @@ export interface TypeDatas {
   url: string;
 }
 [];
+
+export interface UserInfo {
+  uid: string;
+  displayName: string;
+  photoURL: string;
+}
+
+export interface Message {
+  senderId: string;
+  text: string;
+  time: string;
+  date: string;
+  img?: string;
+}
