@@ -12,6 +12,7 @@ import { RootState, changeUser } from "../../utils/Store";
 import { useNavigate } from "react-router-dom";
 import { pickedDataProps } from "../../utils/type";
 import CannotAccess from "../../components/CannotAccess/CannotAccess";
+import { CgGym } from "react-icons/cg";
 
 export default function MyPage(): React.ReactElement {
   const user = useSelector((state: RootState) => state.user);
@@ -92,8 +93,11 @@ export default function MyPage(): React.ReactElement {
                       data.creatorId === user?.uid &&
                       pickerDate === data.createdAt && (
                         <section className={styles.dataContainer} key={i}>
-                          <div>
-                            {i + 1}. {data.name}
+                          <div className={styles.dataTop}>
+                            <div>
+                              <CgGym className={styles.babelIcon} />
+                            </div>{" "}
+                            {data.name}
                           </div>
                           <section className={styles.dataContent}>
                             <div>총 {data.kg.length}세트</div>
