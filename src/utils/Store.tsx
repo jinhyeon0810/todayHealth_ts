@@ -1,16 +1,6 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 import { RecordingProps } from "./type";
 
-const textId = createSlice({
-  name: "textId",
-  initialState: { textId: "" },
-  reducers: {
-    changeData: (state, action) => {
-      state.textId = action.payload;
-    },
-  },
-});
-
 const user = createSlice({
   name: "user",
   initialState: { uid: null, displayName: null, photoURL: undefined },
@@ -56,13 +46,11 @@ const chatContent = createSlice({
   },
 });
 
-export const { changeData } = textId.actions;
 export const { changeUser } = user.actions;
 export const { addPickedDatas, removePickedDatas, resetPickedDatas } = pickedDatas.actions;
 export const { changeChatUser } = chatContent.actions;
 const store = configureStore({
   reducer: {
-    textId: textId.reducer,
     user: user.reducer,
     pickedDatas: pickedDatas.reducer,
     chatContent: chatContent.reducer,
