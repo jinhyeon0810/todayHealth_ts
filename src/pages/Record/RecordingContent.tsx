@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState, changeUser } from "../../utils/Store";
 import { Timestamp, addDoc, collection } from "firebase/firestore";
 import db, { onUserStateChange } from "../../api/firebase";
-import dateString from "../../utils/Date";
+import { dateString } from "../../utils/Date";
 import { RecordingProps } from "../../utils/type";
 
 interface Props {

@@ -7,7 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState, changeUser, resetPickedDatas } from "../../utils/Store";
 import CannotAccess from "../../components/CannotAccess/CannotAccess";
 
-export default function AddExerciseContainer() {
+export default function AddExerciseContainer(): React.ReactElement {
+  const [search, setSearch] = useState<string>("");
   const types = ["전체", "상체", "하체"];
   const [importUpperDatas, setImportUpperDatas] = useState<boolean>(false);
   const [importLowerDatas, setImportLowerDatas] = useState<boolean>(false);
@@ -61,13 +62,18 @@ export default function AddExerciseContainer() {
   const handleRecordPage = () => {
     navigate("/record");
   };
+
+  //검색한 데이터 보여주기
+  const filteredAllData = typeData.data.filter((data) => {
+    return data.name.toLocaleLowerCase().includes(search.toLocaleLowerCase());
+  });
   console.log(user);
   return (
     <>
       {user.uid ? (
         <>
           <AddExercisePresenter
-            datas={typeData.data}
+            datas={filteredAllData}
             upperDatas={upperData}
             lowerDatas={lowerData}
             types={types}
@@ -78,6 +84,8 @@ export default function AddExerciseContainer() {
             handleType={handleType}
             pickedDatas={pickedDatas}
             handleRecordPage={handleRecordPage}
+            search={search}
+            setSearch={setSearch}
           />
         </>
       ) : (

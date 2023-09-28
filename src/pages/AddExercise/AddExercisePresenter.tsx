@@ -15,8 +15,10 @@ interface Props {
   handleType: (e: React.MouseEvent<HTMLButtonElement>) => void;
   pickedDatas: RecordingProps[];
   handleRecordPage: () => void;
+  search: string;
+  setSearch: React.Dispatch<React.SetStateAction<string>>;
 }
-export default function AddExercisePresenter(props: Props) {
+export default function AddExercisePresenter(props: Props): React.ReactElement {
   const {
     datas,
     upperDatas,
@@ -29,6 +31,8 @@ export default function AddExercisePresenter(props: Props) {
     handleType,
     pickedDatas,
     handleRecordPage,
+    search,
+    setSearch,
   } = props;
 
   return (
@@ -36,8 +40,10 @@ export default function AddExercisePresenter(props: Props) {
       <header className={styles.navFixed}>
         <section className={styles.header}>
           <IoChevronBackSharp className={styles.backIcon} onClick={handleGoback} />
-          <input className={styles.headerInput} />
-          <p className={styles.headerCancel}>취소</p>
+          <input className={styles.headerInput} value={search} onChange={(e) => setSearch(e.target.value)} />
+          <p className={styles.headerCancel} onClick={() => setSearch("")}>
+            취소
+          </p>
         </section>
 
         <section className={styles.exerciseType} onClick={handleType}>
