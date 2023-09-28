@@ -10,7 +10,7 @@ import { RootState, changeUser } from "../../utils/Store";
 import { useDispatch, useSelector } from "react-redux";
 import Footer from "../../components/Footer/Footer";
 import CannotAccess from "../../components/CannotAccess/CannotAccess";
-
+import IsLoading from "../../components/IsLoading/IsLoading";
 interface ProductProps {
   title: string;
   content: string;
@@ -20,6 +20,7 @@ interface ProductProps {
   creatorId: string;
 }
 export default function SharePage(): React.ReactElement {
+  const [loading, setLoading] = useState(true);
   const user = useSelector((state: RootState) => state.user);
   const [products, setProducts] = useState<ProductProps[]>([]);
   const navigate = useNavigate();
@@ -27,13 +28,13 @@ export default function SharePage(): React.ReactElement {
 
   useEffect(() => {
     if (changeUser) {
-      onUserStateChange((user: { uid: string; displayName: string; photoURL: string }) => {
+      onUserStateChange((user: { uid: string | null; displayName: string | null; photoURL: string | undefined }) => {
         dispatch(changeUser({ uid: user.uid, displayName: user.displayName, photoURL: user.photoURL }));
       });
     }
   }, [changeUser]);
 
-  const productsPerPage = 10;
+  const productsPerPage = 5;
   const [offset, setOffset] = useState(0);
   const endOffset = offset + productsPerPage;
   const currentProducts = products.slice(offset, endOffset);
@@ -57,6 +58,10 @@ export default function SharePage(): React.ReactElement {
   };
 
   const getData = useCallback(async () => {
+    if (!user.uid) {
+      setLoading(false);
+    }
+    setLoading(true);
     const first = query(collection(db, "product"), orderBy("timeStamp", "desc"));
     const documentSnapshots = await getDocs(first);
 
@@ -66,27 +71,25 @@ export default function SharePage(): React.ReactElement {
     })) as ProductProps[];
 
     setProducts(contentArr);
-  }, []);
+    setLoading(false);
+  }, [user.uid]);
 
   useEffect(() => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
+
     getData();
   }, [getData]);
 
-  // 검색창 만들기
-  // const [search, setSearch] = useState<string>("");
-
-  // const filterTitle = currentProducts.filter((product) => {
-  //   return product.title.toLocaleLowerCase().includes(search.toLocaleLowerCase());
-  // });
-
   return (
     <>
-      {user.uid ? (
+      {loading && <IsLoading />}
+      {!user.uid && !loading && <CannotAccess />}
+      {user.uid && (
         <article className={styles.sharePage}>
+          {currentProducts.length === 0 && !loading && <div className={styles.noImage}> 이미지가 없습니다</div>}
           <section className={styles.cardStyle}>
             {currentProducts.map((product) => {
               return (
@@ -123,8 +126,6 @@ export default function SharePage(): React.ReactElement {
 
           <Footer />
         </article>
-      ) : (
-        <CannotAccess />
       )}
     </>
   );

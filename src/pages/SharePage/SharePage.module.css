@@ -38,6 +38,15 @@
   border: 1px solid black;
 }
 
+.noImage {
+  color: white;
+  display: flex;
+  justify-content: center;
+  padding: 70px 40px;
+  font-size: 30px;
+  height: 75vh;
+}
+
 .pagination {
   display: flex;
   gap: 20px;
@@ -61,6 +70,7 @@
 .next:hover {
   color: white;
 }
+
 @media (min-width: 892px) and (max-width: 1270px) {
   .cardStyle {
     display: grid;
