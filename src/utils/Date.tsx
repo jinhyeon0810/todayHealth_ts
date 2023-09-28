@@ -5,4 +5,10 @@ const day = ("0" + today.getDate()).slice(-2);
 
 const dateString = year + "-" + month + "-" + day;
 
-export default dateString;
+const hour = today.getHours();
+const minute = today.getMinutes();
+const formattedHour = hour < 10 ? `0${hour}` : hour.toString();
+const formattedMinute = minute < 10 ? `0${minute}` : minute.toString();
+
+const timeString = formattedHour + ":" + formattedMinute;
+export { dateString, timeString };

@@ -43,7 +43,7 @@
   }
   40% {
     opacity: 1;
-    transform: translate(30px, 30vh);
+    transform: translate(40px, 30vh);
   }
   60% {
     opacity: 1;
@@ -51,7 +51,7 @@
   }
   80% {
     opacity: 1;
-    transform: translate(30px, 55vh);
+    transform: translate(20px, 55vh);
   }
   100% {
     opacity: 0;
