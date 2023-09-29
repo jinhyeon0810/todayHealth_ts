@@ -5,7 +5,12 @@
 <div align="center"><h2><a href="https://d1icsui2guauqx.cloudfront.net/">Demo</a></h2> <span>ID : test@naver.com / PW : test1234!</span></p></div>
 
 # 프로젝트 소개
-   자신의 운동을 기록하며 소통할 수 있는 커뮤니티 입니다. 
+   자신의 운동을 기록하며 소통할 수 있는 커뮤니티 입니다. <br/><br/>
+  ## 대표 기능  
+   - 기록한 운동을 날짜별로 확인가능,
+   - 게시물, 댓글 CRUD
+   - 채팅기능
+   - 위치찾기 기능 
 
 ## Install
   * 패키지 : yarn
