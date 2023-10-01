@@ -9,6 +9,7 @@ import { Filter } from "./Board.js";
 import { useNavigate } from "react-router-dom";
 import { dateString } from "../../utils/Date.js";
 import { useSelector } from "react-redux";
+import imageCompression from "browser-image-compression";
 import { RootState } from "../../utils/Store.js";
 
 interface Props {
@@ -30,10 +31,32 @@ export default function BoardComponent({ type, setType, imageList, setImageList 
   const [imageUpdate, setImageUpdate] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
+  const compressImage = async (file: File) => {
+    const options = {
+      maxSizeMB: 1, // 최대 파일 크기 (메가바이트)
+      maxWidthOrHeight: 1920, // 최대 너비 또는 높이 (픽셀)
+      useWebWorker: true, // 웹 워커 사용 여부
+    };
+
+    try {
+      const compressedFile = await imageCompression(file, options);
+      return compressedFile;
+    } catch (err) {
+      console.error("이미지 압축 중 오류 : ", err);
+      return null;
+    }
+  };
+
+  const handleChange = async (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
     if (e.target.name === "file" && e.target instanceof HTMLInputElement) {
-      setFile(e.target.files && e.target.files[0]);
-      setAddFile(false);
+      const selectedFile = e.target.files && e.target.files[0];
+      if (selectedFile) {
+        const compressedFile = await compressImage(selectedFile);
+        if (compressedFile) {
+          setFile(compressedFile);
+          setAddFile(false);
+        }
+      }
       return;
     }
     if (e.target.name === "title") {

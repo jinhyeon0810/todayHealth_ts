@@ -7,6 +7,7 @@ import { FaUserCircle } from "react-icons/fa";
 import db, { profileImageUpload } from "../../api/firebase";
 import { v4 } from "uuid";
 import { doc, setDoc } from "firebase/firestore";
+import imageCompression from "browser-image-compression";
 
 export default function SignUpPage(): React.ReactElement {
   const [email, setEmail] = useState("");
@@ -119,10 +120,33 @@ export default function SignUpPage(): React.ReactElement {
     setNickName(e.target.value);
   };
 
-  const handleImgChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFile(e.target.files && e.target.files[0]);
-    setAddFile(false);
+  const compressImage = async (file: File) => {
+    const options = {
+      maxSizeMB: 1, // 최대 파일 크기 (메가바이트)
+      maxWidthOrHeight: 1920, // 최대 너비 또는 높이 (픽셀)
+      useWebWorker: true, // 웹 워커 사용 여부
+    };
+
+    try {
+      const compressedFile = await imageCompression(file, options);
+      return compressedFile;
+    } catch (err) {
+      console.error("이미지 압축 중 오류 : ", err);
+      return null;
+    }
   };
+
+  const handleImgChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files && e.target.files[0];
+    if (selectedFile) {
+      const compressedFile = await compressImage(selectedFile);
+      if (compressedFile) {
+        setFile(compressedFile);
+        setAddFile(false);
+      }
+    }
+  };
+
   useEffect(() => {
     if (file) {
       profileImageUpload(file, v4, setPhoto);
