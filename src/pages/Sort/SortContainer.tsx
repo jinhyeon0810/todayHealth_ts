@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Sort.module.css";
 import SortPresenter from "./SortPresenter";
-import { logout, onUserStateChange } from "../../api/firebase";
+import { onUserStateChange } from "../../api/firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, changeUser } from "../../utils/Store";
@@ -25,13 +25,14 @@ export default function SortContainer(): React.ReactElement {
     });
   }, [changeUser, user.user.uid]);
 
-  const handleModal = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleModal = async (e: React.MouseEvent<HTMLButtonElement>) => {
     if ((e.target as HTMLElement).innerText === "취소") {
       setLogoutModalOpen(false);
       setNickNameModalOpen(false);
     } //
     else if ((e.target as HTMLElement).innerText === "로그아웃") {
       const userData = { uid: null, displayName: null, photoURL: null };
+      const { logout } = await import("../../api/firebase");
       logout().then(() => {
         onUserStateChange(() => {
           dispatch(changeUser(userData));
@@ -46,7 +47,6 @@ export default function SortContainer(): React.ReactElement {
         if (user !== null) {
           updateProfile(user, { displayName: newNick })
             .then(() => {
-              // setLoading(true);
               window.location.reload();
             })
             .catch((error) => console.error("프로필 업데이트 오류", error));
@@ -54,7 +54,6 @@ export default function SortContainer(): React.ReactElement {
       });
     }
     setNickNameModalOpen(false);
-    // setLoading(false);
   };
 
   const onChangeNickName = (e: { target: { value: React.SetStateAction<string> } }) => {

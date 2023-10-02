@@ -10,21 +10,6 @@ export default function Header(): React.ReactElement {
     navigate("/main");
   };
 
-  // const clickLogIn = () => {
-  //   navigate("/");
-  // };
-
-  // const clickLogOut = () => {
-  //   const conFirm = confirm("정말 로그아웃 하시겠습니까?");
-  //   if (conFirm) {
-  //     logout();
-  //     navigate("/");
-  //   }
-  // };
-
-  // const moveToSignUpPage = () => {
-  //   navigate("/signup");
-  // };
   const handleLocationPage = () => {
     navigate("/location");
   };

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { CgGym } from "react-icons/cg";
 import { BsFillChatDotsFill } from "react-icons/bs";
@@ -13,10 +13,11 @@ import { RootState, changeUser } from "../../utils/Store";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { collection, deleteDoc, doc, onSnapshot, orderBy, query } from "firebase/firestore";
-import Timer from "../../components/Timer/Timer";
 import { pickedDataProps } from "../../utils/type";
-import CannotAccess from "../../components/CannotAccess/CannotAccess";
 import IsLoading from "../../components/IsLoading/IsLoading";
+
+const Timer = lazy(() => import("../../components/Timer/Timer"));
+const CannotAccess = lazy(() => import("../../components/CannotAccess/CannotAccess"));
 
 export default function MainPage(): React.ReactElement {
   const [pickedDatas, setPickedDatas] = useState<pickedDataProps[]>([]);
@@ -80,7 +81,11 @@ export default function MainPage(): React.ReactElement {
     <>
       <div className={styles.wrapper}>
         {loading && <IsLoading />}
-        {!user.uid && !loading && <CannotAccess />}
+        {!user.uid && !loading && (
+          <Suspense fallback={<IsLoading />}>
+            <CannotAccess />
+          </Suspense>
+        )}
         {user.uid && !loading && (
           <>
             <Header />
@@ -113,7 +118,9 @@ export default function MainPage(): React.ReactElement {
               </div>
               {useStopWatch && (
                 <div className={styles.timer}>
-                  <Timer />
+                  <Suspense fallback={<IsLoading />}>
+                    <Timer />
+                  </Suspense>
                 </div>
               )}
               <section className={styles.mainContent}>

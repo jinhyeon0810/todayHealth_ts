@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./LoginPage.module.css";
 import { useNavigate } from "react-router-dom";
-import { login } from "../../api/firebase";
 import { AiOutlineGoogle } from "react-icons/ai";
 
 export default function LoginPage(): React.ReactElement {
@@ -14,9 +13,10 @@ export default function LoginPage(): React.ReactElement {
     navigate("/find");
   };
 
-  const handleGoogleLogIn = (e: { preventDefault: () => void }) => {
+  const handleGoogleLogIn = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     console.log("구글로그인");
+    const { login } = await import("../../api/firebase");
     login().then((result) => {
       console.log(result);
       if (result) {
