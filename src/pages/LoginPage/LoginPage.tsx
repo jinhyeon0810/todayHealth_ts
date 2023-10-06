@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./LoginPage.module.css";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineGoogle } from "react-icons/ai";
+import { logout } from "../../api/firebase";
 
 export default function LoginPage(): React.ReactElement {
+  useEffect(() => {
+    logout();
+  }, []);
   const navigate = useNavigate();
   const moveToSignUp = () => {
     navigate("/signup");

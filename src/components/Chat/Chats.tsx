@@ -46,7 +46,7 @@ export default function Chats(props: ChatsProps): React.ReactElement {
         .map((chat) => {
           return (
             <div className={styles.userChat} key={chat[0]} onClick={() => handleSelect(chat[1].userInfo)}>
-              <img className={styles.userChatImg} src={chat[1].userInfo.photoURL} />
+              <img className={styles.userChatImg} src={chat[1].userInfo?.photoURL} />
               <div className={styles.userChatInfo}>
                 <span>{chat[1].userInfo?.displayName}</span>
                 <p className={styles.userLastMsg}>{chat[1].lastMessage?.text}</p>
