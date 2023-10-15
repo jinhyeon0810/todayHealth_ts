@@ -27,7 +27,7 @@ jobs:
       - name: Deploy
         uses: lbertenasco/s3-deploy@v1
         with:
-          folder: dist
+          folder: build
           bucket: ${{ secrets.BUCKET_NAME }}
           dist-id: ${{ secrets.DISTRIBUTION_ID }}
           invalidation: / *
