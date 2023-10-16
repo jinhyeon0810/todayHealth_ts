@@ -35,7 +35,7 @@ export default function LoginPage(): React.ReactElement {
     <>
       <section className={styles.section}>
         <div className={styles.wrapper}>
-          <h1 className={styles.loginMethod}>로그인 방법을 선택해주세요!😎</h1>
+          <h1 className={styles.loginMethod}>로그인 방법을 선택해주세요!!😎</h1>
           <button className={styles.googleLoginButton} onClick={handleGoogleLogIn}>
             <div className={styles.googleLoginBtnText}>
               <AiOutlineGoogle />
