@@ -19,7 +19,7 @@
 
 ## 기술 스택
 - 프레임워크로 Vite를 사용합니다.
-- AWS S3, CloudFront 를 활용하여 CI/CD 배포를 진행하였습니다.
+- Github Actions를 사용하여 AWS S3, CloudFront CI/CD 배포를 자동화하였습니다.
 - Firebase 서비스를 이용하여 서버 구축 없이 빠르게 웹개발을 진행하였습니다.
 - 로컬 상태관리를 위해 Redux를 사용합니다.
 - Css Module를 사용하여 유지보수가 용이합니다.
